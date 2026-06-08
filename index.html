@@ -585,7 +585,7 @@ let currentLang = 'en';
   }
   try{
     const r = await fetch(PROXY_URL, {method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:5,messages:[{role:'user',content:'hi'}]})});
+      body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:5,messages:[{role:'user',content:'hi'}]})});
     el.textContent = r.ok||r.status===400 ? '✅ Connected' : '⚠️ Error '+r.status;
   }catch(e){ el.textContent='⚠️ Cannot reach proxy'; }
 })();
@@ -598,7 +598,12 @@ async function callClaude(body){
     headers:{'Content-Type':'application/json'},
     body: JSON.stringify(body)
   });
-  if(!res.ok) throw new Error(`Proxy returned ${res.status}`);
+  if(!res.ok){
+    // Surface Anthropic's actual error message for easier debugging
+    let detail = '';
+    try { const err = await res.json(); detail = err.error?.message || JSON.stringify(err); } catch{}
+    throw new Error(`API error ${res.status}: ${detail}`);
+  }
   return res.json();
 }
 
@@ -648,7 +653,7 @@ End with a reminder in the response language to consult a qualified lawyer for t
 
   try{
     const data = await callClaude({
-      model:'claude-sonnet-4-20250514',
+      model:'claude-sonnet-4-5',
       max_tokens:900,
       system: sys,
       messages:[{role:'user',content:msg}]
@@ -862,7 +867,7 @@ ${JSON.stringify(texts)}`;
 
   try {
     const data = await callClaude({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-5',
       max_tokens: 2000,
       messages: [{ role:'user', content: prompt }]
     });
