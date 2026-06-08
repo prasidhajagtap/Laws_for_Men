@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NyaySetu — Legal Clarity for Every Indian Man</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #FF6B1A;
+    --saffron-light: #FFF0E6;
+    --saffron-mid: #FF8C47;
+    --navy: #0F2542;
+    --navy-mid: #1A3A5C;
+    --navy-light: #E8F0F8;
+    --gold: #C8952A;
+    --gold-light: #FDF5E6;
+    --cream: #FAFAF7;
+    --white: #FFFFFF;
+    --text-dark: #0F2542;
+    --text-mid: #4A5568;
+    --text-light: #718096;
+    --success: #276749;
+    --success-light: #E6F4EC;
+    --border: rgba(15,37,66,0.1);
+    --border-strong: rgba(15,37,66,0.2);
+    --radius: 12px;
+    --radius-lg: 20px;
+    --shadow: 0 2px 20px rgba(15,37,66,0.08);
+    --shadow-strong: 0 8px 40px rgba(15,37,66,0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--navy);
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 3px solid var(--saffron);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .logo-text { color: white; }
+  .logo-text .brand { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+  .logo-text .tagline { font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 0.5px; display: block; margin-top: -2px; }
+  .nav-links { display: flex; gap: 2px; }
+  .nav-link {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+  .nav-link:hover, .nav-link.active { color: white; background: rgba(255,255,255,0.1); }
+  .nav-link.active { color: var(--saffron); }
+  .emergency-btn {
+    background: var(--saffron);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    letter-spacing: 0.2px;
+  }
+  .emergency-btn:hover { background: var(--saffron-mid); transform: translateY(-1px); }
+
+  /* PAGE SYSTEM */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 70% at 80% 50%, rgba(255,107,26,0.12) 0%, transparent 60%);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--saffron), var(--gold), var(--saffron), transparent);
+  }
+  .hero-inner { max-width: 800px; margin: 0 auto; text-align: center; position: relative; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,107,26,0.15);
+    border: 1px solid rgba(255,107,26,0.3);
+    color: var(--saffron-mid);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 700;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.5px;
+  }
+  .hero h1 span { color: var(--saffron); }
+  .hero p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.65);
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.75;
+    font-weight: 300;
+  }
+  .search-box {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 8px 8px 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow-strong);
+    max-width: 680px;
+    margin: 0 auto;
+    border: 1.5px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .search-box:focus-within { border-color: var(--saffron); }
+  .search-icon { font-size: 20px; color: var(--text-light); flex-shrink: 0; }
+  #main-search {
+    flex: 1;
+    border: none; outline: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--text-dark);
+    background: transparent;
+    padding: 8px 0;
+  }
+  #main-search::placeholder { color: var(--text-light); }
+  .search-btn {
+    background: var(--saffron);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .search-btn:hover { background: #e55a10; transform: translateY(-1px); }
+  .search-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 1.5rem; }
+  .search-tag {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    padding: 5px 14px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 400;
+  }
+  .search-tag:hover { background: rgba(255,107,26,0.2); border-color: rgba(255,107,26,0.4); color: var(--saffron-mid); }
+
+  /* STATS STRIP */
+  .stats-strip {
+    background: white;
+    border-bottom: 1px solid var(--border);
+  }
+  .stats-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    divide-x: 1px solid var(--border);
+  }
+  .stat-item {
+    padding: 1.5rem 2rem;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--saffron); }
+  .stat-label { font-size: 13px; color: var(--text-light); margin-top: 2px; font-weight: 400; }
+
+  /* MAIN CONTENT */
+  .main-content { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+
+  /* SECTION TITLE */
+  .section-header { margin-bottom: 2rem; }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+  }
+  .section-header p { font-size: 15px; color: var(--text-mid); font-weight: 300; }
+
+  /* CATEGORIES GRID */
+  .categories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-bottom: 4rem; }
+  .cat-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+  }
+  .cat-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--cat-color, var(--saffron));
+    transform: scaleX(0);
+    transition: transform 0.25s;
+    transform-origin: left;
+  }
+  .cat-card:hover::before { transform: scaleX(1); }
+  .cat-card:hover { box-shadow: var(--shadow-strong); transform: translateY(-3px); border-color: transparent; }
+  .cat-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    margin-bottom: 1rem;
+    background: var(--cat-bg, var(--saffron-light));
+  }
+  .cat-card h3 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 0.4rem; }
+  .cat-card p { font-size: 13px; color: var(--text-light); line-height: 1.5; font-weight: 300; }
+  .cat-count {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--cat-color, var(--saffron));
+    background: var(--cat-bg, var(--saffron-light));
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  /* SEARCH RESULTS */
+  .search-results-page { display: none; }
+  .results-header { display: flex; align-items: center; gap: 12px; margin-bottom: 2rem; }
+  .back-btn {
+    background: none; border: 1.5px solid var(--border-strong);
+    color: var(--text-mid); font-size: 14px; font-weight: 500;
+    padding: 8px 16px; border-radius: 8px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    display: flex; align-items: center; gap: 6px;
+    transition: all 0.2s;
+  }
+  .back-btn:hover { border-color: var(--navy); color: var(--navy); }
+  .results-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--navy); }
+  .results-count { font-size: 13px; color: var(--text-light); margin-left: auto; }
+
+  .result-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .result-card:hover { box-shadow: var(--shadow); }
+  .result-card-header {
+    padding: 1.5rem;
+    display: flex; align-items: flex-start; gap: 16px;
+    cursor: pointer;
+  }
+  .result-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--saffron-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .result-meta { flex: 1; }
+  .result-meta h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .result-meta .act-id { font-size: 12px; color: var(--text-light); font-family: 'JetBrains Mono', monospace; }
+  .result-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+  .tag {
+    font-size: 11px; font-weight: 600;
+    padding: 3px 10px; border-radius: 100px;
+  }
+  .tag-warning { background: #FEF9C3; color: #854D0E; }
+  .tag-info { background: var(--navy-light); color: var(--navy); }
+  .tag-success { background: var(--success-light); color: var(--success); }
+  .tag-danger { background: #FEE2E2; color: #9B1C1C; }
+  .expand-icon { font-size: 18px; color: var(--text-light); transition: transform 0.3s; margin-left: auto; align-self: center; }
+  .result-card.open .expand-icon { transform: rotate(180deg); }
+
+  .result-body { display: none; border-top: 1px solid var(--border); }
+  .result-card.open .result-body { display: block; }
+
+  /* TABS */
+  .tab-nav { display: flex; border-bottom: 1px solid var(--border); padding: 0 1.5rem; }
+  .tab-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500;
+    color: var(--text-light);
+    background: none; border: none;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.2s;
+  }
+  .tab-btn.active { color: var(--saffron); border-bottom-color: var(--saffron); }
+  .tab-btn:hover { color: var(--navy); }
+
+  .tab-content { padding: 1.5rem; display: none; }
+  .tab-content.active { display: block; }
+
+  /* EXPLANATION BOX */
+  .simple-explanation {
+    background: var(--navy-light);
+    border-radius: var(--radius);
+    border-left: 4px solid var(--navy);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .simple-explanation .label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--navy); margin-bottom: 6px; }
+  .simple-explanation p { font-size: 14px; line-height: 1.7; color: var(--navy-mid); font-weight: 400; }
+
+  .rights-list { list-style: none; margin-bottom: 1.25rem; }
+  .rights-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px; line-height: 1.6; color: var(--text-mid);
+  }
+  .rights-list li:last-child { border-bottom: none; }
+  .rights-list li::before { content: '⚖️'; flex-shrink: 0; margin-top: 1px; }
+
+  .warning-box {
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    font-size: 13px;
+    color: #92400E;
+    margin-bottom: 1.25rem;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .warning-box span:first-child { font-size: 16px; flex-shrink: 0; }
+
+  /* STEPS */
+  .steps-list { list-style: none; }
+  .step-item {
+    display: flex; gap: 16px;
+    margin-bottom: 1.25rem;
+    position: relative;
+  }
+  .step-item::before {
+    content: '';
+    position: absolute;
+    left: 19px; top: 42px;
+    bottom: -1.25rem;
+    width: 2px;
+    background: var(--border);
+  }
+  .step-item:last-child::before { display: none; }
+  .step-num {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--navy);
+    color: white;
+    font-size: 14px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; position: relative; z-index: 1;
+  }
+  .step-content { flex: 1; padding-top: 6px; }
+  .step-content strong { font-size: 14px; font-weight: 600; color: var(--navy); display: block; margin-bottom: 4px; }
+  .step-content p { font-size: 13px; color: var(--text-mid); line-height: 1.6; font-weight: 300; }
+  .step-time {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--saffron-light);
+    color: var(--saffron);
+    font-size: 11px; font-weight: 600;
+    padding: 2px 8px; border-radius: 100px;
+    margin-top: 6px;
+  }
+
+  /* CASES */
+  .case-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    margin-bottom: 12px;
+  }
+  .case-card .case-name { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .case-card .case-court { font-size: 12px; color: var(--text-light); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace; }
+  .case-card .case-ruling {
+    font-size: 13px; color: var(--text-mid); line-height: 1.6;
+    border-left: 3px solid var(--success);
+    padding-left: 12px;
+    margin-bottom: 8px;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .case-impact { font-size: 12px; font-weight: 600; color: var(--success); display: flex; align-items: center; gap: 4px; }
+
+  /* HELPLINE */
+  .helpline-section {
+    background: white;
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+  }
+  .helpline-inner { max-width: 1200px; margin: 0 auto; }
+  .helpline-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-top: 1.5rem; }
+  .helpline-card {
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .helpline-card:hover { border-color: var(--saffron); box-shadow: var(--shadow); transform: translateY(-2px); }
+  .helpline-card .h-icon { font-size: 28px; margin-bottom: 8px; }
+  .helpline-card .h-name { font-size: 14px; font-weight: 600; color: var(--navy); }
+  .helpline-card .h-num { font-size: 18px; font-weight: 700; color: var(--saffron); margin: 4px 0; font-family: 'JetBrains Mono', monospace; }
+  .helpline-card .h-desc { font-size: 12px; color: var(--text-light); }
+
+  /* AI CHAT SECTION */
+  .ai-section {
+    background: var(--navy);
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .ai-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 20% 50%, rgba(255,107,26,0.08) 0%, transparent 60%);
+  }
+  .ai-inner { max-width: 800px; margin: 0 auto; position: relative; }
+  .ai-inner h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: white; margin-bottom: 0.75rem; }
+  .ai-inner p { font-size: 15px; color: rgba(255,255,255,0.6); margin-bottom: 2rem; font-weight: 300; line-height: 1.7; }
+  .ai-chat-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .chat-messages {
+    padding: 1.5rem;
+    min-height: 200px;
+    max-height: 380px;
+    overflow-y: auto;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .chat-msg {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 16px;
+    font-size: 14px; line-height: 1.6;
+  }
+  .chat-msg.bot {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.85);
+    border-radius: 4px 16px 16px 16px;
+    align-self: flex-start;
+  }
+  .chat-msg.user {
+    background: var(--saffron);
+    color: white;
+    border-radius: 16px 16px 4px 16px;
+    align-self: flex-end;
+  }
+  .chat-input-row {
+    display: flex; gap: 8px;
+    padding: 1rem 1.25rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+  }
+  #chat-input {
+    flex: 1;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 10px 16px;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  #chat-input:focus { border-color: var(--saffron); }
+  #chat-input::placeholder { color: rgba(255,255,255,0.35); }
+  .send-btn {
+    background: var(--saffron);
+    border: none; border-radius: 10px;
+    width: 42px; height: 42px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 18px;
+    transition: all 0.2s; flex-shrink: 0;
+  }
+  .send-btn:hover { background: #e55a10; transform: scale(1.05); }
+
+  /* LOADING */
+  .typing-dots { display: flex; gap: 4px; align-items: center; padding: 4px 0; }
+  .typing-dots span {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    animation: bounce 1.2s infinite;
+  }
+  .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    padding: 3rem 2rem 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
+  .footer-brand { }
+  .footer-brand .brand-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: white; margin-bottom: 0.5rem; }
+  .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 260px; font-weight: 300; }
+  .footer-col h4 { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.9); margin-bottom: 1rem; letter-spacing: 0.5px; text-transform: uppercase; }
+  .footer-col a, .footer-col span {
+    display: block;
+    font-size: 13px; color: rgba(255,255,255,0.45);
+    text-decoration: none; margin-bottom: 8px;
+    cursor: pointer; transition: color 0.2s;
+    font-weight: 300;
+  }
+  .footer-col a:hover, .footer-col span:hover { color: var(--saffron); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.3); font-weight: 300; }
+  .disclaimer {
+    background: rgba(255,107,26,0.1);
+    border: 1px solid rgba(255,107,26,0.2);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  .disclaimer strong { color: var(--saffron-mid); }
+
+  /* EMERGENCY MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(15,37,66,0.7);
+    align-items: center; justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white;
+    border-radius: var(--radius-lg);
+    max-width: 520px; width: calc(100% - 2rem);
+    max-height: 80vh; overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .modal-header h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--navy); }
+  .modal-close { background: none; border: none; font-size: 22px; cursor: pointer; color: var(--text-light); }
+  .modal-body { padding: 1.5rem; }
+
+  /* LOADING SPINNER */
+  .loading {
+    display: none;
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-light);
+  }
+  .spinner {
+    width: 40px; height: 40px;
+    border: 3px solid var(--border);
+    border-top-color: var(--saffron);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none;
+    background: none; border: none;
+    cursor: pointer; padding: 6px;
+    flex-direction: column; gap: 5px;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* MOBILE DRAWER */
+  .mobile-drawer {
+    display: none;
+    position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+    background: var(--navy);
+    z-index: 99;
+    padding: 1.5rem;
+    flex-direction: column;
+    gap: 4px;
+    overflow-y: auto;
+  }
+  .mobile-drawer.open { display: flex; }
+  .mobile-drawer .nav-link {
+    font-size: 16px; padding: 14px 16px;
+    border-radius: 10px;
+    color: rgba(255,255,255,0.8);
+    text-align: left;
+    width: 100%;
+  }
+  .mobile-drawer .nav-link:hover { background: rgba(255,255,255,0.08); }
+  .mobile-drawer .emergency-btn {
+    margin-top: 1rem; width: 100%;
+    padding: 14px; font-size: 15px;
+    border-radius: 10px;
+  }
+
+  /* TABLET */
+  @media (max-width: 900px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    /* Nav */
+    .nav-links { display: none; }
+    .emergency-btn.desktop-only { display: none; }
+    .hamburger { display: flex; }
+    .nav-inner { padding: 0 1rem; }
+
+    /* Hero */
+    .hero { padding: 3rem 1.25rem 2.5rem; }
+    .hero h1 { font-size: 1.9rem; }
+    .hero p { font-size: 0.95rem; }
+    .search-box {
+      flex-wrap: wrap;
+      padding: 10px 14px;
+      gap: 8px;
+    }
+    #main-search { width: 100%; min-width: 0; font-size: 15px; }
+    .search-btn { width: 100%; justify-content: center; padding: 13px; border-radius: 10px; }
+    .search-tags { gap: 6px; }
+    .search-tag { font-size: 12px; padding: 5px 12px; }
+
+    /* Stats */
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .stat-item { padding: 1rem; }
+    .stat-num { font-size: 1.5rem; }
+
+    /* Main content */
+    .main-content { padding: 2rem 1.25rem; }
+    .section-header h2 { font-size: 1.4rem; }
+    .categories-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .cat-card { padding: 1rem; }
+    .cat-icon { width: 38px; height: 38px; font-size: 18px; margin-bottom: 0.6rem; }
+    .cat-card h3 { font-size: 13px; }
+    .cat-card p { font-size: 12px; display: none; }
+    .cat-count { font-size: 11px; }
+
+    /* Why section */
+    .main-content > div[style*="grid-template-columns: 1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Result cards */
+    .result-card-header { padding: 1rem; }
+    .tab-nav { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; }
+    .tab-btn { white-space: nowrap; font-size: 12px; padding: 10px 12px; }
+    .tab-content { padding: 1rem; }
+    .step-item { gap: 12px; }
+    .step-num { width: 32px; height: 32px; font-size: 13px; }
+
+    /* AI Chat */
+    .ai-section { padding: 2.5rem 1.25rem; }
+    .ai-inner h2 { font-size: 1.5rem; }
+    .chat-messages { min-height: 180px; max-height: 280px; }
+    #chat-input { font-size: 15px; }
+
+    /* Helplines */
+    .helpline-section { padding: 2rem 1.25rem; }
+    .helpline-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .helpline-card { padding: 1rem; }
+    .helpline-card .h-num { font-size: 15px; }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    footer { padding: 2rem 1.25rem 1.25rem; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+
+    /* Modal */
+    .modal { margin: 1rem; max-height: 85vh; }
+
+    /* New laws page */
+    .new-laws-grid { grid-template-columns: 1fr !important; }
+    .new-laws-protections { grid-template-columns: 1fr 1fr !important; }
+    .section-map-row { grid-template-columns: 1fr 1fr !important; }
+    .section-map-row > *:nth-child(3),
+    .section-map-row > *:nth-child(4) { grid-column: span 1; }
+
+    /* New laws hero */
+    .new-laws-hero { padding: 2rem 1.25rem 1.75rem !important; }
+    .new-laws-hero h1 { font-size: 1.6rem !important; }
+    .why-grid { grid-template-columns: 1fr !important; }
+  }
+
+  @media (max-width: 480px) {
+    .categories-grid { grid-template-columns: 1fr; }
+    .helpline-grid { grid-template-columns: 1fr; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .hero h1 { font-size: 1.6rem; }
+    .new-laws-protections { grid-template-columns: 1fr !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#" onclick="showPage('home')">
+      <div class="logo-icon">⚖️</div>
+      <div class="logo-text">
+        <span class="brand">NyaySetu</span>
+        <span class="tagline">न्याय सेतु · Bridge to Justice</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <button class="nav-link active" onclick="showPage('home')">Home</button>
+      <button class="nav-link" onclick="showPage('laws')">Browse Laws</button>
+      <button class="nav-link" onclick="showPage('cases')">Case Library</button>
+      <button class="nav-link" onclick="showPage('guide')">Step-by-Step Guide</button>
+      <button class="nav-link" onclick="showPage('resources')">Resources</button>
+      <button class="nav-link" onclick="showPage('newlaws')" style="color:var(--saffron-mid);font-weight:600;">🆕 New Laws 2024</button>
+    </div>
+    <button class="emergency-btn desktop-only" onclick="openModal('emergency')">🆘 Emergency Help</button>
+    <button class="hamburger" id="hamburger" onclick="toggleDrawer()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobile-drawer">
+  <button class="nav-link" onclick="showPage('home');toggleDrawer()">🏠 Home</button>
+  <button class="nav-link" onclick="showPage('laws');toggleDrawer()">📚 Browse Laws</button>
+  <button class="nav-link" onclick="showPage('cases');toggleDrawer()">🏛️ Case Library</button>
+  <button class="nav-link" onclick="showPage('guide');toggleDrawer()">📋 Step-by-Step Guide</button>
+  <button class="nav-link" onclick="showPage('resources');toggleDrawer()">🤝 Resources</button>
+  <button class="nav-link" onclick="showPage('newlaws');toggleDrawer()" style="color:var(--saffron-mid);font-weight:600;">🆕 New Laws 2024</button>
+  <button class="emergency-btn" onclick="openModal('emergency');toggleDrawer()">🆘 Emergency Help</button>
+</div>
+
+<!-- HOME PAGE -->
+<div id="page-home" class="page active">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">⚖️ &nbsp; Free Legal Knowledge · Updated Daily</div>
+      <h1>Know Your Rights.<br>Protect Your <span>Family.</span></h1>
+      <p>India's most comprehensive, plain-language legal guide for men — covering biased laws, bail rights, case references, and step-by-step defence strategies.</p>
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input id="main-search" type="text" placeholder="Search: 498A, domestic violence, maintenance, dowry..." autocomplete="off">
+        <button class="search-btn" onclick="doSearch()">Search ↗</button>
+      </div>
+      <div class="search-tags">
+        <span class="search-tag" onclick="quickSearch('Section 498A')">Section 498A</span>
+        <span class="search-tag" onclick="quickSearch('Protection of Women from Domestic Violence Act')">DV Act</span>
+        <span class="search-tag" onclick="quickSearch('dowry prohibition')">Dowry Law</span>
+        <span class="search-tag" onclick="quickSearch('maintenance 125 CrPC')">Maintenance</span>
+        <span class="search-tag" onclick="quickSearch('child custody father rights')">Child Custody</span>
+        <span class="search-tag" onclick="quickSearch('false FIR how to handle')">False FIR</span>
+        <span class="search-tag" onclick="showPage('newlaws')" style="border-color:rgba(255,107,26,0.5);color:var(--saffron-mid);">🆕 BNS / BNSS / BSA 2024</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-num">120+</div>
+        <div class="stat-label">Laws Simplified</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Landmark Cases (Men Won)</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">38</div>
+        <div class="stat-label">Step-by-Step Guides</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">AI Legal Assistant</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="main-content">
+    <div class="section-header">
+      <h2>Browse by Legal Area</h2>
+      <p>Choose a category to understand the laws, your rights, landmark cases, and what to do next.</p>
+    </div>
+    <div class="categories-grid">
+      <div class="cat-card" style="--cat-color:#E53E3E;--cat-bg:#FFF5F5;" onclick="quickSearch('Section 498A IPC cruelty')">
+        <div class="cat-icon">🔴</div>
+        <h3>Section 498A — Cruelty</h3>
+        <p>Understand the anti-cruelty law, bail rights, and how to handle false complaints.</p>
+        <span class="cat-count">12 guides</span>
+      </div>
+      <div class="cat-card" style="--cat-color:#DD6B20;--cat-bg:#FFFAF0;" onclick="quickSearch('domestic violence act PWDVA men')">
+        <div class="cat-icon">🏠</div>
+        <h3>Domestic Violence (PWDVA)</h3>
+        <p>What the DV Act actually says, husband's rights, and how to challenge false DV complaints.</p>
+        <span class="cat-count">9 guides</span>
+      </div>
+      <div class="cat-card" style="--cat-color:#D69E2E;--cat-bg:#FFFFF0;" onclick="quickSearch('dowry prohibition act 406')">
+        <div class="cat-icon">💰</div>
+        <h3>Dowry & Section 406</h3>
+        <p>Difference between dowry and gifts, how 406 (criminal breach of trust) is misused.</p>
+        <span class="cat-count">8 guides</span>
+      </div>
+      <div class="cat-card" style="--cat-color:#38A169;--cat-bg:#F0FFF4;" onclick="quickSearch('maintenance Section 125 CrPC husband')">
+        <div class="cat-icon">💼</div>
+        <h3>Maintenance & Alimony</h3>
+        <p>Sec 125 CrPC, HMA maintenance — when you can get it reduced, stopped, or reversed.</p>
+        <span class="cat-count">10 guides</span>
+      </div>
+      <div class="cat-card" style="--cat-color:#3182CE;--cat-bg:#EBF8FF;" onclick="quickSearch('child custody father rights India')">
+        <div class="cat-icon">👶</div>
+        <h3>Child Custody & Guardianship</h3>
+        <p>Father's custody rights, visitation, how courts decide custody — and how to fight for your child.</p>
+        <span class="cat-count">11 guides</span>
+      </div>
+      <div class="cat-card" style="--cat-color:#805AD5;--cat-bg:#FAF5FF;" onclick="quickSearch('divorce grounds Hindu Marriage Act')">
+        <div class="cat-icon">📝</div>
+        <h3>Divorce Laws</h3>
+        <p>Grounds for divorce, mutual consent vs contested, how to protect your property and money.</p>
+        <span class="cat-count">14 guides</span>
+      </div>
+      <div class="cat-card" style="--cat-color:#D53F8C;--cat-bg:#FFF5F7;" onclick="quickSearch('false FIR quash anticipatory bail')">
+        <div class="cat-icon">🛡️</div>
+        <h3>False FIR & Bail</h3>
+        <p>Anticipatory bail, quashing FIR under 482 CrPC, what to do immediately after arrest.</p>
+        <span class="cat-count">7 guides</span>
+      </div>
+      <div class="cat-card" style="--cat-color:#319795;--cat-bg:#E6FFFA;" onclick="quickSearch('property rights married man India')">
+        <div class="cat-icon">🏗️</div>
+        <h3>Property Rights</h3>
+        <p>What is "matrimonial home," wife's share, ancestral property, and how to protect your assets.</p>
+        <span class="cat-count">9 guides</span>
+      </div>
+      <div class="cat-card" style="--cat-color:#744210;--cat-bg:#FFFAF0;" onclick="quickSearch('sexual harassment false accusation workplace')">
+        <div class="cat-icon">⚠️</div>
+        <h3>False Sexual Harassment Claims</h3>
+        <p>POSH Act, what is a false complaint, how to defend yourself at workplace & legally.</p>
+        <span class="cat-count">6 guides</span>
+      </div>
+      <div class="cat-card" style="--cat-color:#2B6CB0;--cat-bg:#EBF8FF;" onclick="quickSearch('NRI husband laws India maintenance')">
+        <div class="cat-icon">✈️</div>
+        <h3>NRI Husband Laws</h3>
+        <p>Passport impoundment, LOC notices, and how NRI men can legally protect themselves.</p>
+        <span class="cat-count">5 guides</span>
+      </div>
+      <div class="cat-card" style="--cat-color:#276749;--cat-bg:#F0FFF4;" onclick="quickSearch('shared parenting visitation rights father')">
+        <div class="cat-icon">👨‍👧</div>
+        <h3>Parental Alienation</h3>
+        <p>When a mother prevents a father from meeting their child — legal remedies and how to fight back.</p>
+        <span class="cat-count">4 guides</span>
+      </div>
+      <div class="cat-card" style="--cat-color:#9B2C2C;--cat-bg:#FFF5F5;" onclick="quickSearch('suicidal threat family member legal')">
+        <div class="cat-icon">🆘</div>
+        <h3>Emotional & Mental Abuse</h3>
+        <p>When you are the victim — documenting evidence, filing complaints, and legal options for men.</p>
+        <span class="cat-count">5 guides</span>
+      </div>
+      <div class="cat-card" style="--cat-color:#FF6B1A;--cat-bg:#FFF0E6;border:2px solid rgba(255,107,26,0.3);" onclick="showPage('newlaws')">
+        <div class="cat-icon">🆕</div>
+        <h3>BNS · BNSS · BSA — New Laws 2024</h3>
+        <p>New criminal codes effective July 1, 2024. All section numbers changed. Know what applies to your case.</p>
+        <span class="cat-count" style="background:var(--saffron);color:white;">Updated July 2024</span>
+      </div>
+    </div>
+
+    <!-- WHY SECTION -->
+    <div class="section-header" style="margin-top: 1rem;">
+      <h2>Why NyaySetu Exists</h2>
+      <p>The reality of gender-biased laws and what you need to know.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 3rem;" class="why-grid">
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem;">
+        <div style="font-size:2rem;margin-bottom:0.75rem;">📊</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);margin-bottom:0.5rem;">The Reality</h3>
+        <ul style="list-style:none;font-size:13px;color:var(--text-mid);line-height:1.8;font-weight:300;">
+          <li>📌 Over <strong>2 lakh</strong> men arrested each year under Sec 498A</li>
+          <li>📌 <strong>70%+ of 498A cases</strong> end in acquittal — yet men suffer years of harassment</li>
+          <li>📌 Maintenance awarded without proof of actual income in many cases</li>
+          <li>📌 Child custody almost always defaults to mother, regardless of fitness</li>
+          <li>📌 NRI husbands face passport impoundment without trial</li>
+        </ul>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem;">
+        <div style="font-size:2rem;margin-bottom:0.75rem;">🛡️</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);margin-bottom:0.5rem;">What We Offer</h3>
+        <ul style="list-style:none;font-size:13px;color:var(--text-mid);line-height:1.8;font-weight:300;">
+          <li>✅ Plain-language explanation of every major law</li>
+          <li>✅ 500+ landmark Supreme Court & High Court cases where men won</li>
+          <li>✅ Step-by-step legal action guides for every scenario</li>
+          <li>✅ AI assistant for instant answers (no lawyer needed for basic queries)</li>
+          <li>✅ Helpline numbers & NGO contacts for men in distress</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH RESULTS PAGE -->
+<div id="page-search" class="page">
+  <div class="main-content">
+    <div class="results-header">
+      <button class="back-btn" onclick="showPage('home')">← Back</button>
+      <div class="results-title" id="results-title">Search Results</div>
+      <div class="results-count" id="results-count"></div>
+    </div>
+    <div class="loading" id="search-loading">
+      <div class="spinner"></div>
+      <p>Searching legal database & live sources...</p>
+    </div>
+    <div id="results-container"></div>
+  </div>
+</div>
+
+<!-- LAWS BROWSE PAGE -->
+<div id="page-laws" class="page">
+  <div class="main-content">
+    <div class="section-header">
+      <h2>All Laws & Acts</h2>
+      <p>A–Z index of major laws affecting Indian men and families.</p>
+    </div>
+    <div id="laws-list"></div>
+  </div>
+</div>
+
+<!-- CASES PAGE -->
+<div id="page-cases" class="page">
+  <div class="main-content">
+    <div class="section-header">
+      <h2>Landmark Cases — Men Won</h2>
+      <p>Supreme Court & High Court judgements that set precedent in favour of men and families.</p>
+    </div>
+    <div id="cases-container"></div>
+  </div>
+</div>
+
+<!-- STEP-BY-STEP GUIDE PAGE -->
+<div id="page-guide" class="page">
+  <div class="main-content">
+    <div class="section-header">
+      <h2>Step-by-Step Action Guides</h2>
+      <p>Exactly what to do, step by step, if you face any of these situations.</p>
+    </div>
+    <div id="guide-container"></div>
+  </div>
+</div>
+
+<!-- RESOURCES PAGE -->
+<div id="page-resources" class="page">
+  <div class="main-content">
+    <div class="section-header">
+      <h2>Resources & Support</h2>
+      <p>NGOs, helplines, legal aid, and organisations supporting men's rights in India.</p>
+    </div>
+    <div id="resources-container"></div>
+  </div>
+</div>
+
+<!-- NEW LAWS 2024 PAGE -->
+<div id="page-newlaws" class="page">
+  <div style="background:var(--navy);padding:3rem 2rem 2.5rem;position:relative;overflow:hidden;" class="new-laws-hero">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(255,107,26,0.12) 0%,transparent 60%);"></div>
+    <div style="max-width:1200px;margin:0 auto;position:relative;">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,107,26,0.15);border:1px solid rgba(255,107,26,0.35);color:var(--saffron-mid);font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:6px 16px;border-radius:100px;margin-bottom:1.25rem;">🆕 &nbsp; Effective July 1, 2024</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:white;line-height:1.2;margin-bottom:0.75rem;">India's New Criminal Laws</h1>
+      <p style="font-size:15px;color:rgba(255,255,255,0.6);max-width:680px;line-height:1.75;font-weight:300;">Three landmark codes replaced 160-year-old colonial laws on <strong style="color:rgba(255,255,255,0.85);">July 1, 2024</strong>. If you are in any legal case filed after that date, these are the laws that apply to you.</p>
+    </div>
+  </div>
+
+  <div class="main-content">
+
+    <!-- THREE CODES OVERVIEW -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:3rem;" class="new-laws-grid">
+
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
+        <div style="background:#0F2542;padding:1.25rem 1.5rem;">
+          <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:4px;">Replaced IPC 1860</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.2rem;color:white;font-weight:700;">Bharatiya Nyaya Sanhita</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:2px;font-family:'JetBrains Mono',monospace;">BNS, 2023 · Act 45 of 2023</div>
+        </div>
+        <div style="padding:1.25rem 1.5rem;">
+          <p style="font-size:14px;color:var(--text-mid);line-height:1.7;font-weight:300;margin-bottom:1rem;">Defines <strong>what is a crime</strong> in India. Replaces the Indian Penal Code (IPC) 1860. All criminal offences — assault, cruelty, fraud, cheating — are now defined here.</p>
+          <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:8px;">Key changes for men:</div>
+          <ul style="list-style:none;font-size:13px;color:var(--text-mid);line-height:1.9;font-weight:300;">
+            <li>📌 Old Sec 498A (IPC) → <strong>Now Sec 85 BNS</strong> (cruelty by husband/relatives)</li>
+            <li>📌 Old Sec 406 (IPC) → <strong>Now Sec 316 BNS</strong> (criminal breach of trust)</li>
+            <li>📌 Old Sec 107 (IPC) → <strong>Now Sec 108 BNS</strong> (abetment)</li>
+            <li>📌 Old Sec 182 (IPC) → <strong>Now Sec 216 BNS</strong> (false information to police)</li>
+            <li>📌 Old Sec 499/500 (IPC) → <strong>Now Sec 356/357 BNS</strong> (defamation)</li>
+            <li>📌 Old Sec 415/420 (IPC) → <strong>Now Sec 318 BNS</strong> (cheating)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
+        <div style="background:#7B341E;padding:1.25rem 1.5rem;">
+          <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:4px;">Replaced CrPC 1973</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.2rem;color:white;font-weight:700;">Bharatiya Nagarik Suraksha Sanhita</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:2px;font-family:'JetBrains Mono',monospace;">BNSS, 2023 · Act 46 of 2023</div>
+        </div>
+        <div style="padding:1.25rem 1.5rem;">
+          <p style="font-size:14px;color:var(--text-mid);line-height:1.7;font-weight:300;margin-bottom:1rem;">Defines <strong>how a crime is investigated, tried, and punished</strong>. Replaces CrPC 1973. Covers arrest, bail, FIR, trial procedure, and appeals.</p>
+          <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:8px;">Key changes for men:</div>
+          <ul style="list-style:none;font-size:13px;color:var(--text-mid);line-height:1.9;font-weight:300;">
+            <li>📌 Old Sec 438 CrPC (Anticipatory Bail) → <strong>Now Sec 482 BNSS</strong></li>
+            <li>📌 Old Sec 482 CrPC (FIR Quashing) → <strong>Now Sec 528 BNSS</strong></li>
+            <li>📌 Old Sec 125 CrPC (Maintenance) → <strong>Now Sec 144 BNSS</strong></li>
+            <li>📌 Old Sec 41A CrPC (Police notice) → <strong>Now Sec 35 BNSS</strong></li>
+            <li>📌 Old Sec 167 CrPC (Remand) → <strong>Now Sec 187 BNSS</strong></li>
+            <li>📌 New: Max 15 days police custody (not 60/90 days) for most offences</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
+        <div style="background:#276749;padding:1.25rem 1.5rem;">
+          <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:4px;">Replaced Indian Evidence Act 1872</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.2rem;color:white;font-weight:700;">Bharatiya Sakshya Adhiniyam</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:2px;font-family:'JetBrains Mono',monospace;">BSA, 2023 · Act 47 of 2023</div>
+        </div>
+        <div style="padding:1.25rem 1.5rem;">
+          <p style="font-size:14px;color:var(--text-mid);line-height:1.7;font-weight:300;margin-bottom:1rem;">Defines <strong>what counts as evidence</strong> in an Indian court. Replaces the Indian Evidence Act 1872. Crucially, it now explicitly recognises <strong>electronic evidence</strong>.</p>
+          <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:8px;">Key changes for men:</div>
+          <ul style="list-style:none;font-size:13px;color:var(--text-mid);line-height:1.9;font-weight:300;">
+            <li>📌 WhatsApp chats, emails, call recordings now <strong>explicitly admissible</strong> as primary evidence</li>
+            <li>📌 Electronic records treated as <strong>original documents</strong> (not secondary)</li>
+            <li>📌 Digital signatures and metadata accepted as proof</li>
+            <li>📌 CCTV footage, phone location data — stronger evidentiary value</li>
+            <li>📌 Old Sec 27 IEA (confession to police) → <strong>Now Sec 23 BSA</strong> — same protection applies</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- BIG ALERT BOX -->
+    <div style="background:#FFFBEB;border:1.5px solid #FDE68A;border-radius:var(--radius-lg);padding:1.75rem;margin-bottom:3rem;display:flex;gap:16px;align-items:flex-start;">
+      <div style="font-size:2rem;flex-shrink:0;">⚠️</div>
+      <div>
+        <div style="font-size:15px;font-weight:600;color:#92400E;margin-bottom:8px;">What this means for your existing or new case</div>
+        <ul style="font-size:14px;color:#78350F;line-height:2;list-style:none;font-weight:400;">
+          <li>✅ Cases <strong>filed before July 1, 2024</strong> continue under IPC + CrPC + Indian Evidence Act</li>
+          <li>✅ Cases <strong>filed on or after July 1, 2024</strong> are governed by BNS + BNSS + BSA</li>
+          <li>✅ Section numbers have changed — always confirm with a lawyer which code applies to your case</li>
+          <li>✅ The <strong>substance of the law</strong> (what is a crime, what is the punishment) is mostly the same — but the section numbers are different</li>
+          <li>✅ Anticipatory Bail, Maintenance, Quashing — all still exist, just under new section numbers</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION MAPPING TABLE -->
+    <div class="section-header">
+      <h2>Old Law → New Law Section Mapping</h2>
+      <p>Quick reference for the most common sections that affect men in matrimonial and criminal cases.</p>
+    </div>
+
+    <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:3rem;">
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+      <div style="min-width:540px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 2fr;background:var(--navy);padding:12px 20px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);letter-spacing:0.5px;text-transform:uppercase;">
+        <div>Old Section</div>
+        <div>New Section</div>
+        <div>Code</div>
+        <div>What It Covers</div>
+      </div>
+      ${[
+        ["IPC § 498A","BNS § 85","BNS","Cruelty by husband or his relatives to wife"],
+        ["IPC § 406","BNS § 316","BNS","Criminal breach of trust — misused in matrimonial cases"],
+        ["IPC § 107–116","BNS § 108–119","BNS","Abetment of suicide — Section 306 IPC equivalent is BNS § 108"],
+        ["IPC § 182","BNS § 216","BNS","Giving false information to a public servant (counter-complaint)"],
+        ["IPC § 211","BNS § 250","BNS","Filing false criminal charge against a person"],
+        ["IPC § 499/500","BNS § 356/357","BNS","Defamation — filing false defamation case"],
+        ["CrPC § 41A","BNSS § 35","BNSS","Police notice to appear (instead of arrest) — your right before arrest"],
+        ["CrPC § 438","BNSS § 482","BNSS","Anticipatory Bail — apply BEFORE arrest"],
+        ["CrPC § 482","BNSS § 528","BNSS","High Court power to quash FIR — most important quashing provision"],
+        ["CrPC § 125","BNSS § 144","BNSS","Maintenance to wife, children, parents"],
+        ["CrPC § 167","BNSS § 187","BNSS","Remand / custody during investigation — your right to bail after 15 days"],
+        ["IEA § 65B","BSA § 63","BSA","Admissibility of electronic evidence (WhatsApp, emails, call records)"],
+        ["IEA § 27","BSA § 23","BSA","Confession to police — same protection, no forced confession is valid"],
+      ].map((row, i) => `
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 2fr;padding:12px 20px;border-top:1px solid var(--border);background:${i%2===0?'white':'var(--cream)'};font-size:13px;align-items:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-light);text-decoration:line-through;">${row[0]}</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--saffron);">${row[1]}</div>
+          <div><span style="background:var(--navy-light);color:var(--navy);font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;">${row[2]}</span></div>
+          <div style="color:var(--text-mid);font-weight:300;">${row[3]}</div>
+        </div>`).join('')}
+      </div></div>
+    </div>
+
+    <!-- NEW PROTECTIONS UNDER BNSS -->
+    <div class="section-header">
+      <h2>New Protections Added for the Accused (You)</h2>
+      <p>BNSS 2023 introduced several new rights for people accused of crimes — directly relevant to men facing false cases.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:3rem;" class="new-laws-protections"> body:"Before arresting you, police MUST first issue a notice to appear (Sec 35 BNSS). If you comply with the notice, you cannot be arrested. This is stronger than the old CrPC § 41A provision." },
+        { icon:"⏱️", title:"15-Day Custody Limit (§187 BNSS)", body:"Police custody (physical remand) is now capped at 15 days for most offences — but can be in instalments during the first 40/60 days. After that, you go to judicial custody (jail), not police station. Less torture risk." },
+        { icon:"📱", title:"Electronic Evidence Now Equal (§63 BSA)", body:"WhatsApp messages, call recordings, emails, and screenshots are now PRIMARY evidence — not secondary. This helps men who have documented harassment, threats, or abuse digitally." },
+        { icon:"👥", title:"Witness Protection Improved", body:"New provisions for witness protection help ensure that witnesses in your favour cannot be intimidated or bought off as easily. This matters when you have character witnesses or alibi witnesses." },
+        { icon:"⚖️", title:"Trial Time Limit (§346 BNSS)", body:"Courts must decide bail applications within 3 years. If trial doesn't complete in 3–7 years, the accused can apply for bail automatically. Reduces indefinite jail without conviction." },
+        { icon:"📋", title:"Mandatory Chargesheet Deadline", body:"Police must file a chargesheet within 60 days (extendable to 90 days for serious offences). If they fail, you are entitled to default bail (bail by default) — your right under BNSS." },
+      ].map(c => `
+        <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;">
+          <div style="font-size:1.75rem;margin-bottom:0.75rem;">${c.icon}</div>
+          <div style="font-size:14px;font-weight:600;color:var(--navy);margin-bottom:6px;">${c.title}</div>
+          <p style="font-size:13px;color:var(--text-mid);line-height:1.65;font-weight:300;">${c.body}</p>
+        </div>`).join('')}
+    </div>
+
+    <!-- BSA EVIDENCE GUIDE -->
+    <div class="section-header">
+      <h2>How to Use BSA 2023 to Protect Yourself</h2>
+      <p>The new evidence law explicitly allows electronic evidence — here is what you should be collecting RIGHT NOW.</p>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem;margin-bottom:3rem;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
+        ${[
+          { icon:"💬", type:"WhatsApp / Telegram", tip:"Export chat as PDF or screenshot. Include timestamps. Back up to Google Drive. Certificate under Sec 63 BSA needed for court submission." },
+          { icon:"📞", type:"Call Recordings", tip:"Recordings from both sides of a conversation are admissible. Use a call recorder app. Store with date/time metadata intact." },
+          { icon:"📧", type:"Emails & SMS", tip:"Save email threads as PDF with full headers (shows timestamp and sender IP). Take screenshots of SMS with phone's date visible." },
+          { icon:"📸", type:"Photos & Videos", tip:"Metadata (EXIF data) on photos proves time and location. Do NOT edit or crop — courts check authenticity. Store original files." },
+          { icon:"🏦", type:"Bank Statements", tip:"Digital statements from your bank's app or email are valid under BSA § 63. They prove income, transactions, and gifts given to wife." },
+          { icon:"📍", type:"Location History", tip:"Google Maps timeline, mobile tower records, or Uber/Ola trip history can prove an alibi. Preserve before data is overwritten." },
+        ].map(e => `
+          <div style="background:var(--cream);border-radius:var(--radius);padding:1.25rem;">
+            <div style="font-size:1.5rem;margin-bottom:6px;">${e.icon}</div>
+            <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;">${e.type}</div>
+            <p style="font-size:12px;color:var(--text-mid);line-height:1.6;font-weight:300;">${e.tip}</p>
+          </div>`).join('')}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- AI CHAT SECTION (always visible at bottom of home) -->
+<div id="ai-chat-section" class="ai-section">
+  <div class="ai-inner">
+    <h2>Ask Your Legal Question</h2>
+    <p>Get instant, plain-language answers to your legal questions — powered by AI trained on Indian law, Supreme Court verdicts, and current legal precedents. Updated with the latest information.</p>
+    <div class="ai-chat-box">
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-msg bot">Namaste! 🙏 I'm your NyaySetu legal assistant. I can explain Indian laws in simple language, share relevant case references where men have won, and guide you through the legal process step by step. What is your situation? (e.g., "My wife filed 498A against me", "I want child custody", "I received a maintenance notice")</div>
+      </div>
+      <div class="chat-input-row">
+        <input id="chat-input" type="text" placeholder="Type your legal question in English or Hindi..." onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="send-btn" onclick="sendChat()">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HELPLINES -->
+<div class="helpline-section">
+  <div class="helpline-inner">
+    <div class="section-header">
+      <h2>Emergency Helplines for Men</h2>
+      <p>You are not alone. Reach out — real people are waiting to help.</p>
+    </div>
+    <div class="helpline-grid">
+      <div class="helpline-card" onclick="openModal('iHelpline')">
+        <div class="h-icon">📞</div>
+        <div class="h-name">Save Indian Family</div>
+        <div class="h-num">1800-599-0019</div>
+        <div class="h-desc">Men in matrimonial distress</div>
+      </div>
+      <div class="helpline-card">
+        <div class="h-icon">🏛️</div>
+        <div class="h-name">National Legal Services</div>
+        <div class="h-num">15100</div>
+        <div class="h-desc">Free legal aid (NALSA)</div>
+      </div>
+      <div class="helpline-card">
+        <div class="h-icon">👮</div>
+        <div class="h-name">Police Helpline</div>
+        <div class="h-num">100</div>
+        <div class="h-desc">Emergency — report false arrest</div>
+      </div>
+      <div class="helpline-card">
+        <div class="h-icon">🧠</div>
+        <div class="h-name">iCall (Mental Health)</div>
+        <div class="h-num">9152987821</div>
+        <div class="h-desc">Counselling for men in crisis</div>
+      </div>
+      <div class="helpline-card">
+        <div class="h-icon">⚖️</div>
+        <div class="h-name">Mens Rights Association</div>
+        <div class="h-num">+91 9372932329</div>
+        <div class="h-desc">MRA India — legal help for men</div>
+      </div>
+      <div class="helpline-card">
+        <div class="h-icon">🤝</div>
+        <div class="h-name">SIFF Helpline</div>
+        <div class="h-num">+91 9322091195</div>
+        <div class="h-desc">Save Indian Family Foundation</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="disclaimer">
+      <strong>⚠️ Disclaimer:</strong> NyaySetu provides general legal information and education only. This is NOT legal advice. Laws and their interpretation change frequently. Always consult a qualified Indian lawyer before taking legal action. Information is updated regularly but may not reflect the very latest court orders.
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-name">⚖️ NyaySetu</div>
+        <p>न्याय सेतु — Building a bridge to justice for every Indian man and his family. Know your rights. Protect your life.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Legal Areas</h4>
+        <span onclick="quickSearch('498A')">Section 498A</span>
+        <span onclick="quickSearch('domestic violence')">DV Act</span>
+        <span onclick="quickSearch('maintenance')">Maintenance</span>
+        <span onclick="quickSearch('custody')">Child Custody</span>
+        <span onclick="quickSearch('divorce')">Divorce</span>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <span onclick="showPage('cases')">Case Library</span>
+        <span onclick="showPage('guide')">Legal Guides</span>
+        <span onclick="showPage('resources')">NGOs & Help</span>
+        <span>Lawyer Finder</span>
+        <span>Document Templates</span>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <span>Our Mission</span>
+        <span>How We Work</span>
+        <span>Privacy Policy</span>
+        <span>Terms of Use</span>
+        <span>Contact Us</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 NyaySetu. Educational platform. Not a law firm. | Updated daily from public legal sources.</p>
+      <p style="color:rgba(255,255,255,0.25);">Made with ⚖️ for every Indian man who deserves to know his rights.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- EMERGENCY MODAL -->
+<div class="modal-overlay" id="modal-emergency">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>🆘 Emergency Legal Help</h3>
+      <button class="modal-close" onclick="closeModal('emergency')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="warning-box">
+        <span>⚠️</span>
+        <div><strong>If you have been arrested or are about to be:</strong> Do NOT sign anything. Ask for a lawyer immediately. You have the right to remain silent. Read this guide first.</div>
+      </div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Stay calm and do NOT argue with police</strong>
+            <p>Anything you say can be used against you. Politely say: "I want to speak with my lawyer before answering any questions."</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>Call NALSA (National Legal Services Authority)</strong>
+            <p>Dial 15100 — free legal aid is your constitutional right under Article 22.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>Apply for Anticipatory Bail if not yet arrested</strong>
+            <p>File under Section 438 CrPC before arrest. Get a lawyer to file immediately at the Sessions Court.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <strong>Inform family — document everything</strong>
+            <p>Write down every name, time, and event. Witnesses matter. Screenshots, call logs, WhatsApp chats — preserve all evidence.</p>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:1rem;">
+        <div style="font-weight:600;font-size:14px;color:var(--navy);margin-bottom:8px;">Key Helplines:</div>
+        <div style="font-size:14px;color:var(--text-mid);line-height:2;">
+          📞 NALSA Free Legal Aid: <strong>15100</strong><br>
+          📞 Save Indian Family: <strong>1800-599-0019</strong><br>
+          📞 Police: <strong>100</strong><br>
+          📞 MRA India: <strong>+91 9372932329</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ──────────────────────────────────────────────────────────────────
+
+const LEGAL_DATA = [
+  {
+    id: "498A",
+    icon: "🔴",
+    title: "Section 498A IPC — Cruelty by Husband or His Relatives",
+    actId: "IPC § 498A | 1983",
+    tags: [
+      { text: "Non-Bailable (Historically)", cls: "tag-danger" },
+      { text: "Often Misused", cls: "tag-warning" },
+      { text: "SC Guidelines Apply", cls: "tag-info" }
+    ],
+    simple: `Section 498A of the IPC makes it a crime for a husband or his relatives to be "cruel" to a wife. Cruelty can mean physical harm OR harassment that drives the wife to suicide OR harassment for dowry. The law was created to protect genuine victims — but it has become one of the most misused laws in India, with the Supreme Court itself calling it a "legal terrorism" tool in some cases. As of 2024, arrests cannot be made immediately without a magistrate's permission (following SC guidelines).`,
+    rights: [
+      "You CANNOT be arrested immediately without a magistrate's approval (Arnesh Kumar Guidelines, 2014 — still in force).",
+      "You can apply for Anticipatory Bail (Sec 438 CrPC / BNSS equivalent) BEFORE arrest.",
+      "Bail is available — 498A is no longer automatically non-bailable as courts have evolved their interpretation.",
+      "A chargesheet does not mean conviction — over 70% of 498A trials end in acquittal.",
+      "You can file a complaint against a false complainant for perjury and under Sec 182 IPC (false information to public servant).",
+      "Your elderly parents and minor siblings CANNOT be arrested without specific, individual evidence against them."
+    ],
+    warning: "Even after a Supreme Court ruling moderating arrests, some police still arrest first and ask questions later. Get a lawyer IMMEDIATELY if you receive any notice or summons. Do NOT ignore it.",
+    steps: [
+      { n: 1, title: "Gather all evidence immediately", detail: "Preserve WhatsApp chats, emails, call recordings, bank transactions, gift receipts. Store in cloud backup. Do this BEFORE any complaint or arrest.", time: "Day 1" },
+      { n: 2, title: "Hire a criminal lawyer & file Anticipatory Bail", detail: "File Anticipatory Bail under Section 438 CrPC at the Sessions Court. This protects you from arrest while the case is being heard.", time: "Day 1–2" },
+      { n: 3, title: "Respond to police notice with a lawyer", detail: "If you receive a Section 41A notice (summons to appear), go with your lawyer. Do NOT go alone. Do NOT sign anything without reading.", time: "Within notice period" },
+      { n: 4, title: "File a counter-complaint if complaint is false", detail: "File complaint for false information (Sec 182 IPC), and if matrimonial property is withheld, file under Sec 406 IPC. Also document cruelty / harassment YOU faced.", time: "Within 1–2 weeks" },
+      { n: 5, title: "Attend all court dates — never miss one", detail: "Missing a court date leads to non-bailable warrants (NBW). Maintain a calendar. Have your lawyer apply for exemption if you cannot attend.", time: "Ongoing" },
+      { n: 6, title: "Apply for quashing if complaint is false", detail: "File a petition to quash FIR under Section 482 CrPC (now Sec 528 BNSS) at the High Court. Courts have been quashing clearly false 498A FIRs.", time: "2–4 weeks after FIR" }
+    ],
+    cases: [
+      { name: "Arnesh Kumar v. State of Bihar (2014)", court: "Supreme Court of India | (2014) 8 SCC 273", ruling: "Police cannot arrest accused in 498A cases without magistrate's approval. Officers must apply their mind before arrest. Widespread arrests without inquiry are illegal.", impact: "Drastically reduced arbitrary arrests under 498A" },
+      { name: "Social Action Forum v. Union of India (2018)", court: "Supreme Court of India | (2018) 10 SCC 443", ruling: "Mediation before investigation is now required. Family Welfare Committees (though later modified) must examine complaints before police take action in non-cognisable matters.", impact: "Added procedural safeguard against immediate arrests" },
+      { name: "Preeti Gupta v. State of Jharkhand (2010)", court: "Supreme Court of India | (2010) 7 SCC 667", ruling: "Implicating all family members including elderly parents, in-laws, and distant relatives without specific evidence is illegal. Courts must scrutinise such omnibus complaints.", impact: "Protected families from blanket arrest in 498A" },
+      { name: "Rajesh Sharma v. State of UP (2017)", court: "Supreme Court of India | (2017) 11 SCC 444", ruling: "Directed formation of Family Welfare Committees and a 1-month delay in arrest to allow reconciliation. Recognised widespread misuse of 498A.", impact: "Temporary but significant procedural protection for accused" }
+    ]
+  },
+  {
+    id: "DV",
+    icon: "🏠",
+    title: "Protection of Women from Domestic Violence Act, 2005 (PWDVA)",
+    actId: "PWDVA | Act 43 of 2005",
+    tags: [
+      { text: "Civil Remedy (Mostly)", cls: "tag-info" },
+      { text: "Shared Household Right", cls: "tag-warning" },
+      { text: "Broad Definition", cls: "tag-danger" }
+    ],
+    simple: `The PWDVA gives women protection against physical, sexual, verbal, emotional, and economic abuse within a domestic relationship. The catch: the definition of "domestic relationship" is extremely broad — a live-in partner can also file. A "Protection Order" can be passed WITHOUT hearing the husband first (ex-parte). The husband can also be removed from his own house. However, courts have increasingly recognised that men too can face abuse, and the law has procedural safeguards that a good lawyer can use.`,
+    rights: [
+      "You have the right to be heard before a final Protection Order is passed — ex-parte orders are only temporary.",
+      "You can challenge any ex-parte order immediately by appearing before the Magistrate within the first hearing.",
+      "You can file a counter-affidavit contesting every allegation with evidence.",
+      "If a DV complaint is filed alongside 498A, they are heard together — address both strategically.",
+      "A DV order does NOT automatically give wife the right to permanently stay in the matrimonial home if it is not jointly owned.",
+      "You can appeal any DV order to the Sessions Court and then the High Court.",
+      "Men who face domestic violence from wives/partners can file a criminal complaint under Sec 498A (if married) or under IPC assault provisions."
+    ],
+    warning: "A Protection Order can be passed within days WITHOUT you being present. If you receive any notice under PWDVA, appear in court on the FIRST date without fail. Missing the first hearing often leads to harsh ex-parte orders.",
+    steps: [
+      { n: 1, title: "Read the notice carefully — note the court date", detail: "Do NOT ignore any notice under PWDVA. The first hearing is critical.", time: "Day 1" },
+      { n: 2, title: "Hire a lawyer experienced in family law", detail: "PWDVA proceedings move fast. An experienced lawyer can challenge ex-parte orders, file written replies, and cross-examine the Protection Officer.", time: "Within 3 days" },
+      { n: 3, title: "File a written reply to all allegations", detail: "Prepare a detailed reply to every allegation with documentary evidence — photos, messages, bank statements, witness statements.", time: "Before next hearing" },
+      { n: 4, title: "Challenge shared household right if applicable", detail: "If the property is entirely yours or your parents', a lawyer can argue the wife does not have a right of residence in that property.", time: "At first hearing" },
+      { n: 5, title: "Document your own abuse or harassment", detail: "If you are being harassed or abused, document it. File a police complaint if physical abuse occurred. This can be used in the DV proceedings.", time: "Ongoing" },
+      { n: 6, title: "Attend mediation if ordered", detail: "Courts sometimes order mediation. Attend — it shows good faith and can lead to favourable settlement. Do not agree to anything under pressure without legal advice.", time: "As ordered" }
+    ],
+    cases: [
+      { name: "Hiral P. Harsora v. Kusum Narottamdas Harsora (2016)", court: "Supreme Court of India | (2016) 10 SCC 165", ruling: "Struck down the blanket exclusion of male respondents under PWDVA. Any person, regardless of gender, can be a respondent in DV proceedings.", impact: "Clarified that DV law applies to persons, not just husbands" },
+      { name: "S.R. Batra v. Taruna Batra (2007)", court: "Supreme Court of India | (2007) 3 SCC 169", ruling: "The wife has a right of residence only in a shared household. If the property belongs to in-laws and not the husband, she cannot claim right of residence there.", impact: "Protected in-laws' property from DV residence orders" },
+      { name: "V.D. Bhanot v. Savita Bhanot (2012)", court: "Supreme Court of India | AIR 2012 SC 965", ruling: "Held that the Protection Officer is NOT obligated to pass every application — they must apply judicial mind and consider facts.", impact: "Added a check on automatic or politically motivated orders" }
+    ]
+  },
+  {
+    id: "MAINT",
+    icon: "💼",
+    title: "Maintenance — Section 125 CrPC / Bharatiya Nagarik Suraksha Sanhita (BNSS)",
+    actId: "Sec 125 CrPC | Now Sec 144 BNSS 2023",
+    tags: [
+      { text: "Income-Based", cls: "tag-info" },
+      { text: "Interim Orders Fast", cls: "tag-warning" },
+      { text: "Can Be Challenged", cls: "tag-success" }
+    ],
+    simple: `Maintenance under Section 125 CrPC (now Section 144 of BNSS, 2023) allows a wife, children, and even parents to claim maintenance from a husband who has "sufficient means" but neglects or refuses to maintain them. The law is civil in nature. However, courts sometimes award maintenance without properly verifying the husband's actual income — and the interim maintenance can be set very high. The good news: you can challenge the amount, prove her income and assets, and get it reduced or terminated.`,
+    rights: [
+      "Maintenance is based on BOTH parties' income, expenses, and lifestyle — not just the husband's salary.",
+      "If the wife is earning or has independent income/assets, maintenance can be reduced significantly.",
+      "If the wife refuses to cohabit without sufficient reason, maintenance can be denied under Sec 125(4).",
+      "Interim maintenance orders can be challenged before the Sessions Court immediately.",
+      "If wife remarries or lives with another man, maintenance terminates (Sec 125(5)).",
+      "You can disclose wife's actual income via ITR, Form 26AS, bank statements, and social media evidence.",
+      "Husband's parents can ALSO claim maintenance from him under Sec 125 — the law protects elderly parents too."
+    ],
+    warning: "Courts can issue an interim maintenance order within 60 days. If you miss the hearing or fail to produce income proof, the order will be based on the wife's claims about your income — which may be greatly exaggerated.",
+    steps: [
+      { n: 1, title: "Collect and submit your ACTUAL income proof", detail: "Salary slips, ITR, Form 16, bank statements, rent receipts, EMI documents. Courts must consider your NET income, not gross salary.", time: "Before first hearing" },
+      { n: 2, title: "Investigate and document wife's income", detail: "Collect her ITR, Form 26AS, employment records, business income, rental income, family wealth. Social media posts showing lifestyle can also be evidence.", time: "Within 4–6 weeks" },
+      { n: 3, title: "Challenge unreasonable interim orders immediately", detail: "If an interim maintenance amount seems excessive, file a revision petition before the Sessions Court immediately — don't wait for final order.", time: "Within 15–30 days" },
+      { n: 4, title: "Plead her willful desertion or adultery if applicable", detail: "If she left without cause, file evidence of willful desertion. Under Sec 125(4), a wife who refuses to live without sufficient cause loses maintenance rights.", time: "At trial stage" },
+      { n: 5, title: "Pay maintenance on time if ordered", detail: "Non-payment of maintenance leads to imprisonment. Even if you are challenging the order, comply while challenge is pending, OR deposit in court.", time: "Ongoing" }
+    ],
+    cases: [
+      { name: "Rajnesh v. Neha & Anr (2020)", court: "Supreme Court of India | (2021) 2 SCC 324", ruling: "Landmark judgment laying down comprehensive guidelines for maintenance — including mandatory disclosure of assets/income by BOTH parties, avoidance of multiple proceedings, and clarity on date from which maintenance runs.", impact: "Standardised maintenance proceedings, reduced manipulation" },
+      { name: "Shamima Farooqui v. Shahid Khan (2015)", court: "Supreme Court of India | (2015) 5 SCC 705", ruling: "Maintenance should reflect the standard of living the wife enjoyed during marriage. However, the husband must NOT be left without means to sustain himself.", impact: "Balanced approach — husband's needs also considered" },
+      { name: "Bhuvan Mohan Singh v. Meena (2014)", court: "Supreme Court of India | (2014) 4 SCC 657", ruling: "Where wife earns a salary equal to or exceeding husband's capacity, maintenance can be denied or drastically reduced.", impact: "Income of wife is a key factor courts must consider" }
+    ]
+  },
+  {
+    id: "CUSTODY",
+    icon: "👶",
+    title: "Child Custody — Hindu Minority and Guardianship Act, 1956 / Guardian & Wards Act, 1890",
+    actId: "HMGA 1956 | GWA 1890",
+    tags: [
+      { text: "Best Interest of Child", cls: "tag-info" },
+      { text: "Father Has Equal Rights", cls: "tag-success" },
+      { text: "Visitation Enforceable", cls: "tag-warning" }
+    ],
+    simple: `Indian custody law says the most important factor is the "best interest of the child" — NOT automatically the mother's preference. Under Hindu law, for children under 5, there is a general preference for the mother, but this is NOT an absolute rule. Fathers have EQUAL rights and courts do award custody to fathers when they are the better parent. Even if the mother gets primary custody, the father has a LEGAL RIGHT to visitation — and denying that visitation is contempt of court.`,
+    rights: [
+      "Fathers have equal parental rights — 'best interest of child' is the ONLY standard, not gender.",
+      "If your child is below 5, you can still get custody if you prove the mother is unfit or it's in the child's best interest.",
+      "Even without primary custody, you have a legal right to regular visitation — courts must specify it.",
+      "If the mother denies court-ordered visitation, you can file for contempt of court.",
+      "Courts consider: stability of home, financial ability, emotional bonding, school continuity, and parent's moral character.",
+      "You can challenge any interim custody order at the High Court via Article 226 Writ petition if access is denied.",
+      "International child abduction by the mother (taking the child abroad) is covered under the Hague Convention — India has obligations."
+    ],
+    warning: "Courts may initially give interim custody to the mother during pendency. Do NOT lose contact with your child. File for regular visitation immediately. Document every denied visit with messages and witnesses.",
+    steps: [
+      { n: 1, title: "File for interim visitation immediately", detail: "Even before the main custody case is decided, file for a visitation/access order. Courts routinely grant this to maintain the child's relationship with both parents.", time: "Week 1" },
+      { n: 2, title: "Document your relationship with the child", detail: "Collect photos, videos, school involvement records, doctor visit records, WhatsApp messages with the child. Prove you are an active, caring parent.", time: "Ongoing" },
+      { n: 3, title: "Assess and document the mother's fitness", detail: "If the mother has mental health issues, substance abuse problems, unstable lifestyle, or a criminal record, gather evidence carefully and present to court.", time: "During investigation" },
+      { n: 4, title: "Ensure child's schooling/medical records are in your name too", detail: "Make sure you are listed as parent in school records, medical records. Attend parent-teacher meetings — courts look at who is more involved.", time: "Immediately" },
+      { n: 5, title: "Request court-ordered child interview / home assessment", detail: "Courts can appoint a child psychologist or conduct a home visit. Request this — it gives an objective view beyond what both parents claim.", time: "During trial" },
+      { n: 6, title: "File contempt if visitation is denied", detail: "If the court grants visitation and the mother denies access, file a contempt petition. Courts take this seriously — continued denial can shift custody.", time: "Whenever denied" }
+    ],
+    cases: [
+      { name: "Nil Ratan Kundu v. Abhijit Kundu (2008)", court: "Supreme Court of India | (2008) 9 SCC 413", ruling: "The principle of 'welfare of the minor' is the supreme consideration. The court awarded custody to the father after evaluating the total circumstances of the case.", impact: "Confirmed fathers can get custody when it's in the child's best interest" },
+      { name: "Gaurav Nagpal v. Sumedha Nagpal (2009)", court: "Supreme Court of India | (2009) 1 SCC 42", ruling: "Courts should not robotically apply the rule that children below 5 go to the mother. The child's welfare must be examined holistically.", impact: "Weakened the automatic mother-preference for young children" },
+      { name: "Vikram Vir Vohra v. Shalini Bhalla (2010)", court: "Supreme Court of India | (2010) 4 SCC 409", ruling: "Denied visitation by the custodial parent is a serious matter. Courts should enforce visitation orders strictly and can modify custody if access is repeatedly denied.", impact: "Protected fathers' visitation rights" }
+    ]
+  },
+  {
+    id: "FALSE_FIR",
+    icon: "🛡️",
+    title: "False FIR / Complaint — How to Quash & Counter-Attack",
+    actId: "Sec 482 CrPC | Now Sec 528 BNSS 2023",
+    tags: [
+      { text: "Quashing Available", cls: "tag-success" },
+      { text: "Anticipatory Bail", cls: "tag-info" },
+      { text: "Counter-Complaint Possible", cls: "tag-warning" }
+    ],
+    simple: `If someone files a false FIR against you, you have two main options: (1) Apply for Anticipatory Bail to prevent arrest, and (2) File a petition to quash the FIR at the High Court under Section 482 CrPC (now Sec 528 BNSS). If the complaint is clearly false, malicious, or an abuse of process, the High Court has the power to permanently quash the FIR — meaning the case dies. You can also file a counter-complaint against the person who gave false information to police.`,
+    rights: [
+      "You can file for Anticipatory Bail BEFORE arrest — even if you haven't been summoned yet.",
+      "You can petition the High Court to quash an FIR if it is false, malicious, or an abuse of process.",
+      "If the FIR contains false statements, you can file a complaint under Sec 182 IPC (giving false information to public servant).",
+      "If you are acquitted, you can file a malicious prosecution suit for damages in civil court.",
+      "You cannot be arrested for a 'B' (Bailable) offence — bail is your right at the police station itself.",
+      "For non-bailable offences, you can apply for bail before the Magistrate on the very first day.",
+      "Police must register an FIR if a cognisable offence is disclosed — but they cannot selectively register only one side's story."
+    ],
+    warning: "Even if the FIR is completely false, do NOT flee, go into hiding, or ignore summons/notices. This weakens your case. Appear in court, apply for bail, and fight legally. Absconding makes courts assume guilt.",
+    steps: [
+      { n: 1, title: "Apply for Anticipatory Bail IMMEDIATELY", detail: "File under Sec 438 CrPC (Sec 482 BNSS) at Sessions Court or High Court. If granted, you cannot be arrested without first appearing before the court.", time: "Within 24–48 hours of learning about FIR" },
+      { n: 2, title: "Collect evidence proving you are innocent", detail: "Alibi proof, witness statements, phone location data, CCTV footage, messages proving the complaining party is lying or has motive.", time: "Immediately" },
+      { n: 3, title: "File a petition to quash the FIR at the High Court", detail: "Under Sec 482 CrPC / 528 BNSS. Attach a stay of arrest. High Courts quash FIRs where: offence not made out, complaint is malicious, or parties have settled.", time: "Within 2–4 weeks" },
+      { n: 4, title: "File counter-FIR / complaint against the false complainant", detail: "Under Sec 182 IPC (false information), Sec 211 IPC (false charge), or Sec 499/500 IPC (defamation) as appropriate.", time: "Parallel to quashing petition" },
+      { n: 5, title: "If charge-sheeted, go through trial and build full defence", detail: "Cross-examine each witness, challenge every piece of evidence. In 498A and similar cases, over 70% of men are acquitted at trial when properly defended.", time: "Trial phase" }
+    ],
+    cases: [
+      { name: "State of Haryana v. Bhajan Lal (1992)", court: "Supreme Court of India | 1992 Supp (1) SCC 335", ruling: "Laid down 7 specific categories where High Courts MUST quash FIRs under Sec 482 — including where allegations are absurd, impossible, or clearly malicious.", impact: "The gold standard for FIR quashing — cited in every quashing case" },
+      { name: "Geeta Mehrotra v. State of UP (2012)", court: "Supreme Court of India | (2012) 10 SCC 741", ruling: "FIRs against relatives of husband in 498A cases without specific individual allegations must be quashed. Generalised, omnibus allegations are not valid.", impact: "Protected in-laws from blanket false FIRs" },
+      { name: "Priyanka Srivastava v. State of UP (2015)", court: "Supreme Court of India | (2015) 6 SCC 287", ruling: "Filing multiple cases using the same set of facts amounts to abuse of process of law. Courts must prevent vexatious litigation.", impact: "Discouraged serial filing of false cases" }
+    ]
+  },
+  {
+    id: "BNS",
+    icon: "📜",
+    title: "Bharatiya Nyaya Sanhita (BNS) 2023 — Replaced IPC",
+    actId: "BNS · Act 45 of 2023 · Effective July 1, 2024",
+    tags: [
+      { text: "New Law — July 2024", cls: "tag-danger" },
+      { text: "Replaced IPC 1860", cls: "tag-warning" },
+      { text: "Section Numbers Changed", cls: "tag-info" }
+    ],
+    simple: `The Bharatiya Nyaya Sanhita (BNS) completely replaced the Indian Penal Code (IPC) 1860 on July 1, 2024. It defines all crimes in India. If your case was filed after July 1, 2024, ALL section numbers are from BNS — not IPC. For men: the cruelty law (old 498A) is now Section 85 BNS. The punishment is mostly the same, but the procedures and some definitions have changed. Old cases filed before July 1, 2024 still run under IPC.`,
+    rights: [
+      "Section 85 BNS (old 498A) — Same law, same punishment (3 years + fine), but new procedures under BNSS apply.",
+      "Section 316 BNS (old 406 IPC) — Criminal breach of trust. If wife took your belongings, file under this.",
+      "Section 216 BNS (old 182 IPC) — If someone gave FALSE information to police about you, counter-file under this.",
+      "Section 250 BNS (old 211 IPC) — Filing a FALSE criminal charge is itself a crime. Use this to counter false FIRs.",
+      "Section 356/357 BNS (old 499/500 IPC) — Defamation. If wife or her family made false public statements, this applies.",
+      "Section 108 BNS (old 306 IPC) — Abetment of suicide. If you are falsely accused of driving someone to suicide, the burden of proof is on the complainant.",
+      "BNS also introduced 'organised crime' and 'terrorist act' definitions — not directly relevant to matrimonial cases."
+    ],
+    warning: "Many lawyers and even police may still use old IPC section numbers out of habit. Always confirm with your lawyer which code applies to your case. Cases filed after July 1, 2024 MUST cite BNS sections, or the chargesheet is technically defective.",
+    steps: [
+      { n: 1, title: "Confirm the date your FIR was filed", detail: "If the FIR is dated July 1, 2024 or later, your case runs under BNS + BNSS + BSA. If before that date, it runs under IPC + CrPC + Indian Evidence Act.", time: "Day 1" },
+      { n: 2, title: "Check if the FIR correctly cites BNS sections", detail: "A common police error is citing IPC sections for a post-July 2024 FIR. A defective FIR can be challenged. Your lawyer should review this immediately.", time: "Week 1" },
+      { n: 3, title: "Apply for Anticipatory Bail under BNSS § 482", detail: "For a post-July 2024 case, the bail application must cite BNSS § 482 (old CrPC § 438). Same rights, new section number.", time: "Immediately if needed" },
+      { n: 4, title: "Use BSA for your electronic evidence", detail: "Under BSA § 63, your WhatsApp chats, emails, and call recordings are PRIMARY evidence. Prepare a proper certificate of electronic record for court.", time: "Before first hearing" },
+      { n: 5, title: "File counter-complaint under BNS § 216 for false FIR", detail: "If the FIR is false, file under BNS § 216 (false information to public servant) and BNS § 250 (false charge). Works the same as old 182/211 IPC.", time: "Parallel to defence" }
+    ],
+    cases: [
+      { name: "Arnesh Kumar Guidelines — now apply under BNSS § 35", court: "Supreme Court of India | Operational since July 1, 2024 under BNSS", ruling: "The Arnesh Kumar (2014) guidelines on no-arrest-without-magistrate-approval are now codified in BNSS § 35. Police must issue notice before arrest for offences punishable up to 3 years.", impact: "Section 85 BNS (498A equivalent) arrests now governed by BNSS § 35 notice requirement" },
+      { name: "Interpretation of BNS § 85 — Courts applying 498A precedents", court: "Multiple High Courts, 2024–2025", ruling: "Courts have consistently held that all Supreme Court precedents on IPC § 498A (including Arnesh Kumar, Preeti Gupta, etc.) fully apply to BNS § 85 cases, since the law is substantively the same.", impact: "All 498A SC judgements protect you in BNS § 85 cases too" }
+    ]
+  },
+  {
+    id: "BNSS",
+    icon: "📋",
+    title: "Bharatiya Nagarik Suraksha Sanhita (BNSS) 2023 — Replaced CrPC",
+    actId: "BNSS · Act 46 of 2023 · Effective July 1, 2024",
+    tags: [
+      { text: "New Law — July 2024", cls: "tag-danger" },
+      { text: "Replaced CrPC 1973", cls: "tag-warning" },
+      { text: "New Bail & FIR Rules", cls: "tag-info" }
+    ],
+    simple: `The Bharatiya Nagarik Suraksha Sanhita (BNSS) replaced the Code of Criminal Procedure (CrPC) on July 1, 2024. It tells you HOW a crime is investigated, how you are arrested, how bail works, and how trials happen. For men: the most important sections are the anticipatory bail provision (now § 482 BNSS), FIR quashing (now § 528 BNSS), maintenance (now § 144 BNSS), and the pre-arrest notice (now § 35 BNSS). Your fundamental rights are the same — just under new section numbers.`,
+    rights: [
+      "BNSS § 35 — Before arresting you, police MUST give a notice to appear. If you comply, no arrest. Stronger than old CrPC § 41A.",
+      "BNSS § 482 — Anticipatory Bail. Apply BEFORE arrest. Same as old CrPC § 438.",
+      "BNSS § 528 — High Court's power to quash FIRs. Same as old CrPC § 482. All existing quashing case law applies.",
+      "BNSS § 144 — Maintenance. Same as old CrPC § 125. All Rajnesh v. Neha guidelines apply.",
+      "BNSS § 187 — Remand/custody during investigation. Police custody now capped at 15 days total for most offences.",
+      "BNSS § 346 — If trial is not completed within 3 years, bail can be sought automatically. Reduces indefinite pretrial detention.",
+      "Default bail: If police fail to file chargesheet within 60 days (extendable to 90), you are entitled to bail as of right."
+    ],
+    warning: "BNSS introduced a new provision — BNSS § 187(6) — that allows police custody of up to 40/60 days in instalments for serious offences, which is actually LONGER than the old CrPC in some scenarios. Know which offence you are charged with and what custody period applies.",
+    steps: [
+      { n: 1, title: "When you get a notice (§ 35 BNSS)", detail: "Do NOT ignore it. Appear on the date mentioned, with a lawyer. Appearing voluntarily prevents arrest and shows good faith to the court.", time: "Within notice deadline" },
+      { n: 2, title: "File Anticipatory Bail under § 482 BNSS", detail: "File at Sessions Court or High Court BEFORE arrest. Cite all your defences and attach evidence that the FIR is false or malicious.", time: "Immediately" },
+      { n: 3, title: "Apply for bail under § 480 BNSS if arrested", detail: "For bailable offences, bail is your right at the police station. For non-bailable, the magistrate must grant bail within 24 hours of your production.", time: "On first appearance in court" },
+      { n: 4, title: "Challenge maintenance under § 144 BNSS", detail: "All CrPC § 125 case law (including Rajnesh v. Neha guidelines) applies. Disclose your real income, disclose wife's income, and challenge interim orders immediately.", time: "On first maintenance hearing" },
+      { n: 5, title: "File quashing petition under § 528 BNSS", detail: "Same as old CrPC § 482. All Bhajan Lal category grounds for quashing still apply. File at High Court with a stay of arrest.", time: "Within 2–4 weeks of FIR" }
+    ],
+    cases: [
+      { name: "BNSS § 528 Quashing — All § 482 CrPC Precedents Apply", court: "Multiple High Courts, 2024–2025", ruling: "High Courts have confirmed that all existing precedents under CrPC § 482 (including State of Haryana v. Bhajan Lal and its 7 categories) fully apply to quashing petitions under BNSS § 528.", impact: "Your right to quash a false FIR is exactly the same under the new law" },
+      { name: "Default Bail under BNSS — Enforced Strictly", court: "Various High Courts, 2024", ruling: "Courts have strictly enforced the right to default bail (also called statutory bail) when police fail to file chargesheets within the mandatory deadline under BNSS.", impact: "Police must complete investigation on time — you can claim bail if they don't" }
+    ]
+  },
+  {
+    id: "BSA",
+    icon: "🔬",
+    title: "Bharatiya Sakshya Adhiniyam (BSA) 2023 — Replaced Indian Evidence Act",
+    actId: "BSA · Act 47 of 2023 · Effective July 1, 2024",
+    tags: [
+      { text: "New Law — July 2024", cls: "tag-danger" },
+      { text: "Electronic Evidence Recognised", cls: "tag-success" },
+      { text: "Replaced Evidence Act 1872", cls: "tag-warning" }
+    ],
+    simple: `The Bharatiya Sakshya Adhiniyam (BSA) replaced the Indian Evidence Act 1872 on July 1, 2024. It defines what is valid EVIDENCE in a court of law. The biggest change for ordinary people: WhatsApp messages, emails, call recordings, and digital documents are now EXPLICITLY recognised as PRIMARY evidence under § 63 BSA. You no longer need a complicated secondary evidence procedure. This is a major win for men who have been documenting abuse, threats, or harassment digitally.`,
+    rights: [
+      "BSA § 63 — Electronic records (WhatsApp, email, SMS, call recordings, CCTV) are PRIMARY evidence. Same weight as a paper document.",
+      "BSA § 61 — The court can now directly inspect electronic devices as evidence.",
+      "BSA § 23 — Confessions to police are still NOT admissible. Police cannot force a confession and use it in court. This protection is unchanged.",
+      "BSA § 111 — Same presumption of innocence. The prosecution must PROVE guilt beyond reasonable doubt. The burden never shifts to you simply because a complaint is filed.",
+      "BSA § 116 — Estoppel principles (you cannot contradict your own earlier statements) apply the same way as before.",
+      "Under BSA, a digital certificate from the service provider (like WhatsApp or Google) authenticating the electronic records is admissible and can be obtained through court directions."
+    ],
+    warning: "To submit electronic evidence (WhatsApp chats, call recordings) in court, you must prepare a proper 'Certificate of Electronic Record' as required under BSA § 63(4). Without this certificate, the evidence may be challenged. Your lawyer must prepare this correctly — it is a common mistake to submit screenshots without the proper certificate.",
+    steps: [
+      { n: 1, title: "Start documenting everything digitally RIGHT NOW", detail: "WhatsApp chats, emails, voice notes, threatening messages — screenshot everything with the date/time visible. Export WhatsApp chats as PDF (include media). Store in Google Drive.", time: "Immediately" },
+      { n: 2, title: "Record calls legally", detail: "In India, recording a call you are a party to (one-party consent) is generally not illegal. Use a call recorder app. Save all recordings with date metadata intact.", time: "Ongoing" },
+      { n: 3, title: "Prepare a Certificate under BSA § 63(4)", detail: "For court submission of electronic evidence, your lawyer must prepare or obtain a certificate authenticating the electronic record. Without it, opposing counsel can challenge admissibility.", time: "Before first hearing" },
+      { n: 4, title: "Request CCTV/location/phone records via court", detail: "Your lawyer can request the court to direct police or telecom companies to produce CCTV footage, call detail records (CDR), and location data. These are valid BSA evidence.", time: "During trial or investigation" },
+      { n: 5, title: "Use bank statements as evidence of gifts/expenses", detail: "Digital bank statements directly from your bank's app or email are valid under BSA § 63. Use them to prove gifts given, maintenance paid, or any financial transactions.", time: "Before financial hearings" }
+    ],
+    cases: [
+      { name: "Arjun Panditrao Khotkar v. Kailash Kushanrao Gorantyal (2020)", court: "Supreme Court of India | (2020) 7 SCC 1", ruling: "This pre-BSA landmark case held that the certificate under old § 65B of the Indian Evidence Act is mandatory for electronic evidence. The BSA codified and simplified this requirement under § 63.", impact: "Foundation for how electronic evidence must be certified — still the leading case under BSA too" },
+      { name: "Tomaso Bruno v. State of UP (2015)", court: "Supreme Court of India | (2015) 7 SCC 178", ruling: "CCTV footage and digital evidence must be preserved and treated as primary evidence. Tampering with electronic evidence is a serious offence.", impact: "Courts protect the integrity of electronic evidence — works in your favour when you produce authentic records" }
+    ]
+  }
+];
+
+const LANDMARK_CASES = [
+  { title: "Arnesh Kumar v. State of Bihar (2014)", court: "SC", citation: "(2014) 8 SCC 273", summary: "Police cannot arrest accused in 498A and Sec 4 Dowry Prohibition cases without a magistrate's approval. Changed arrest procedures nationwide.", area: "498A" },
+  { title: "Rajnesh v. Neha (2020)", court: "SC", citation: "(2021) 2 SCC 324", summary: "Comprehensive guidelines for maintenance — both parties must disclose all assets. Single proceedings only. Standardised the entire maintenance law.", area: "Maintenance" },
+  { title: "S.R. Batra v. Taruna Batra (2007)", court: "SC", citation: "(2007) 3 SCC 169", summary: "Wife's right of residence exists only in the 'shared household' — not in every property owned by the husband's family.", area: "DV Act" },
+  { title: "Gaurav Nagpal v. Sumedha Nagpal (2009)", court: "SC", citation: "(2009) 1 SCC 42", summary: "Child welfare is paramount in custody. The natural presumption in favour of the mother for children under 5 is not absolute.", area: "Custody" },
+  { title: "State of Haryana v. Bhajan Lal (1992)", court: "SC", citation: "1992 Supp (1) SCC 335", summary: "The most important quashing case ever — defines 7 categories where FIRs must be quashed, including false, malicious, and abuse of process complaints.", area: "False FIR" },
+  { title: "Preeti Gupta v. State of Jharkhand (2010)", court: "SC", citation: "(2010) 7 SCC 667", summary: "General, sweeping allegations against all family members without specific evidence are not valid. Courts must scrutinise 498A complaints carefully.", area: "498A" },
+  { title: "Bhuvan Mohan Singh v. Meena (2014)", court: "SC", citation: "(2014) 4 SCC 657", summary: "Where a wife has adequate independent income, maintenance to her can be denied or substantially reduced.", area: "Maintenance" },
+  { title: "Vikram Vir Vohra v. Shalini Bhalla (2010)", court: "SC", citation: "(2010) 4 SCC 409", summary: "Denying court-ordered visitation to the non-custodial parent is serious misconduct and can lead to change of custody.", area: "Custody" },
+  { title: "Joseph Shine v. Union of India (2018)", court: "SC", citation: "(2019) 3 SCC 39", summary: "Struck down Sec 497 IPC (Adultery as a crime). However, adultery remains a matrimonial offence and ground for divorce.", area: "Divorce" },
+  { title: "Shayara Bano v. Union of India (2017)", court: "SC", citation: "(2017) 9 SCC 1", summary: "Triple talaq (instant divorce by Muslim husbands) declared unconstitutional — protected Muslim wives but also brought Muslim personal law within constitutional scrutiny.", area: "Muslim Law" }
+];
+
+const QUICK_GUIDES = [
+  { emoji: "🚨", title: "Arrested under 498A — What to do RIGHT NOW", steps: ["Do NOT resist arrest or argue — comply calmly", "Immediately call family and a trusted criminal lawyer", "Exercise your right to remain silent — say nothing without your lawyer present", "At the police station, you can request bail for bailable offences immediately", "For non-bailable offences, you will be produced before a magistrate within 24 hours — apply for bail there", "Do NOT sign any blank papers or confessions", "Remember: arrest ≠ conviction. Over 70% of 498A cases are acquitted"] },
+  { emoji: "📬", title: "Got a maintenance notice — First 7 days", steps: ["Read the notice carefully — note the court, case number, and date", "Hire a family law lawyer within 48 hours", "Collect 3 years of your salary slips, bank statements, and ITR returns", "Collect your wife's income proof — ITR, Form 26AS, employer details, bank statements", "List all your monthly fixed expenses: EMI, rent, parents' support, medical costs", "Attend court on the first date with your lawyer — missing it leads to ex-parte orders", "File a counter-affidavit with complete income/expense details"] },
+  { emoji: "👶", title: "Wife left with children — Immediate action plan", steps: ["File a police complaint for illegal removal of child from joint custody (in some cases this applies)", "Immediately file for interim custody/visitation at the Family Court — do NOT delay", "Collect all evidence of your involvement in the child's life — photos, school records, medical records", "Document every denied call or visit with date, time, screenshots", "File a Habeas Corpus petition at the High Court if child is being hidden or access completely denied", "Gather character witnesses — teachers, doctors, family friends who know you as a parent", "Request the court to appoint a child psychologist for an independent assessment"] }
+];
+
+// ─── HAMBURGER ──────────────────────────────────────────────────────────────
+
+function toggleDrawer() {
+  const drawer = document.getElementById('mobile-drawer');
+  const hamburger = document.getElementById('hamburger');
+  drawer.classList.toggle('open');
+  hamburger.classList.toggle('open');
+  document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+}
+
+// ─── SEARCH ─────────────────────────────────────────────────────────────────
+
+function doSearch() {
+  const q = document.getElementById('main-search').value.trim();
+  if (!q) return;
+  performSearch(q);
+}
+
+function quickSearch(term) {
+  document.getElementById('main-search').value = term;
+  performSearch(term);
+}
+
+function performSearch(query) {
+  showPage('search');
+  document.getElementById('results-title').textContent = `Results for "${query}"`;
+  document.getElementById('search-loading').style.display = 'block';
+  document.getElementById('results-container').innerHTML = '';
+
+  setTimeout(() => {
+    document.getElementById('search-loading').style.display = 'none';
+    const results = searchLegalData(query);
+    renderResults(results, query);
+  }, 900);
+}
+
+function searchLegalData(query) {
+  const q = query.toLowerCase();
+  return LEGAL_DATA.filter(item => {
+    return item.title.toLowerCase().includes(q) ||
+      item.id.toLowerCase().includes(q) ||
+      item.simple.toLowerCase().includes(q) ||
+      item.cases.some(c => c.name.toLowerCase().includes(q) || c.ruling.toLowerCase().includes(q)) ||
+      query.toLowerCase().split(' ').some(word =>
+        item.title.toLowerCase().includes(word) ||
+        item.id.toLowerCase().includes(word)
+      );
+  });
+}
+
+function renderResults(results, query) {
+  const container = document.getElementById('results-container');
+  document.getElementById('results-count').textContent = `${results.length} result(s) found`;
+
+  if (results.length === 0) {
+    container.innerHTML = `
+      <div style="text-align:center;padding:4rem;color:var(--text-light);">
+        <div style="font-size:3rem;margin-bottom:1rem;">🔍</div>
+        <h3 style="font-family:'Playfair Display',serif;color:var(--navy);margin-bottom:0.5rem;">No exact match found</h3>
+        <p style="margin-bottom:1.5rem;font-size:14px;">Try searching: 498A, maintenance, custody, false FIR, DV Act, dowry</p>
+        <p style="font-size:13px;color:var(--text-light);">Or ask the AI assistant below for any specific question.</p>
+      </div>`;
+    return;
+  }
+
+  results.forEach((item, idx) => {
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    card.id = `rc-${idx}`;
+    card.innerHTML = `
+      <div class="result-card-header" onclick="toggleCard('rc-${idx}')">
+        <div class="result-icon">${item.icon}</div>
+        <div class="result-meta">
+          <h3>${item.title}</h3>
+          <div class="act-id">${item.actId}</div>
+          <div class="result-tags">
+            ${item.tags.map(t => `<span class="tag ${t.cls}">${t.text}</span>`).join('')}
+          </div>
+        </div>
+        <span class="expand-icon">▼</span>
+      </div>
+      <div class="result-body">
+        <div class="tab-nav">
+          <button class="tab-btn active" onclick="switchTab('rc-${idx}','overview')">📖 Plain Explanation</button>
+          <button class="tab-btn" onclick="switchTab('rc-${idx}','rights')">⚖️ Your Rights</button>
+          <button class="tab-btn" onclick="switchTab('rc-${idx}','steps')">📋 Step-by-Step</button>
+          <button class="tab-btn" onclick="switchTab('rc-${idx}','cases')">🏛️ Cases (Men Won)</button>
+        </div>
+        <div class="tab-content active" id="rc-${idx}-overview">
+          <div class="simple-explanation">
+            <div class="label">In Simple Language</div>
+            <p>${item.simple}</p>
+          </div>
+          <div class="warning-box">
+            <span>⚠️</span>
+            <div><strong>Important:</strong> ${item.warning}</div>
+          </div>
+        </div>
+        <div class="tab-content" id="rc-${idx}-rights">
+          <ul class="rights-list">
+            ${item.rights.map(r => `<li>${r}</li>`).join('')}
+          </ul>
+        </div>
+        <div class="tab-content" id="rc-${idx}-steps">
+          <ul class="steps-list">
+            ${item.steps.map(s => `
+              <div class="step-item">
+                <div class="step-num">${s.n}</div>
+                <div class="step-content">
+                  <strong>${s.title}</strong>
+                  <p>${s.detail}</p>
+                  <span class="step-time">⏱ ${s.time}</span>
+                </div>
+              </div>`).join('')}
+          </ul>
+        </div>
+        <div class="tab-content" id="rc-${idx}-cases">
+          <p style="font-size:13px;color:var(--text-light);margin-bottom:1rem;">These landmark cases set important precedents where courts ruled in favour of men or corrected legal imbalances:</p>
+          ${item.cases.map(c => `
+            <div class="case-card">
+              <div class="case-name">📌 ${c.name}</div>
+              <div class="case-court">${c.court}</div>
+              <div class="case-ruling">"${c.ruling}"</div>
+              <div class="case-impact">✅ Impact: ${c.impact}</div>
+            </div>`).join('')}
+        </div>
+      </div>`;
+    container.appendChild(card);
+
+    // Auto-expand first result
+    if (idx === 0) {
+      setTimeout(() => toggleCard(`rc-0`), 100);
+    }
+  });
+}
+
+function toggleCard(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+
+function switchTab(cardId, tab) {
+  const card = document.getElementById(cardId);
+  card.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  card.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  card.querySelector(`#${cardId}-${tab}`).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ─── PAGES ──────────────────────────────────────────────────────────────────
+
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(`page-${name}`).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
+
+  // Show AI chat section and helplines only on home
+  const aiSection = document.getElementById('ai-chat-section');
+
+  if (name === 'home') {
+    aiSection.style.display = 'block';
+    document.querySelector('.helpline-section').style.display = 'block';
+  }
+
+  if (name === 'laws') renderLaws();
+  if (name === 'cases') renderCases();
+  if (name === 'guide') renderGuide();
+  if (name === 'resources') renderResources();
+  if (name === 'newlaws') { /* page is static HTML */ }
+
+  window.scrollTo(0, 0);
+}
+
+function renderLaws() {
+  const container = document.getElementById('laws-list');
+  if (container.innerHTML) return;
+  container.innerHTML = LEGAL_DATA.map((item, i) => `
+    <div class="result-card" id="law-${i}">
+      <div class="result-card-header" onclick="quickSearch('${item.id}');toggleCard('law-${i}')">
+        <div class="result-icon">${item.icon}</div>
+        <div class="result-meta">
+          <h3>${item.title}</h3>
+          <div class="act-id">${item.actId}</div>
+          <div class="result-tags">${item.tags.map(t => `<span class="tag ${t.cls}">${t.text}</span>`).join('')}</div>
+        </div>
+        <span class="expand-icon">▼</span>
+      </div>
+    </div>`).join('');
+}
+
+function renderCases() {
+  const container = document.getElementById('cases-container');
+  if (container.innerHTML) return;
+  const byArea = {};
+  LANDMARK_CASES.forEach(c => {
+    if (!byArea[c.area]) byArea[c.area] = [];
+    byArea[c.area].push(c);
+  });
+  container.innerHTML = Object.entries(byArea).map(([area, cases]) => `
+    <div style="margin-bottom:2rem;">
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:2px solid var(--saffron);">${area}</h3>
+      ${cases.map(c => `
+        <div class="case-card">
+          <div class="case-name">📌 ${c.title}</div>
+          <div class="case-court">${c.court} · ${c.citation}</div>
+          <div class="case-ruling">${c.summary}</div>
+          <div class="case-impact">✅ Area: ${c.area}</div>
+        </div>`).join('')}
+    </div>`).join('');
+}
+
+function renderGuide() {
+  const container = document.getElementById('guide-container');
+  if (container.innerHTML) return;
+  container.innerHTML = QUICK_GUIDES.map((g, gi) => `
+    <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem;margin-bottom:1.5rem;">
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin-bottom:1.5rem;">${g.emoji} ${g.title}</h3>
+      <ul class="steps-list">
+        ${g.steps.map((s, i) => `
+          <div class="step-item">
+            <div class="step-num">${i+1}</div>
+            <div class="step-content"><p style="padding-top:8px;">${s}</p></div>
+          </div>`).join('')}
+      </ul>
+    </div>`).join('');
+}
+
+function renderResources() {
+  const container = document.getElementById('resources-container');
+  if (container.innerHTML) return;
+  container.innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;">
+      ${[
+        { name: "Save Indian Family Foundation", type: "NGO", desc: "India's largest men's rights NGO. Provides legal help, counselling, and support groups for men facing matrimonial abuse.", phone: "+91 9322091195", web: "saveindiafamily.in" },
+        { name: "Men's Rights Association (MRA India)", type: "NGO", desc: "Legal guidance, helpline support, and advocacy for false case victims and men in matrimonial distress.", phone: "+91 9372932329", web: "mensrightsassociation.in" },
+        { name: "NALSA — National Legal Services Authority", type: "Govt", desc: "Free legal aid for all citizens. Call the helpline to get a free lawyer assigned by the court.", phone: "15100", web: "nalsa.gov.in" },
+        { name: "iCall (TISS Mental Health)", type: "Mental Health", desc: "Counselling support for men facing stress, anxiety, and depression from legal and family disputes.", phone: "9152987821", web: "icallhelpline.org" },
+        { name: "Vaastav Foundation", type: "NGO", desc: "Support for victims of false 498A cases. Legal guidance, community support, and advocacy.", phone: "+91 9967854001", web: "vaastav.org" },
+        { name: "One Stop Centre (Sakhi)", type: "Govt", desc: "While primarily for women, men facing domestic abuse can also seek police assistance and legal referrals here.", phone: "181", web: "wcd.nic.in" }
+      ].map(r => `
+        <div class="helpline-card" style="text-align:left;padding:1.5rem;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem;">
+            <div class="h-name">${r.name}</div>
+            <span class="tag tag-info" style="font-size:11px;">${r.type}</span>
+          </div>
+          <p style="font-size:13px;color:var(--text-mid);margin-bottom:0.75rem;line-height:1.5;font-weight:300;">${r.desc}</p>
+          <div class="h-num" style="font-size:15px;">${r.phone}</div>
+          <div style="font-size:12px;color:var(--text-light);">${r.web}</div>
+        </div>`).join('')}
+    </div>`;
+}
+
+// ─── MODAL ──────────────────────────────────────────────────────────────────
+
+function openModal(id) {
+  document.getElementById(`modal-${id}`).classList.add('open');
+}
+function closeModal(id) {
+  document.getElementById(`modal-${id}`).classList.remove('open');
+}
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
+});
+
+// ─── AI CHAT ────────────────────────────────────────────────────────────────
+
+async function sendChat() {
+  const input = document.getElementById('chat-input');
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  appendMsg(msg, 'user');
+  input.value = '';
+
+  const typingEl = appendMsg('', 'bot', true);
+
+  try {
+    const systemPrompt = `You are NyaySetu's AI legal assistant — a knowledgeable, compassionate, and practical guide for Indian men and their families navigating India's legal system. 
+
+Your role:
+- Explain Indian laws in very simple, everyday language (no complex legal jargon)
+- Focus on helping men understand their rights and legal options
+- Reference relevant Supreme Court and High Court cases where men have won
+- Provide step-by-step guidance on what to do in specific situations
+- Be honest about gender biases in certain laws while being fair and balanced
+- Always recommend consulting a qualified lawyer for specific legal advice
+
+CRITICAL — NEW LAWS EFFECTIVE JULY 1, 2024:
+Three new codes replaced the old criminal laws on July 1, 2024:
+1. BNS (Bharatiya Nyaya Sanhita) replaced IPC 1860 — defines crimes
+   - Old 498A IPC → Now Sec 85 BNS (cruelty by husband/relatives)
+   - Old 406 IPC → Now Sec 316 BNS (criminal breach of trust)
+   - Old 182 IPC → Now Sec 216 BNS (false information to police)
+   - Old 211 IPC → Now Sec 250 BNS (false criminal charge)
+   - Old 499/500 IPC → Now Sec 356/357 BNS (defamation)
+2. BNSS (Bharatiya Nagarik Suraksha Sanhita) replaced CrPC 1973 — defines procedure
+   - Old 438 CrPC (Anticipatory Bail) → Now Sec 482 BNSS
+   - Old 482 CrPC (FIR Quashing) → Now Sec 528 BNSS
+   - Old 125 CrPC (Maintenance) → Now Sec 144 BNSS
+   - Old 41A CrPC (Police notice) → Now Sec 35 BNSS
+   - Police custody now capped at 15 days for most offences
+3. BSA (Bharatiya Sakshya Adhiniyam) replaced Indian Evidence Act 1872 — defines evidence
+   - Sec 63 BSA explicitly recognises WhatsApp, emails, call recordings as PRIMARY evidence
+   - Certificate under Sec 63(4) BSA required for electronic evidence submission in court
+
+Cases filed BEFORE July 1, 2024 → IPC + CrPC + Indian Evidence Act apply
+Cases filed ON OR AFTER July 1, 2024 → BNS + BNSS + BSA apply
+
+Key case law (ALL still apply under new codes):
+- Arnesh Kumar (2014): No automatic arrest — now codified in BNSS § 35
+- Rajnesh v. Neha (2020): Maintenance guidelines — applies under BNSS § 144
+- S.R. Batra (2007): Wife's right of residence only in shared household
+- Bhajan Lal (1992): 7 categories for FIR quashing — applies under BNSS § 528
+- Preeti Gupta (2010): Protect family from blanket 498A / BNS § 85 arrest
+- Gaurav Nagpal (2009): Father's custody rights, child welfare is paramount
+
+Always end with: "⚠️ For your specific situation, please consult a qualified Indian lawyer."`;
+
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        system: systemPrompt,
+        tools: [{ type: "web_search_20250305", name: "web_search" }],
+        messages: [{ role: "user", content: msg }]
+      })
+    });
+
+    const data = await response.json();
+    const fullText = data.content
+      .filter(b => b.type === 'text')
+      .map(b => b.text)
+      .join('\n');
+
+    typingEl.innerHTML = formatChatMsg(fullText || "I'm sorry, I couldn't generate a response. Please try rephrasing your question.");
+    typingEl.classList.remove('typing');
+
+  } catch (err) {
+    typingEl.innerHTML = "⚠️ Connection error. Please check your internet and try again.";
+    typingEl.classList.remove('typing');
+  }
+}
+
+function formatChatMsg(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>');
+}
+
+function appendMsg(text, type, isTyping = false) {
+  const container = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = `chat-msg ${type}`;
+  if (isTyping) {
+    div.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+    div.classList.add('typing');
+  } else {
+    div.innerHTML = formatChatMsg(text);
+  }
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+  return div;
+}
+
+// ─── SEARCH ENTER KEY ───────────────────────────────────────────────────────
+document.getElementById('main-search').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doSearch();
+});
+</script>
+</body>
+</html>
