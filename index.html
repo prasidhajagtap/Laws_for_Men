@@ -411,7 +411,6 @@ footer{background:var(--primary);padding:1.75rem 1.25rem 1.25rem;margin-top:2rem
 // Replace with your actual worker URL after deploying worker/worker.js
 const PROXY = 'https://nyaysetu-proxy.jkuku7866.workers.dev';
 // ════════════════════════════════════════
-const MODEL = 'claude-sonnet-4-6';
 
 // ── DATA ─────────────────────────────────────────────────────────────────────
 
@@ -576,20 +575,25 @@ const LPILLS = [
 ];
 const LNAMES = {en:'English',hi:'Hindi (हिंदी)',mr:'Marathi (मराठी)',ta:'Tamil (தமிழ்)',te:'Telugu (తెలుగు)',bn:'Bengali (বাংলা)',gu:'Gujarati (ગુજরાતી)',kn:'Kannada (ಕನ್ನಡ)',ml:'Malayalam (മലയാളം)'};
 
-// ── API CALL ─────────────────────────────────────────────────────────────────
-async function callAPI(body) {
+// ── API CALL (Gemini via Cloudflare Worker proxy) ─────────────────────────
+// Worker accepts: { system?, userMessage, max_tokens? }
+// Worker returns: { text }
+async function callAPI({ system, userMessage, max_tokens }) {
   const res = await fetch(PROXY, {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({...body, model: MODEL})
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify({ system, userMessage, max_tokens })
   });
   if (!res.ok) {
     let detail = '';
-    try { const e = await res.json(); detail = e.error?.message || JSON.stringify(e); } catch {}
+    try { const e = await res.json(); detail = e.error || JSON.stringify(e); } catch {}
     throw new Error(`${res.status}: ${detail}`);
   }
-  return res.json();
+  const data = await res.json();
+  if (!data.text && data.error) throw new Error(data.error);
+  return data.text || '';
 }
+
 
 // ── BUILD CARD HTML ──────────────────────────────────────────────────────────
 function buildCard(law, prefix) {
@@ -707,11 +711,7 @@ STRICT RULES:
 Texts: ${JSON.stringify(texts)}`;
 
   try {
-    const data = await callAPI({
-      max_tokens: 2000,
-      messages: [{ role: 'user', content: prompt }]
-    });
-    const raw = data.content.filter(b => b.type === 'text').map(b => b.text).join('');
+    const raw = await callAPI({ userMessage: prompt, max_tokens: 2000 });
     const parsed = JSON.parse(raw.replace(/```json|```/g, '').trim());
     const t = parsed.t || parsed.translations || [];
 
@@ -768,12 +768,7 @@ Format: (1) Simple explanation of the situation (2) Key rights (3) What to do ne
 End with a one-line reminder to consult a qualified lawyer for their specific case.`;
 
   try {
-    const data = await callAPI({
-      max_tokens: 800,
-      system: sys,
-      messages: [{ role: 'user', content: msg }]
-    });
-    const text = data.content.filter(b => b.type === 'text').map(b => b.text).join('\n');
+    const text = await callAPI({ system: sys, userMessage: msg, max_tokens: 800 });
     t.innerHTML = fmt(text || 'Sorry, could not generate a response. Please try again.');
     t.classList.remove('typing');
   } catch (e) {
