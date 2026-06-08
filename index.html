@@ -133,6 +133,14 @@ nav{background:var(--navy);position:sticky;top:0;z-index:200;border-bottom:3px s
 .sbox .lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;color:var(--navy);margin-bottom:4px}
 .sbox p{font-size:13px;line-height:1.7;color:var(--navy-m)}
 
+/* ── INLINE LANGUAGE BAR (inside explanation box) ── */
+.lang-bar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:.85rem;padding-top:.75rem;border-top:1px solid rgba(15,37,66,0.12)}
+.lang-bar-label{font-size:10px;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;flex-shrink:0}
+.lang-pill{background:#fff;border:1px solid var(--bds);color:var(--tm);font-size:11px;font-weight:500;padding:3px 10px;border-radius:100px;cursor:pointer;transition:all .18s;-webkit-tap-highlight-color:transparent}
+.lang-pill:hover{border-color:var(--saffron);color:var(--saffron)}
+.lang-pill.active{background:var(--saffron);border-color:var(--saffron);color:#fff}
+.tr-status{font-size:11px;color:var(--tl);display:flex;align-items:center;gap:5px;margin-top:.5rem;min-height:18px}
+
 /* ── LANG BADGE on translated blocks ── */
 .lang-badge{display:inline-flex;align-items:center;gap:5px;background:var(--saffron-l);border:1px solid rgba(255,107,26,0.25);color:var(--saffron);font-size:10px;font-weight:600;padding:3px 9px;border-radius:100px;margin-bottom:8px}
 .translating-msg{font-size:12px;color:var(--tl);padding:.5rem 0;display:flex;align-items:center;gap:6px}
@@ -594,105 +602,20 @@ async function callClaude(body){
   return res.json();
 }
 
-// ── LANGUAGE ────────────────────────────────────────────
+
+// ── LANGUAGE (state only — translation is now inline per card) ──────────────
 function toggleLangMenu(){
   document.getElementById('lang-menu').classList.toggle('open');
 }
 document.addEventListener('click', e=>{
   if(!e.target.closest('.lang-float')) document.getElementById('lang-menu').classList.remove('open');
 });
-
 function setLang(lang){
   currentLang = lang;
   document.querySelectorAll('.lang-opt').forEach(o=>o.classList.remove('active'));
   document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
   document.getElementById('lang-menu').classList.remove('open');
   document.getElementById('lang-btn-el').textContent = lang==='en' ? '🌐 Language' : `🌐 ${LANG_NAMES[lang]}`;
-}
-
-// ── Translate only the explanation + steps in an open card ──
-async function translateCard(cardEl, lang){
-  if(lang === 'en'){ restoreCard(cardEl); return; }
-
-  // Grab the explanation and steps tab content
-  const ovEl  = cardEl.querySelector('[id$="-ov"]');
-  const stEl  = cardEl.querySelector('[id$="-st"]');
-  if(!ovEl && !stEl) return;
-
-  const idBase = ovEl ? ovEl.id.replace('-ov','') : stEl.id.replace('-st','');
-
-  // Show translating indicator
-  let indicator = cardEl.querySelector('.tr-indicator');
-  if(!indicator){
-    indicator = document.createElement('div');
-    indicator.className = 'translating-msg tr-indicator';
-    indicator.style.padding = '4px 1.1rem';
-    cardEl.querySelector('.res-body').prepend(indicator);
-  }
-  indicator.innerHTML = '<div class="mini-spin"></div> Translating to '+LANG_NAMES[lang]+'...';
-
-  // Collect texts to translate — simple explanation paragraph + each step text
-  const items = [];
-  const simpleP = ovEl ? ovEl.querySelector('.sbox p') : null;
-  if(simpleP) items.push({el:simpleP, key:'simple', orig:simpleP.dataset.orig||simpleP.innerText});
-
-  const warnDiv = ovEl ? ovEl.querySelector('.warn-box div div') : null;
-  if(warnDiv) items.push({el:warnDiv, key:'warn', orig:warnDiv.dataset.orig||warnDiv.innerText});
-
-  const stepStrongs = stEl ? stEl.querySelectorAll('.step-bd strong') : [];
-  const stepPs      = stEl ? stEl.querySelectorAll('.step-bd p')      : [];
-  stepStrongs.forEach((el,i)=> items.push({el, key:`sts${i}`, orig:el.dataset.orig||el.innerText}));
-  stepPs.forEach((el,i)=>      items.push({el, key:`stp${i}`, orig:el.dataset.orig||el.innerText}));
-
-  // Save originals
-  items.forEach(it=>{ if(!it.el.dataset.orig) it.el.dataset.orig = it.orig; });
-
-  const texts = items.map(it=>it.orig);
-
-  const prompt = `You are translating legal rights content for an Indian men's legal platform called NyaySetu.
-
-TARGET LANGUAGE: ${LANG_NAMES[lang]} (language code: ${lang})
-
-RULES — VERY IMPORTANT:
-1. Use SIMPLE, EVERYDAY spoken ${LANG_NAMES[lang]} — as if explaining to a neighbour or family member, NOT formal court/legal language.
-2. Keep these words in English (they are proper nouns / legal codes): 498A, BNS, BNSS, BSA, FIR, IPC, CrPC, ITR, NALSA, NGO, SC, HC, and any section numbers like "§ 85", "§ 482".
-3. Add local context where helpful — for example in Hindi say "thana" for police station, "vakeel" for lawyer. Use words people actually use in daily life.
-4. Translations should feel natural and warm — not robotic.
-5. Keep roughly the same length as the original.
-6. Return ONLY a JSON object: {"t":["translation1","translation2",...]} — same order as input, no markdown, no explanation.
-
-Texts to translate (${texts.length} items):
-${JSON.stringify(texts)}`;
-
-  try{
-    const data = await callClaude({
-      model:'claude-sonnet-4-20250514',
-      max_tokens:2000,
-      messages:[{role:'user',content:prompt}]
-    });
-    const raw = data.content.filter(b=>b.type==='text').map(b=>b.text).join('');
-    const clean = raw.replace(/```json|```/g,'').trim();
-    const parsed = JSON.parse(clean);
-    const translations = parsed.t || parsed.translations || [];
-
-    items.forEach((it,i)=>{
-      if(translations[i]) it.el.innerText = translations[i];
-    });
-
-    // Replace indicator with badge
-    indicator.innerHTML = `<span class="lang-badge">🌐 ${LANG_NAMES[lang]}</span> <button onclick="restoreCard(this.closest('.res-card'))" style="background:none;border:none;font-size:11px;color:var(--tl);cursor:pointer;text-decoration:underline">Reset to English</button>`;
-
-  }catch(e){
-    indicator.innerHTML = `⚠️ Translation failed: ${e.message}. Please configure the proxy — see worker/SETUP.md`;
-    console.error('Translation error:',e);
-  }
-}
-
-function restoreCard(cardEl){
-  // Restore all saved originals
-  cardEl.querySelectorAll('[data-orig]').forEach(el=>{ el.innerText = el.dataset.orig; });
-  const ind = cardEl.querySelector('.tr-indicator');
-  if(ind) ind.remove();
 }
 
 // ── AI CHAT ─────────────────────────────────────────────
@@ -822,7 +745,23 @@ function renderCatGrid(){
   });
 }
 
+// Language pills rendered inside each explanation box
+const LANG_PILLS = [
+  {code:'hi', label:'हिंदी'},
+  {code:'mr', label:'मराठी'},
+  {code:'ta', label:'தமிழ்'},
+  {code:'te', label:'తెలుగు'},
+  {code:'bn', label:'বাংলা'},
+  {code:'gu', label:'ગુજ'},
+  {code:'kn', label:'ಕನ್ನಡ'},
+  {code:'ml', label:'മലയാ'},
+];
+
 function buildCard(item,id){
+  const pillsHTML = LANG_PILLS.map(l=>
+    `<button class="lang-pill" data-lang="${l.code}" onclick="handlePill(this,'${id}')">${l.label}</button>`
+  ).join('');
+
   return `<div class="res-hd">
     <div class="res-ico">${item.icon}</div>
     <div class="res-meta">
@@ -840,30 +779,125 @@ function buildCard(item,id){
       <button class="tb" data-tab="cs">🏛️ Cases Won</button>
     </div>
     <div class="tc active" id="${id}-ov">
-      <div class="sbox"><div class="lbl">In Simple Language</div><p>${item.simple}</p></div>
-      <div class="warn-box"><span>⚠️</span><div><div><strong>Important:</strong> ${item.warning}</div></div></div>
+      <div class="sbox">
+        <div class="lbl">In Simple Language</div>
+        <p id="${id}-simple">${item.simple}</p>
+        <div class="lang-bar">
+          <span class="lang-bar-label">🌐 Translate:</span>
+          ${pillsHTML}
+          <button class="lang-pill" data-lang="en" onclick="handlePill(this,'${id}')" style="display:none" id="${id}-reset">EN ↺</button>
+        </div>
+        <div class="tr-status" id="${id}-tr-status"></div>
+      </div>
+      <div class="warn-box"><span>⚠️</span><div><strong>Important:</strong> ${item.warning}</div></div>
     </div>
     <div class="tc" id="${id}-rt"><ul class="rights-list">${item.rights.map(r=>`<li>${r}</li>`).join('')}</ul></div>
-    <div class="tc" id="${id}-st"><div class="steps-list">${item.steps.map(s=>`<div class="step-item"><div class="step-n">${s.n}</div><div class="step-bd"><strong>${s.t}</strong><p>${s.d}</p><span class="step-time">⏱ ${s.tm}</span></div></div>`).join('')}</div></div>
+    <div class="tc" id="${id}-st">
+      <div class="steps-list" id="${id}-steps-list">${item.steps.map(s=>`<div class="step-item"><div class="step-n">${s.n}</div><div class="step-bd"><strong class="step-title">${s.t}</strong><p class="step-desc">${s.d}</p><span class="step-time">⏱ ${s.tm}</span></div></div>`).join('')}</div>
+    </div>
     <div class="tc" id="${id}-cs"><p style="font-size:12px;color:var(--tl);margin-bottom:.8rem">Landmark cases where courts ruled in favour of men:</p>${item.cases.map(c=>`<div class="case-card"><div class="cn">📌 ${c.name}</div><div class="cc">${c.court}</div><div class="cr">"${c.ruling}"</div><div class="case-imp">✅ ${c.impact}</div></div>`).join('')}</div>
   </div>`;
 }
 
+// Called when a language pill is clicked
+async function handlePill(btn, id){
+  const lang = btn.dataset.lang;
+  const cardEl = btn.closest('.res-card');
+
+  // Mark active pill
+  cardEl.querySelectorAll('.lang-pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+
+  if(lang === 'en'){
+    // Reset to English
+    const simpleEl = document.getElementById(`${id}-simple`);
+    if(simpleEl.dataset.orig) simpleEl.textContent = simpleEl.dataset.orig;
+    cardEl.querySelectorAll('.step-title').forEach(el=>{ if(el.dataset.orig) el.textContent=el.dataset.orig; });
+    cardEl.querySelectorAll('.step-desc').forEach(el=>{  if(el.dataset.orig) el.textContent=el.dataset.orig; });
+    document.getElementById(`${id}-tr-status`).innerHTML = '';
+    document.getElementById(`${id}-reset`).style.display='none';
+    return;
+  }
+
+  await translateCardContent(id, lang, cardEl);
+}
+
+async function translateCardContent(id, lang, cardEl){
+  const statusEl = document.getElementById(`${id}-tr-status`);
+  statusEl.innerHTML = '<div class="mini-spin"></div> Translating to '+LANG_NAMES[lang]+'...';
+
+  // Collect elements to translate
+  const simpleEl   = document.getElementById(`${id}-simple`);
+  const titleEls   = cardEl.querySelectorAll('.step-title');
+  const descEls    = cardEl.querySelectorAll('.step-desc');
+
+  // Save originals once
+  if(!simpleEl.dataset.orig) simpleEl.dataset.orig = simpleEl.textContent;
+  titleEls.forEach(el=>{ if(!el.dataset.orig) el.dataset.orig = el.textContent; });
+  descEls.forEach(el=>{  if(!el.dataset.orig) el.dataset.orig  = el.textContent; });
+
+  const texts = [
+    simpleEl.dataset.orig,
+    ...Array.from(titleEls).map(el=>el.dataset.orig),
+    ...Array.from(descEls).map(el=>el.dataset.orig),
+  ];
+
+  const prompt = `You are translating legal content for NyaySetu, an Indian men's legal rights platform.
+
+TARGET LANGUAGE: ${LANG_NAMES[lang]}
+
+RULES:
+1. Use SIMPLE everyday spoken ${LANG_NAMES[lang]} — like explaining to a neighbour, not a lawyer.
+2. Keep these EXACTLY in English (do NOT translate): 498A, BNS, BNSS, BSA, FIR, IPC, CrPC, ITR, NALSA, NGO, SC, HC, and any section numbers like "§ 85", "§ 482", "§ 528", "§ 144".
+3. Use local vocabulary people actually say:
+   - Hindi/Marathi: "vakeel" for lawyer, "thana" for police station, "bail" stays as bail, "girftari" for arrest
+   - Tamil: "vaakil" for lawyer, "kavalkaara nilayam" for police station
+   - Telugu: "lawyer" or "vakeel", "police station" stays
+4. Add helpful context — don't translate robotically, explain what it means to a common person.
+5. Keep roughly the same length as original.
+6. Return ONLY valid JSON: {"t":["translated_text_1","translated_text_2",...]} — same count and order as input. No markdown, no preamble.
+
+Input texts (${texts.length} items):
+${JSON.stringify(texts)}`;
+
+  try {
+    const data = await callClaude({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 2000,
+      messages: [{ role:'user', content: prompt }]
+    });
+    const raw = data.content.filter(b=>b.type==='text').map(b=>b.text).join('');
+    const parsed = JSON.parse(raw.replace(/```json|```/g,'').trim());
+    const t = parsed.t || parsed.translations || [];
+
+    // Apply translations
+    if(t[0]) simpleEl.textContent = t[0];
+    titleEls.forEach((el,i)=>{ if(t[1+i]) el.textContent = t[1+i]; });
+    descEls.forEach((el,i)=>{  if(t[1+titleEls.length+i]) el.textContent = t[1+titleEls.length+i]; });
+
+    statusEl.innerHTML = `✅ Translated to ${LANG_NAMES[lang]}`;
+    // Show reset button
+    document.getElementById(`${id}-reset`).style.display = 'inline-flex';
+
+  } catch(e) {
+    const msg = PROXY_URL.includes('YOUR-WORKER')
+      ? '⚠️ Proxy not configured. See worker/SETUP.md'
+      : `⚠️ Error: ${e.message}`;
+    statusEl.innerHTML = msg;
+    console.error('Translation error:', e);
+    // Deactivate the pill
+    cardEl.querySelectorAll('.lang-pill').forEach(p=>p.classList.remove('active'));
+  }
+}
+
 function attachCard(el,id){
-  el.querySelector('.res-hd').onclick=()=>{
-    const wasOpen=el.classList.contains('open');
-    el.classList.toggle('open');
-    // When opening: if a language is selected, auto-translate
-    if(!wasOpen && currentLang!=='en') translateCard(el,currentLang);
-  };
+  el.querySelector('.res-hd').onclick=()=>{ el.classList.toggle('open'); };
   el.querySelectorAll('.tb').forEach(b=>b.onclick=e=>{
     e.stopPropagation();
     el.querySelectorAll('.tb').forEach(x=>x.classList.remove('active'));
     el.querySelectorAll('.tc').forEach(x=>x.classList.remove('active'));
     el.querySelector(`#${id}-${b.dataset.tab}`).classList.add('active');
     b.classList.add('active');
-    // Translate newly shown tab if language is active
-    if(currentLang!=='en') translateCard(el,currentLang);
   });
 }
 
