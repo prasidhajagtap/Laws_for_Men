@@ -679,6 +679,50 @@ async function handlePill(btn, prefix) {
   await translateCard(prefix, lang, card);
 }
 
+// ── JSON extraction — handles markdown fences, extra text, encoding issues ───
+function extractTranslations(raw) {
+  // 1. Strip markdown fences
+  let s = raw.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
+
+  // 2. Find the first '[' and its matching ']'
+  const arrStart = s.indexOf('[');
+  if (arrStart !== -1) {
+    let depth = 0, arrEnd = -1;
+    for (let i = arrStart; i < s.length; i++) {
+      if (s[i] === '[') depth++;
+      else if (s[i] === ']') { depth--; if (depth === 0) { arrEnd = i; break; } }
+    }
+    if (arrEnd !== -1) {
+      try { return JSON.parse(s.slice(arrStart, arrEnd + 1)); } catch {}
+    }
+  }
+
+  // 3. Find {"t":[...]} or {"translations":[...]}
+  const objStart = s.indexOf('{');
+  if (objStart !== -1) {
+    let depth = 0, objEnd = -1;
+    for (let i = objStart; i < s.length; i++) {
+      if (s[i] === '{') depth++;
+      else if (s[i] === '}') { depth--; if (depth === 0) { objEnd = i; break; } }
+    }
+    if (objEnd !== -1) {
+      try {
+        const obj = JSON.parse(s.slice(objStart, objEnd + 1));
+        return obj.t || obj.translations || [];
+      } catch {}
+    }
+  }
+
+  // 4. Last resort: extract quoted strings line by line
+  const lines = raw.split('\n');
+  const results = [];
+  for (const line of lines) {
+    const m = line.match(/^\s*"((?:[^"\\]|\\.)*)"\s*,?\s*$/);
+    if (m) results.push(m[1].replace(/\\n/g, '\n').replace(/\\"/g, '"'));
+  }
+  return results;
+}
+
 async function translateCard(prefix, lang, card) {
   const statusEl = document.getElementById(`${prefix}-tr-st`);
   statusEl.innerHTML = `<div class="mspin"></div> Translating to ${LNAMES[lang]}...`;
@@ -698,22 +742,29 @@ async function translateCard(prefix, lang, card) {
     ...Array.from(descEls).map(el  => el.dataset.orig),
   ];
 
-  const prompt = `Translate the following legal content to ${LNAMES[lang]} for an Indian men's legal rights platform.
+  // Build a numbered list so the model can't confuse order
+  const numbered = texts.map((t, i) => `${i + 1}. ${t}`).join('\n');
 
-STRICT RULES:
-1. Use SIMPLE everyday spoken ${LNAMES[lang]} — as if explaining to a neighbour, not a court.
-2. Do NOT translate these (keep exactly in English): 498A, BNS, BNSS, BSA, FIR, IPC, CrPC, ITR, NALSA, and section numbers like § 85, § 482, § 528, § 144, § 35.
-3. Use local words: Hindi/Marathi → "vakeel" (lawyer), "thana" (police station), "girftari" (arrest). Tamil → "vaakil", "kavalkaara nilayam".
-4. Add context — explain what it means to a common person, don't just translate word-for-word.
-5. Return ONLY valid JSON with no markdown: {"t":["translation1","translation2",...]}
-   Same count and order as input. ${texts.length} items total.
+  const prompt = `You are translating Indian legal rights content to ${LNAMES[lang]}.
 
-Texts: ${JSON.stringify(texts)}`;
+OUTPUT FORMAT — respond with ONLY a JSON array, nothing else before or after:
+["translation 1", "translation 2", ...]
+${texts.length} items, same order as input. No markdown, no code fences, no explanation.
+
+TRANSLATION RULES:
+- Simple everyday spoken ${LNAMES[lang]} — like explaining to a neighbour, not a court
+- Keep in English (do not translate): 498A, BNS, BNSS, BSA, FIR, IPC, CrPC, ITR, NALSA, § numbers
+- Local words: Hindi/Marathi → vakeel (lawyer), thana (police station), girftari (arrest)
+- Tamil → vaakil (lawyer); Telugu → vakeel; keep bail, FIR, court as-is
+
+INPUT (${texts.length} items):
+${numbered}`;
 
   try {
     const raw = await callAPI({ userMessage: prompt, max_tokens: 2000 });
-    const parsed = JSON.parse(raw.replace(/```json|```/g, '').trim());
-    const t = parsed.t || parsed.translations || [];
+    const t = extractTranslations(raw);
+
+    if (!t.length) throw new Error('Model returned no translations — try again');
 
     if (t[0]) simpleEl.textContent = t[0];
     titleEls.forEach((el, i) => { if (t[1 + i]) el.textContent = t[1 + i]; });
@@ -722,7 +773,7 @@ Texts: ${JSON.stringify(texts)}`;
     statusEl.innerHTML = `✅ Translated to ${LNAMES[lang]}`;
     document.getElementById(`${prefix}-reset`).style.display = 'inline-block';
   } catch (e) {
-    statusEl.innerHTML = `⚠ Error: ${e.message}`;
+    statusEl.innerHTML = `⚠ Translation failed — tap again to retry`;
     console.error('Translation error:', e);
     const card2 = document.getElementById(`${prefix}-simple`)?.closest('.rcard');
     if (card2) card2.querySelectorAll('.lpill').forEach(p => p.classList.remove('on'));
