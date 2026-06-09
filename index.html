@@ -3,228 +3,276 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>NyaySetu — Indian Legal Guide for Men</title>
+<title>NyaySetu — Know Your Rights</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:#F7F7F5;color:#1A1A1A;line-height:1.6;-webkit-font-smoothing:antialiased}
-button,input{font-family:inherit}
-a{text-decoration:none}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Inter',sans-serif;background:#F8F8F6;color:#1C1C1C;-webkit-font-smoothing:antialiased;min-height:100vh}
+button,input,textarea{font-family:inherit}
 
-/* ── TOKENS ── */
 :root{
-  --primary:#1A3A5C;
-  --accent:#E05A1B;
-  --accent-l:#FDF0E8;
-  --border:#E2E2DC;
-  --bg:#F7F7F5;
+  --ink:#1C1C1C;
+  --ink2:#4A4A4A;
+  --ink3:#888;
+  --rule:#E4E4DF;
+  --bg:#F8F8F6;
   --white:#FFFFFF;
-  --text:#1A1A1A;
-  --muted:#6B6B6B;
-  --light:#9A9A9A;
-  --ok:#1E6B3C;
-  --ok-l:#EAF4EE;
-  --warn-bg:#FFFAEB;
-  --warn-border:#F5D76E;
-  --warn-text:#7A5200;
-  --r:8px;
-  --rl:12px;
-  --nh:56px;
+  --navy:#1A3A5C;
+  --navy2:#254E7A;
+  --orange:#D95A18;
+  --orange-l:#FDF1EB;
+  --green:#1A6B3C;
+  --green-l:#EBF5EF;
+  --amber-bg:#FFFAEB;
+  --amber-bd:#F0D060;
+  --amber-tx:#7A5200;
+  --r:10px;
+  --nh:54px;
 }
 
 /* ── NAV ── */
-nav{background:var(--primary);height:var(--nh);position:sticky;top:0;z-index:100}
-.nav-w{max-width:960px;margin:0 auto;padding:0 1.25rem;height:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.logo{display:flex;align-items:center;gap:8px;color:#fff;font-weight:600;font-size:15px;letter-spacing:-.2px}
-.logo span{color:#F5A06B;font-size:18px}
-.nav-links{display:flex;gap:2px}
-.nav-btn{background:none;border:none;color:rgba(255,255,255,.65);font-size:12px;font-weight:500;padding:6px 10px;border-radius:6px;cursor:pointer;transition:all .15s}
-.nav-btn:hover,.nav-btn.on{color:#fff;background:rgba(255,255,255,.1)}
-.nav-btn.on{color:#F5A06B}
-.sos-btn{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:background .15s}
-.sos-btn:hover{background:#c44d14}
-.hbg{display:none;background:none;border:none;cursor:pointer;padding:5px;flex-direction:column;gap:4px}
-.hbg span{display:block;width:18px;height:1.5px;background:rgba(255,255,255,.8);border-radius:2px;transition:all .25s}
-.hbg.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
-.hbg.open span:nth-child(2){opacity:0}
-.hbg.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+nav{height:var(--nh);background:var(--navy);display:flex;align-items:center;position:sticky;top:0;z-index:200}
+.nav-w{width:100%;max-width:720px;margin:0 auto;padding:0 1.25rem;display:flex;align-items:center;justify-content:space-between}
+.logo{color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;gap:7px;cursor:pointer;letter-spacing:-.2px}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.nav-r{display:flex;align-items:center;gap:8px}
+.nav-link{color:rgba(255,255,255,.6);font-size:12px;font-weight:500;background:none;border:none;cursor:pointer;padding:5px 8px;border-radius:6px;transition:color .15s}
+.nav-link:hover{color:#fff}
+.sos{background:var(--orange);color:#fff;border:none;border-radius:7px;padding:6px 13px;font-size:12px;font-weight:600;cursor:pointer;transition:background .15s}
+.sos:hover{background:#b84c12}
+.hbg{display:none;background:none;border:none;cursor:pointer;padding:5px;flex-direction:column;gap:4px;margin-left:4px}
+.hbg span{display:block;width:18px;height:1.5px;background:rgba(255,255,255,.75);border-radius:2px;transition:all .22s}
+.hbg.o span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.hbg.o span:nth-child(2){opacity:0}
+.hbg.o span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
 
 /* ── DRAWER ── */
-.drawer{position:fixed;top:var(--nh);left:0;right:0;bottom:0;background:var(--primary);z-index:99;padding:1rem;display:flex;flex-direction:column;gap:3px;transform:translateX(-100%);transition:transform .25s ease}
-.drawer.open{transform:translateX(0)}
-.drawer .nav-btn{font-size:14px;padding:12px 14px;border-radius:8px;color:rgba(255,255,255,.8);text-align:left;width:100%}
-.drawer .sos-btn{margin-top:auto;width:100%;padding:12px;text-align:center;border-radius:8px;font-size:14px}
+.drawer{position:fixed;inset:var(--nh) 0 0 0;background:var(--navy);z-index:199;padding:1rem;display:flex;flex-direction:column;gap:4px;transform:translateX(-100%);transition:transform .22s ease}
+.drawer.o{transform:none}
+.drawer button{background:none;border:none;color:rgba(255,255,255,.75);font-size:14px;font-weight:500;padding:12px 14px;border-radius:8px;text-align:left;cursor:pointer;transition:background .15s}
+.drawer button:hover{background:rgba(255,255,255,.08)}
+.drawer .sos{margin-top:auto;width:100%;padding:12px;text-align:center;border-radius:8px;font-size:14px;color:#fff}
 
-/* ── PAGE SYSTEM ── */
-.page{display:none}.page.on{display:block}
+/* ── PAGES ── */
+.pg{display:none}.pg.on{display:block}
 
-/* ── HERO ── */
-.hero{background:var(--primary);padding:3rem 1.25rem 2.5rem}
-.hero-w{max-width:680px;margin:0 auto;text-align:center}
-.hero h1{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;color:#fff;line-height:1.25;margin-bottom:.75rem;letter-spacing:-.4px}
-.hero h1 em{color:#F5A06B;font-style:normal}
-.hero p{font-size:.9rem;color:rgba(255,255,255,.55);max-width:460px;margin:0 auto 1.75rem;font-weight:300}
+/* ════════════════════════════════
+   HOME — Focused search experience
+   ════════════════════════════════ */
+.home-wrap{max-width:620px;margin:0 auto;padding:3.5rem 1.25rem 2rem}
 
-/* ── SEARCH ── */
-.search-row{display:flex;gap:8px;max-width:580px;margin:0 auto}
-.search-row input{flex:1;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);border-radius:var(--r);padding:11px 14px;color:#fff;font-size:14px;outline:none;transition:border-color .15s;min-width:0;-webkit-appearance:none}
-.search-row input::placeholder{color:rgba(255,255,255,.35);font-size:13px}
-.search-row input:focus{border-color:rgba(245,160,107,.5);background:rgba(255,255,255,.12)}
-.search-row button{background:var(--accent);color:#fff;border:none;border-radius:var(--r);padding:11px 20px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:background .15s;-webkit-tap-highlight-color:transparent}
-.search-row button:hover{background:#c44d14}
-.quick-tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:1rem}
-.qtag{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.6);font-size:11px;padding:4px 10px;border-radius:100px;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent}
-.qtag:hover,.qtag:active{background:rgba(230,90,27,.2);border-color:rgba(230,90,27,.4);color:#F5A06B}
+.home-eyebrow{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--orange);margin-bottom:.75rem}
+.home-h1{font-size:clamp(1.6rem,5vw,2.1rem);font-weight:700;color:var(--navy);line-height:1.25;margin-bottom:.6rem;letter-spacing:-.4px}
+.home-sub{font-size:.9rem;color:var(--ink2);line-height:1.65;max-width:460px;margin-bottom:2rem;font-weight:300}
 
-/* ── MAIN ── */
-.main{max-width:960px;margin:0 auto;padding:2rem 1.25rem}
-.pg-title{font-size:1.25rem;font-weight:700;color:var(--primary);margin-bottom:.25rem;letter-spacing:-.3px}
-.pg-sub{font-size:13px;color:var(--muted);margin-bottom:1.5rem;font-weight:300}
+/* Search input — the hero element */
+.search-box{position:relative;margin-bottom:1.25rem}
+.search-box input{width:100%;border:2px solid var(--rule);border-radius:var(--r);padding:13px 48px 13px 16px;font-size:15px;color:var(--ink);background:var(--white);outline:none;transition:border-color .15s;-webkit-appearance:none;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.search-box input:focus{border-color:var(--navy)}
+.search-box input::placeholder{color:var(--ink3);font-size:14px}
+.srch-go{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:var(--navy);color:#fff;border:none;border-radius:7px;width:32px;height:32px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.srch-go:hover{background:var(--navy2)}
 
-/* ── CATEGORY PILLS ── */
-.cat-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:2rem}
-.cat-pill{background:var(--white);border:1.5px solid var(--border);border-radius:100px;padding:6px 14px;font-size:12px;font-weight:500;color:var(--primary);cursor:pointer;transition:all .15s;white-space:nowrap;-webkit-tap-highlight-color:transparent}
-.cat-pill:hover,.cat-pill:active{border-color:var(--accent);color:var(--accent);background:var(--accent-l)}
+/* Quick-pick chips */
+.chips-label{font-size:11px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.6rem}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:2.5rem}
+.chip{background:var(--white);border:1.5px solid var(--rule);color:var(--ink2);font-size:12px;font-weight:500;padding:6px 13px;border-radius:100px;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent;white-space:nowrap}
+.chip:hover,.chip:active{border-color:var(--navy);color:var(--navy);background:#EEF3FA}
+.chip.accent{border-color:var(--orange);color:var(--orange);background:var(--orange-l)}
 
-/* ── RESULT CARD ── */
-.rcard{background:var(--white);border:1.5px solid var(--border);border-radius:var(--rl);margin-bottom:10px;overflow:hidden;transition:border-color .15s}
-.rcard:hover{border-color:#C8C8C0}
-.rcard-hd{padding:1rem 1.1rem;display:flex;align-items:flex-start;gap:12px;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.rcard-ico{font-size:22px;flex-shrink:0;margin-top:1px}
-.rcard-meta{flex:1;min-width:0}
-.rcard-meta h3{font-size:14px;font-weight:600;color:var(--primary);margin-bottom:2px;line-height:1.3}
-.rcard-meta .sub{font-size:11px;color:var(--light);font-family:'JetBrains Mono',monospace}
-.rtags{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
-.rtag{font-size:10px;font-weight:500;padding:2px 7px;border-radius:100px}
-.rtag-o{background:#FFF3E8;color:#C24A10}
-.rtag-b{background:#EEF3FB;color:#1A3A5C}
-.rtag-g{background:var(--ok-l);color:var(--ok)}
-.chev{font-size:13px;color:var(--light);margin-left:auto;align-self:center;flex-shrink:0;transition:transform .25s}
-.rcard.open .chev{transform:rotate(180deg)}
-.rcard-body{display:none;border-top:1.5px solid var(--border)}
-.rcard.open .rcard-body{display:block}
+/* Divider */
+.home-divider{border:none;border-top:1.5px solid var(--rule);margin:0 0 2rem}
 
-/* ── TABS ── */
-.tabs{display:flex;border-bottom:1.5px solid var(--border);overflow-x:auto;scrollbar-width:none}
-.tabs::-webkit-scrollbar{display:none}
-.tab{background:none;border:none;font-size:12px;font-weight:500;color:var(--muted);padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1.5px;white-space:nowrap;transition:all .15s;-webkit-tap-highlight-color:transparent}
-.tab.on{color:var(--accent);border-bottom-color:var(--accent)}
-.tc{padding:1.1rem;display:none}
-.tc.on{display:block}
-
-/* ── EXPLANATION BOX ── */
-.explbox{background:#F0F4FA;border-left:3px solid var(--primary);border-radius:0 var(--r) var(--r) 0;padding:.9rem 1rem;margin-bottom:.85rem}
-.explbox .elbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;color:var(--primary);margin-bottom:5px}
-.explbox p{font-size:13px;line-height:1.75;color:#333}
-
-/* ── INLINE LANG BAR ── */
-.lang-bar{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:.75rem;padding-top:.65rem;border-top:1px solid #D8DFE8}
-.lang-bar-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--primary);flex-shrink:0}
-.lpill{background:var(--white);border:1px solid var(--border);color:var(--muted);font-size:10px;font-weight:500;padding:3px 9px;border-radius:100px;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent}
-.lpill:hover{border-color:var(--accent);color:var(--accent)}
-.lpill.on{background:var(--accent);border-color:var(--accent);color:#fff}
-.tr-st{font-size:11px;color:var(--muted);margin-top:.4rem;min-height:16px;display:flex;align-items:center;gap:5px}
-.mspin{width:12px;height:12px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* ── WARN BOX ── */
-.wbox{background:var(--warn-bg);border:1px solid var(--warn-border);border-radius:var(--r);padding:.75rem .9rem;font-size:12px;color:var(--warn-text);margin-bottom:.85rem;display:flex;gap:7px}
-.wbox strong{font-weight:600}
-
-/* ── STEPS ── */
-.step{display:flex;gap:11px;margin-bottom:.9rem;position:relative}
-.step::before{content:'';position:absolute;left:14px;top:30px;bottom:-.9rem;width:1.5px;background:var(--border)}
-.step:last-child::before{display:none}
-.snum{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:1}
-.sbody{flex:1;padding-top:3px}
-.sbody strong{font-size:13px;font-weight:600;color:var(--primary);display:block;margin-bottom:2px}
-.sbody p{font-size:12px;color:var(--muted);line-height:1.6;font-weight:300}
-.stm{display:inline-flex;background:var(--accent-l);color:var(--accent);font-size:10px;font-weight:500;padding:1px 7px;border-radius:100px;margin-top:4px}
-
-/* ── RIGHTS LIST ── */
-.rlist{list-style:none;margin-bottom:.85rem}
-.rlist li{display:flex;gap:7px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;color:#333;line-height:1.55}
-.rlist li:last-child{border-bottom:none}
-.rlist li::before{content:'⚖';flex-shrink:0;font-size:12px;color:var(--ok);margin-top:1px}
-
-/* ── CASE CARD ── */
-.ccase{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:.85rem;margin-bottom:8px}
-.ccase .ctit{font-size:13px;font-weight:600;color:var(--primary);margin-bottom:2px}
-.ccase .cref{font-size:10px;color:var(--light);font-family:'JetBrains Mono',monospace;margin-bottom:6px}
-.ccase .crul{font-size:12px;color:var(--muted);line-height:1.6;border-left:2px solid var(--ok);padding-left:8px;font-style:italic;margin-bottom:5px}
-.ccase .cimp{font-size:11px;font-weight:500;color:var(--ok)}
-
-/* ── LOADING ── */
-.loading{display:none;text-align:center;padding:2.5rem;color:var(--muted)}
-.bigspin{width:28px;height:28px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto .65rem}
-
-/* ── CHAT ── */
-.chat-wrap{background:var(--primary);border-radius:var(--rl);overflow:hidden}
-.chat-msgs{padding:1rem;min-height:160px;max-height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;-webkit-overflow-scrolling:touch}
-.cmsg{max-width:88%;padding:9px 12px;border-radius:12px;font-size:13px;line-height:1.6}
-.cmsg.bot{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85);border-radius:3px 12px 12px 12px;align-self:flex-start}
-.cmsg.user{background:var(--accent);color:#fff;border-radius:12px 12px 3px 12px;align-self:flex-end}
-.chat-in-row{display:flex;gap:6px;padding:.8rem;border-top:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
-#chat-input{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:9px 12px;color:#fff;font-size:13px;outline:none;transition:border-color .15s;min-width:0;-webkit-appearance:none}
-#chat-input:focus{border-color:rgba(245,160,107,.5)}
-#chat-input::placeholder{color:rgba(255,255,255,.3);font-size:12px}
-.csend{background:var(--accent);border:none;border-radius:7px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;flex-shrink:0;transition:background .15s;-webkit-tap-highlight-color:transparent}
-.csend:hover{background:#c44d14}
-.dots span{display:inline-block;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.4);animation:bonce 1.2s infinite;margin:0 1px}
+/* Chat section on home */
+.section-label{font-size:11px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:.85rem}
+.chat-shell{border:1.5px solid var(--rule);border-radius:var(--r);overflow:hidden;background:var(--white);margin-bottom:2.5rem}
+.chat-msgs{padding:1rem;min-height:100px;max-height:280px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;-webkit-overflow-scrolling:touch}
+.cmsg{max-width:90%;padding:9px 12px;border-radius:12px;font-size:13px;line-height:1.65}
+.cmsg.bot{background:#EEF3FA;color:var(--ink);border-radius:3px 12px 12px 12px;align-self:flex-start}
+.cmsg.user{background:var(--navy);color:#fff;border-radius:12px 12px 3px 12px;align-self:flex-end}
+.chat-footer{display:flex;gap:7px;padding:.75rem;border-top:1.5px solid var(--rule);background:#FAFAF8}
+#chat-input{flex:1;border:1.5px solid var(--rule);border-radius:8px;padding:9px 12px;font-size:13px;color:var(--ink);outline:none;transition:border-color .15s;background:var(--white);min-width:0;-webkit-appearance:none}
+#chat-input:focus{border-color:var(--navy)}
+#chat-input::placeholder{color:var(--ink3);font-size:12px}
+.chat-send{background:var(--navy);color:#fff;border:none;border-radius:8px;width:36px;height:36px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;-webkit-tap-highlight-color:transparent}
+.chat-send:hover{background:var(--navy2)}
+.dots span{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--ink3);animation:bonce 1.2s infinite;margin:0 1px}
 .dots span:nth-child(2){animation-delay:.2s}
 .dots span:nth-child(3){animation-delay:.4s}
 @keyframes bonce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)}}
 
-/* ── HELP GRID ── */
-.help-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
-.hcard{border:1.5px solid var(--border);border-radius:var(--r);padding:.85rem;text-align:center}
-.hcard .hi{font-size:20px;margin-bottom:4px}
-.hcard .hn{font-size:12px;font-weight:600;color:var(--primary)}
-.hcard .hnum{font-size:14px;font-weight:700;color:var(--accent);margin:2px 0;font-family:'JetBrains Mono',monospace}
-.hcard .hd{font-size:10px;color:var(--light)}
+/* Helplines — minimal on home */
+.help-row{display:flex;flex-direction:column;gap:6px}
+.help-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--white);border:1.5px solid var(--rule);border-radius:var(--r)}
+.help-item .hi-name{font-size:13px;font-weight:500;color:var(--ink)}
+.help-item .hi-num{font-size:13px;font-weight:600;color:var(--orange);font-family:'JetBrains Mono',monospace}
+
+/* ════════════════════════════════
+   SEARCH RESULTS — focused view
+   ════════════════════════════════ */
+.results-wrap{max-width:720px;margin:0 auto;padding:1.5rem 1.25rem}
+.back-row{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem}
+.back-btn{background:none;border:none;color:var(--ink3);font-size:13px;font-weight:500;cursor:pointer;padding:4px 0;display:flex;align-items:center;gap:4px;transition:color .15s}
+.back-btn:hover{color:var(--ink)}
+.results-q{font-size:15px;font-weight:600;color:var(--ink);letter-spacing:-.2px}
+.results-count{font-size:12px;color:var(--ink3);margin-left:auto}
+.spin-wrap{text-align:center;padding:3rem;color:var(--ink3)}
+.spinner{width:24px;height:24px;border:2px solid var(--rule);border-top-color:var(--navy);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto .65rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── LAW CARD ── */
+.law-card{background:var(--white);border:1.5px solid var(--rule);border-radius:var(--r);margin-bottom:10px;overflow:hidden}
+.law-card-hd{padding:1rem 1.1rem;display:flex;align-items:flex-start;gap:11px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.law-card-hd:hover{background:#FAFAF8}
+.lc-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+.lc-meta{flex:1;min-width:0}
+.lc-title{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:2px;line-height:1.3}
+.lc-ref{font-size:10px;color:var(--ink3);font-family:'JetBrains Mono',monospace}
+.lc-tags{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.ltag{font-size:10px;font-weight:500;padding:2px 8px;border-radius:100px;white-space:nowrap}
+.ltag-o{background:#FFF0E8;color:#B84C12}
+.ltag-b{background:#EEF3FA;color:#1A3A5C}
+.ltag-g{background:var(--green-l);color:var(--green)}
+.chev{font-size:13px;color:var(--ink3);margin-left:auto;align-self:center;flex-shrink:0;transition:transform .22s}
+.law-card.open .chev{transform:rotate(180deg)}
+.law-body{display:none;border-top:1.5px solid var(--rule)}
+.law-card.open .law-body{display:block}
+
+/* ── TAB NAV (inside card) ── */
+.tabs{display:flex;border-bottom:1.5px solid var(--rule);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{background:none;border:none;font-size:12px;font-weight:500;color:var(--ink3);padding:9px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1.5px;white-space:nowrap;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.tab.on{color:var(--orange);border-bottom-color:var(--orange)}
+
+/* ── TAB PANELS ── */
+.tp{padding:1.1rem;display:none;font-size:13px;line-height:1.7;color:var(--ink2)}
+.tp.on{display:block}
+
+/* Explanation */
+.expl-box{background:#EEF3FA;border-left:3px solid var(--navy);border-radius:0 8px 8px 0;padding:.9rem 1rem;margin-bottom:.85rem}
+.expl-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--navy);margin-bottom:5px}
+.expl-text{font-size:13px;line-height:1.75;color:#2A2A2A}
+
+/* Language bar — inside explanation */
+.lang-bar{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:.75rem;padding-top:.65rem;border-top:1px solid #D0DAEC}
+.lb-lbl{font-size:10px;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:.4px;flex-shrink:0}
+.lpill{background:var(--white);border:1.5px solid var(--rule);color:var(--ink2);font-size:10px;font-weight:500;padding:3px 9px;border-radius:100px;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.lpill:hover{border-color:var(--navy);color:var(--navy)}
+.lpill.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.lpill.reset{background:#EEF3FA;border-color:#C0CEDF;color:var(--navy)}
+.tr-st{font-size:11px;color:var(--ink3);margin-top:.4rem;min-height:16px;display:flex;align-items:center;gap:5px}
+.mspin{width:11px;height:11px;border:2px solid var(--rule);border-top-color:var(--navy);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+
+/* Warn box */
+.warn{background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:8px;padding:.75rem .9rem;font-size:12px;color:var(--amber-tx);display:flex;gap:7px;margin-bottom:.85rem}
+
+/* Rights list */
+.rlist{list-style:none;margin-bottom:.85rem}
+.rlist li{display:flex;gap:7px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:13px;color:var(--ink2);line-height:1.55;align-items:flex-start}
+.rlist li:last-child{border-bottom:none}
+.rlist li::before{content:'⚖';font-size:11px;color:var(--green);flex-shrink:0;margin-top:2px}
+
+/* Steps */
+.step-item{display:flex;gap:11px;margin-bottom:.9rem;position:relative}
+.step-item::before{content:'';position:absolute;left:13px;top:28px;bottom:-.9rem;width:1.5px;background:var(--rule)}
+.step-item:last-child::before{display:none}
+.step-n{width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:1}
+.step-body{flex:1;padding-top:2px}
+.step-body strong{font-size:13px;font-weight:600;color:var(--navy);display:block;margin-bottom:2px}
+.step-body p{font-size:12px;color:var(--ink3);line-height:1.6;font-weight:300}
+.step-tm{display:inline-flex;background:var(--orange-l);color:var(--orange);font-size:10px;font-weight:500;padding:1px 7px;border-radius:100px;margin-top:4px}
+
+/* Cases — designed for lawyers to cite */
+.case-note{font-size:11px;color:var(--ink3);margin-bottom:.85rem;padding:.6rem .75rem;background:#FAFAF8;border-radius:6px;border:1px solid var(--rule)}
+.case-card{border:1.5px solid var(--rule);border-radius:var(--r);margin-bottom:8px;overflow:hidden}
+.case-hd{padding:.85rem 1rem;background:#FAFAF8;border-bottom:1px solid var(--rule)}
+.case-name{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:2px}
+.case-cite{font-size:10px;color:var(--orange);font-family:'JetBrains Mono',monospace;font-weight:500}
+.case-body{padding:.85rem 1rem}
+.case-ruling{font-size:12px;color:var(--ink2);line-height:1.65;border-left:2px solid var(--green);padding-left:9px;margin-bottom:.6rem;font-style:italic}
+.case-impact{font-size:11px;font-weight:600;color:var(--green)}
+.case-copy{background:none;border:1px solid var(--rule);color:var(--ink3);font-size:10px;font-weight:500;padding:3px 9px;border-radius:6px;cursor:pointer;margin-top:.6rem;transition:all .15s;display:inline-flex;align-items:center;gap:4px}
+.case-copy:hover{border-color:var(--navy);color:var(--navy)}
+.copy-toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:12px;font-weight:500;padding:8px 18px;border-radius:100px;z-index:999;opacity:0;transition:opacity .2s;pointer-events:none}
+.copy-toast.show{opacity:1}
+
+/* ══ FULL PAGES (Laws, Cases, Guides, New Laws) ══ */
+.page-wrap{max-width:720px;margin:0 auto;padding:1.75rem 1.25rem}
+.page-hd{margin-bottom:1.5rem}
+.page-hd h1{font-size:1.3rem;font-weight:700;color:var(--navy);letter-spacing:-.3px;margin-bottom:.2rem}
+.page-hd p{font-size:13px;color:var(--ink3);font-weight:300}
+
+/* Case library full page */
+.case-area-hd{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--orange);margin:1.5rem 0 .65rem;padding-bottom:.4rem;border-bottom:2px solid var(--orange-l)}
+.case-area-hd:first-child{margin-top:0}
+
+/* Guides */
+.guide-card{background:var(--white);border:1.5px solid var(--rule);border-radius:var(--r);padding:1.1rem;margin-bottom:10px}
+.guide-title{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:1rem}
+
+/* New laws page */
+.nl-badge{display:inline-block;background:var(--orange-l);border:1px solid #F0B090;color:var(--orange);font-size:10px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:.75rem}
+.nl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:1.25rem}
+.nl-card{background:var(--white);border:1.5px solid var(--rule);border-radius:var(--r);overflow:hidden}
+.nl-card-hd{padding:.75rem 1rem}
+.nl-card-hd .sub{font-size:9px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.nl-card-hd .title{font-size:13px;font-weight:700;color:#fff;margin-top:2px;line-height:1.25}
+.nl-card-hd .code{font-size:9px;color:rgba(255,255,255,.35);font-family:'JetBrains Mono',monospace;margin-top:2px}
+.nl-card-body{padding:.75rem 1rem;font-size:12px;color:var(--ink2);line-height:1.7}
+.nl-card-body ul{list-style:none;margin-top:.5rem;font-size:12px;line-height:1.85}
+.map-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1.5px solid var(--rule);border-radius:var(--r);margin-bottom:1.5rem}
+.map-tbl{min-width:420px;width:100%;border-collapse:collapse}
+.map-tbl th{background:var(--navy);color:rgba(255,255,255,.65);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;padding:8px 12px;text-align:left}
+.map-tbl td{padding:8px 12px;font-size:11px;border-top:1px solid var(--rule);color:var(--ink2)}
+.map-tbl tr:nth-child(even) td{background:#FAFAF8}
+.map-tbl td:first-child{font-family:'JetBrains Mono',monospace;color:var(--ink3);text-decoration:line-through}
+.map-tbl td:nth-child(2){font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--orange)}
+.mbadge{background:#EEF3FA;color:var(--navy);font-size:9px;font-weight:600;padding:1px 6px;border-radius:100px}
+
+/* ── TRANSLATE BAR — above all tabs ── */
+.tr-bar{display:flex;align-items:center;gap:5px;flex-wrap:wrap;padding:.65rem 1rem;border-bottom:1.5px solid var(--rule);background:#FAFAF8}
+.tr-bar .tr-st{font-size:11px;color:var(--ink3);display:flex;align-items:center;gap:5px;width:100%;margin-top:2px}
+
+/* ── Clickable case name ── */
+a.case-name{display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:2px;text-decoration:none;transition:color .15s}
+a.case-name:hover{color:var(--orange);text-decoration:underline}
+
+/* ── Section links ── */
+.sec-link{color:var(--orange);text-decoration:none;font-weight:600;border-bottom:1px dashed rgba(217,90,24,.35);transition:all .15s;cursor:pointer}
+.sec-link:hover{color:var(--navy);border-bottom-color:var(--navy)}
 
 /* ── MODAL ── */
-.overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5);align-items:center;justify-content:center;padding:1rem}
-.overlay.open{display:flex}
-.modal{background:var(--white);border-radius:var(--rl);max-width:440px;width:100%;max-height:85vh;overflow-y:auto}
-.modal-hd{padding:1rem 1.1rem;border-bottom:1.5px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.modal-hd h3{font-size:14px;font-weight:600;color:var(--primary)}
-.modal-close{background:none;border:none;font-size:18px;cursor:pointer;color:var(--light);padding:3px}
-.modal-body{padding:1.1rem}
+.overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.45);align-items:flex-end;justify-content:center;padding:0}
+.overlay.on{display:flex}
+.modal{background:var(--white);border-radius:16px 16px 0 0;width:100%;max-width:540px;max-height:85vh;overflow-y:auto;padding:1.25rem;padding-bottom:2rem}
+.modal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.modal-hd h3{font-size:15px;font-weight:700;color:var(--navy)}
+.modal-close{background:none;border:none;font-size:20px;color:var(--ink3);cursor:pointer;padding:2px}
+/* Drag handle */
+.modal::before{content:'';display:block;width:36px;height:4px;background:var(--rule);border-radius:2px;margin:0 auto .85rem}
 
 /* ── FOOTER ── */
-footer{background:var(--primary);padding:1.75rem 1.25rem 1.25rem;margin-top:2rem}
-.foot-w{max-width:960px;margin:0 auto}
-.disc{font-size:11px;color:rgba(255,255,255,.35);line-height:1.65;border-top:1px solid rgba(255,255,255,.08);padding-top:1rem;margin-top:1rem}
-.disc strong{color:rgba(255,255,255,.5)}
-.foot-links{display:flex;gap:1rem;flex-wrap:wrap}
-.foot-links span{font-size:11px;color:rgba(255,255,255,.38);cursor:pointer;transition:color .15s}
-.foot-links span:hover{color:rgba(255,255,255,.6)}
-
-/* ── MAP TABLE ── */
-.map-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1.5px solid var(--border);border-radius:var(--rl);margin-bottom:1.5rem}
-.map-tbl{min-width:440px;width:100%;border-collapse:collapse}
-.map-tbl th{background:var(--primary);color:rgba(255,255,255,.65);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;padding:9px 14px;text-align:left}
-.map-tbl td{padding:8px 14px;font-size:11px;border-top:1px solid var(--border);color:#333}
-.map-tbl tr:nth-child(even) td{background:var(--bg)}
-.map-tbl td:first-child{font-family:'JetBrains Mono',monospace;color:var(--light);text-decoration:line-through}
-.map-tbl td:nth-child(2){font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--accent)}
-.mbadge{background:#EEF3FB;color:var(--primary);font-size:9px;font-weight:600;padding:1px 6px;border-radius:100px}
+footer{border-top:1.5px solid var(--rule);padding:1.5rem 1.25rem;margin-top:2rem}
+.foot-w{max-width:720px;margin:0 auto}
+.foot-links{display:flex;gap:1.25rem;flex-wrap:wrap;margin-bottom:.75rem}
+.foot-links button{background:none;border:none;font-size:12px;color:var(--ink3);cursor:pointer;padding:0;transition:color .15s}
+.foot-links button:hover{color:var(--ink)}
+.foot-disc{font-size:11px;color:var(--ink3);line-height:1.6;font-weight:300}
+.foot-disc strong{color:var(--ink2);font-weight:500}
 
 /* ── RESPONSIVE ── */
-@media(max-width:768px){
-  .nav-links,.sos-btn.desk{display:none}
+@media(max-width:640px){
+  .nav-link.hide-sm{display:none}
   .hbg{display:flex}
-  .cat-row{gap:6px}
-  .help-grid{grid-template-columns:1fr 1fr}
+  .home-wrap{padding:2.5rem 1rem 1.5rem}
+  .results-wrap,.page-wrap{padding:1.25rem 1rem}
 }
-@media(max-width:480px){
-  .help-grid{grid-template-columns:1fr 1fr}
-  .search-row{flex-direction:column}
-  .search-row button{width:100%;padding:11px}
-  .hero{padding:2rem 1.25rem 2rem}
+@media(max-width:400px){
+  .home-h1{font-size:1.45rem}
+  .chips{gap:5px}
+  .chip{font-size:11px;padding:5px 10px}
 }
 </style>
 </head>
@@ -233,751 +281,543 @@ footer{background:var(--primary);padding:1.75rem 1.25rem 1.25rem;margin-top:2rem
 <!-- ── NAV ── -->
 <nav>
   <div class="nav-w">
-    <div class="logo"><span>⚖</span> NyaySetu</div>
-    <div class="nav-links">
-      <button class="nav-btn on" onclick="go('home')">Home</button>
-      <button class="nav-btn" onclick="go('laws')">Laws</button>
-      <button class="nav-btn" onclick="go('cases')">Case Library</button>
-      <button class="nav-btn" onclick="go('guide')">Guides</button>
-      <button class="nav-btn" onclick="go('newlaws')">🆕 BNS/BNSS</button>
+    <div class="logo" onclick="go('home')"><div class="logo-dot"></div>NyaySetu</div>
+    <div class="nav-r">
+      <button class="nav-link hide-sm" onclick="go('laws')">Laws</button>
+      <button class="nav-link hide-sm" onclick="go('cases')">Cases</button>
+      <button class="nav-link hide-sm" onclick="go('newlaws')">BNS/BNSS</button>
+      <button class="sos" onclick="openM('sos')">🆘 Help</button>
+      <button class="hbg" id="hbg" onclick="toggleDraw()"><span></span><span></span><span></span></button>
     </div>
-    <button class="sos-btn desk" onclick="openM('sos')">🆘 Emergency</button>
-    <button class="hbg" id="hbg" onclick="toggleDraw()"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="drawer" id="drawer">
-  <button class="nav-btn" onclick="go('home');toggleDraw()">🏠 Home</button>
-  <button class="nav-btn" onclick="go('laws');toggleDraw()">📚 Laws A–Z</button>
-  <button class="nav-btn" onclick="go('cases');toggleDraw()">🏛 Case Library</button>
-  <button class="nav-btn" onclick="go('guide');toggleDraw()">📋 Guides</button>
-  <button class="nav-btn" onclick="go('newlaws');toggleDraw()">🆕 BNS / BNSS 2024</button>
-  <button class="sos-btn" onclick="openM('sos');toggleDraw()">🆘 Emergency Help</button>
+  <button onclick="go('home');closeDraw()">🏠 Home</button>
+  <button onclick="go('laws');closeDraw()">📚 All Laws</button>
+  <button onclick="go('cases');closeDraw()">🏛 Case Library</button>
+  <button onclick="go('guide');closeDraw()">📋 Action Guides</button>
+  <button onclick="go('newlaws');closeDraw()">🆕 BNS / BNSS 2024</button>
+  <button class="sos" onclick="openM('sos');closeDraw()">🆘 Emergency Help</button>
 </div>
 
-<!-- ══ HOME ══ -->
-<div id="pg-home" class="page on">
-  <div class="hero">
-    <div class="hero-w">
-      <h1>Understand Indian Law.<br>Know Your Rights.<br><em>Protect Your Family.</em></h1>
-      <p>Plain-language explanations of every major law affecting Indian men — with real case references and step-by-step guidance.</p>
-      <div class="search-row">
-        <input id="srch" type="search" placeholder="Search: 498A, maintenance, child custody, false FIR, BNS § 85..." autocomplete="off">
-        <button onclick="doSearch()">Search</button>
-      </div>
-      <div class="quick-tags">
-        <span class="qtag" onclick="qs('Section 498A')">498A</span>
-        <span class="qtag" onclick="qs('maintenance BNSS')">Maintenance</span>
-        <span class="qtag" onclick="qs('child custody father')">Custody</span>
-        <span class="qtag" onclick="qs('false FIR bail')">False FIR</span>
-        <span class="qtag" onclick="qs('domestic violence PWDVA')">DV Act</span>
-        <span class="qtag" onclick="go('newlaws')">🆕 BNS/BNSS 2024</span>
-      </div>
-    </div>
-  </div>
-  <div class="main">
-    <div class="pg-title">Browse by Topic</div>
-    <div class="pg-sub">Select a topic to read the law, understand your rights, and see real cases.</div>
-    <div class="cat-row" id="cat-row"></div>
+<!-- ════════ HOME ════════ -->
+<div id="pg-home" class="pg on">
+  <div class="home-wrap">
+    <div class="home-eyebrow">For Indian men & their families</div>
+    <h1 class="home-h1">Understand your legal rights.<br>Know what to do next.</h1>
+    <p class="home-sub">Search any law, act, or situation. Get a plain-language explanation, your rights, step-by-step guidance, and real court cases your lawyer can cite.</p>
 
-    <!-- AI Chat -->
-    <div class="pg-title" style="margin-bottom:.25rem">Ask a Legal Question</div>
-    <div class="pg-sub">Type in English, Hindi, Marathi, Tamil, or any Indian language. Get a plain-language answer.</div>
-    <div class="chat-wrap" style="margin-bottom:2rem">
+    <div class="search-box">
+      <input id="srch" type="search" placeholder="e.g. 498A, maintenance, child custody, false FIR..." autocomplete="off">
+      <button class="srch-go" onclick="doSearch()" aria-label="Search">→</button>
+    </div>
+
+    <div class="chips-label">Common searches</div>
+    <div class="chips">
+      <span class="chip" onclick="qs('Section 498A BNS 85')">498A / BNS § 85</span>
+      <span class="chip" onclick="qs('maintenance BNSS 144')">Maintenance</span>
+      <span class="chip" onclick="qs('child custody father')">Child Custody</span>
+      <span class="chip" onclick="qs('false FIR anticipatory bail')">False FIR</span>
+      <span class="chip" onclick="qs('domestic violence PWDVA')">DV Act</span>
+      <span class="chip" onclick="qs('dowry Section 406')">Dowry / 406</span>
+      <span class="chip accent" onclick="go('newlaws')">🆕 BNS / BNSS 2024</span>
+    </div>
+
+    <hr class="home-divider">
+
+    <div class="section-label">Ask a legal question — any Indian language</div>
+    <div class="chat-shell">
       <div class="chat-msgs" id="chat-msgs">
-        <div class="cmsg bot">Namaste 🙏 Ask me anything about Indian law — in any language. I'll explain in simple words and tell you what to do next. (e.g. "My wife filed 498A against me", "I want child custody", "I got a maintenance notice")</div>
+        <div class="cmsg bot">Namaste 🙏 Describe your situation and I'll explain the law, your rights, and what to do — in simple language. You can type in Hindi, Marathi, Tamil, Telugu, or any Indian language.</div>
       </div>
-      <div class="chat-in-row">
-        <input id="chat-input" type="text" placeholder="Ask in any language — English, हिंदी, मराठी, தமிழ்..." onkeydown="if(event.key==='Enter')sendChat()">
-        <button class="csend" onclick="sendChat()">➤</button>
+      <div class="chat-footer">
+        <input id="chat-input" type="text" placeholder="e.g. My wife filed 498A, I got a maintenance notice..." onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="chat-send" onclick="sendChat()">➤</button>
       </div>
     </div>
 
-    <!-- Helplines -->
-    <div class="pg-title" style="margin-bottom:.75rem">Emergency Helplines</div>
-    <div class="help-grid">
-      <div class="hcard"><div class="hi">🏛</div><div class="hn">NALSA (Free Legal Aid)</div><div class="hnum">15100</div><div class="hd">Free lawyer, your right</div></div>
-      <div class="hcard"><div class="hi">📞</div><div class="hn">Save Indian Family</div><div class="hnum">1800-599-0019</div><div class="hd">Matrimonial distress</div></div>
-      <div class="hcard"><div class="hi">👮</div><div class="hn">Police</div><div class="hnum">100</div><div class="hd">Emergency</div></div>
-      <div class="hcard"><div class="hi">🧠</div><div class="hn">iCall (Mental Health)</div><div class="hnum">9152987821</div><div class="hd">Free counselling</div></div>
-      <div class="hcard"><div class="hi">⚖</div><div class="hn">MRA India</div><div class="hnum">+91 9372932329</div><div class="hd">Men's rights help</div></div>
-      <div class="hcard"><div class="hi">🤝</div><div class="hn">SIFF</div><div class="hnum">+91 9322091195</div><div class="hd">Save Indian Family Foundation</div></div>
+    <div class="section-label">Emergency helplines</div>
+    <div class="help-row">
+      <div class="help-item"><span class="hi-name">NALSA — Free Legal Aid</span><span class="hi-num">15100</span></div>
+      <div class="help-item"><span class="hi-name">Save Indian Family</span><span class="hi-num">1800-599-0019</span></div>
+      <div class="help-item"><span class="hi-name">Police Emergency</span><span class="hi-num">100</span></div>
+      <div class="help-item"><span class="hi-name">iCall (Mental Health)</span><span class="hi-num">9152987821</span></div>
+      <div class="help-item"><span class="hi-name">MRA India</span><span class="hi-num">+91 9372932329</span></div>
     </div>
   </div>
 </div>
 
-<!-- ══ SEARCH RESULTS ══ -->
-<div id="pg-search" class="page">
-  <div class="main">
-    <button onclick="go('home')" style="background:none;border:1.5px solid var(--border);color:var(--muted);font-size:12px;padding:6px 12px;border-radius:6px;cursor:pointer;margin-bottom:1.25rem">← Back</button>
-    <div class="loading" id="srch-load"><div class="bigspin"></div>Searching...</div>
-    <div id="srch-title" style="font-size:14px;font-weight:600;color:var(--primary);margin-bottom:1rem"></div>
-    <div id="srch-res"></div>
+<!-- ════════ SEARCH RESULTS ════════ -->
+<div id="pg-search" class="pg">
+  <div class="results-wrap">
+    <div class="back-row">
+      <button class="back-btn" onclick="go('home')">← Back</button>
+      <div class="results-q" id="res-q"></div>
+      <div class="results-count" id="res-count"></div>
+    </div>
+    <div id="res-spin" class="spin-wrap" style="display:none"><div class="spinner"></div>Searching...</div>
+    <div id="res-list"></div>
   </div>
 </div>
 
-<!-- ══ ALL LAWS ══ -->
-<div id="pg-laws" class="page">
-  <div class="main">
-    <div class="pg-title">All Laws & Acts</div>
-    <div class="pg-sub">Major laws affecting Indian men — tap to expand, translate to your language.</div>
+<!-- ════════ ALL LAWS ════════ -->
+<div id="pg-laws" class="pg">
+  <div class="page-wrap">
+    <div class="page-hd">
+      <h1>All Laws & Acts</h1>
+      <p>Tap any law to read the explanation, your rights, steps, and cases.</p>
+    </div>
     <div id="laws-list"></div>
   </div>
 </div>
 
-<!-- ══ CASE LIBRARY ══ -->
-<div id="pg-cases" class="page">
-  <div class="main">
-    <div class="pg-title">Landmark Cases — Men Won</div>
-    <div class="pg-sub">Supreme Court & High Court judgements that set precedent in favour of men.</div>
+<!-- ════════ CASE LIBRARY ════════ -->
+<div id="pg-cases" class="pg">
+  <div class="page-wrap">
+    <div class="page-hd">
+      <h1>Case Library</h1>
+      <p>Landmark Supreme Court & High Court judgements in favour of men. Share these with your lawyer.</p>
+    </div>
     <div id="cases-list"></div>
   </div>
 </div>
 
-<!-- ══ GUIDES ══ -->
-<div id="pg-guide" class="page">
-  <div class="main">
-    <div class="pg-title">Step-by-Step Action Guides</div>
-    <div class="pg-sub">Exactly what to do if you face one of these situations — step by step.</div>
+<!-- ════════ GUIDES ════════ -->
+<div id="pg-guide" class="pg">
+  <div class="page-wrap">
+    <div class="page-hd">
+      <h1>Action Guides</h1>
+      <p>Step-by-step — exactly what to do when facing these situations.</p>
+    </div>
     <div id="guide-list"></div>
   </div>
 </div>
 
-<!-- ══ NEW LAWS 2024 ══ -->
-<div id="pg-newlaws" class="page">
-  <div class="hero" style="padding:2rem 1.25rem">
-    <div class="hero-w" style="text-align:left;max-width:960px">
-      <div style="display:inline-block;background:rgba(245,160,107,.2);border:1px solid rgba(245,160,107,.35);color:#F5A06B;font-size:10px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:.75rem">Effective July 1, 2024</div>
-      <h1 style="font-size:clamp(1.3rem,3.5vw,1.8rem);text-align:left">India's New Criminal Laws</h1>
-      <p style="text-align:left;margin:0">Three codes replaced 160-year-old colonial laws. If your case was filed after July 1, 2024, these apply to you.</p>
+<!-- ════════ NEW LAWS ════════ -->
+<div id="pg-newlaws" class="pg">
+  <div class="page-wrap">
+    <div class="page-hd">
+      <span class="nl-badge">Effective July 1, 2024</span>
+      <h1>India's New Criminal Laws</h1>
+      <p>BNS replaced IPC. BNSS replaced CrPC. BSA replaced the Evidence Act. If your case was filed after July 1, 2024, these laws apply to you.</p>
     </div>
-  </div>
-  <div class="main">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-bottom:1.5rem">
-      <div style="background:var(--white);border:1.5px solid var(--border);border-radius:var(--rl);overflow:hidden">
-        <div style="background:#1A3A5C;padding:.85rem 1rem"><div style="font-size:9px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.6px;font-weight:600">Replaced IPC 1860</div><div style="font-size:13px;font-weight:700;color:#fff;margin-top:2px">Bharatiya Nyaya Sanhita</div><div style="font-size:10px;color:rgba(255,255,255,.35);font-family:'JetBrains Mono',monospace">BNS · Act 45 of 2023</div></div>
-        <div style="padding:.85rem 1rem;font-size:12px;color:var(--muted);line-height:1.7"><p style="margin-bottom:.6rem">Defines <strong>what is a crime.</strong></p><strong style="font-size:11px;color:var(--primary)">Key changes:</strong><ul style="list-style:none;margin-top:4px;font-size:12px;line-height:1.85"><li>📌 Old 498A → <strong>Now § 85 BNS</strong></li><li>📌 Old 406 → <strong>§ 316 BNS</strong></li><li>📌 Old 182 → <strong>§ 216 BNS</strong></li><li>📌 Old 211 → <strong>§ 250 BNS</strong></li></ul></div>
-      </div>
-      <div style="background:var(--white);border:1.5px solid var(--border);border-radius:var(--rl);overflow:hidden">
-        <div style="background:#6B2D10;padding:.85rem 1rem"><div style="font-size:9px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.6px;font-weight:600">Replaced CrPC 1973</div><div style="font-size:13px;font-weight:700;color:#fff;margin-top:2px">Bharatiya Nagarik Suraksha Sanhita</div><div style="font-size:10px;color:rgba(255,255,255,.35);font-family:'JetBrains Mono',monospace">BNSS · Act 46 of 2023</div></div>
-        <div style="padding:.85rem 1rem;font-size:12px;color:var(--muted);line-height:1.7"><p style="margin-bottom:.6rem">Defines <strong>how crimes are investigated</strong> and how bail works.</p><strong style="font-size:11px;color:var(--primary)">Key changes:</strong><ul style="list-style:none;margin-top:4px;font-size:12px;line-height:1.85"><li>📌 Anticipatory Bail → <strong>§ 482 BNSS</strong></li><li>📌 FIR Quashing → <strong>§ 528 BNSS</strong></li><li>📌 Maintenance → <strong>§ 144 BNSS</strong></li><li>📌 Police Notice → <strong>§ 35 BNSS</strong></li></ul></div>
-      </div>
-      <div style="background:var(--white);border:1.5px solid var(--border);border-radius:var(--rl);overflow:hidden">
-        <div style="background:#1E5C38;padding:.85rem 1rem"><div style="font-size:9px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.6px;font-weight:600">Replaced Evidence Act 1872</div><div style="font-size:13px;font-weight:700;color:#fff;margin-top:2px">Bharatiya Sakshya Adhiniyam</div><div style="font-size:10px;color:rgba(255,255,255,.35);font-family:'JetBrains Mono',monospace">BSA · Act 47 of 2023</div></div>
-        <div style="padding:.85rem 1rem;font-size:12px;color:var(--muted);line-height:1.7"><p style="margin-bottom:.6rem">Defines <strong>what counts as evidence.</strong></p><strong style="font-size:11px;color:var(--primary)">Key changes:</strong><ul style="list-style:none;margin-top:4px;font-size:12px;line-height:1.85"><li>📌 WhatsApp chats ✅ <strong>primary evidence</strong></li><li>📌 Call recordings ✅ <strong>primary evidence</strong></li><li>📌 Emails & SMS ✅ <strong>primary evidence</strong></li><li>📌 Certificate needed § 63(4) BSA</li></ul></div>
-      </div>
+    <div class="nl-grid">
+      <div class="nl-card"><div class="nl-card-hd" style="background:#1A3A5C"><div class="sub">Replaced IPC 1860</div><div class="title">Bharatiya Nyaya Sanhita</div><div class="code">BNS · Act 45 of 2023</div></div><div class="nl-card-body">Defines what is a crime.<ul><li>📌 498A → <strong>§ 85 BNS</strong></li><li>📌 406 → <strong>§ 316 BNS</strong></li><li>📌 182 → <strong>§ 216 BNS</strong></li><li>📌 211 → <strong>§ 250 BNS</strong></li></ul></div></div>
+      <div class="nl-card"><div class="nl-card-hd" style="background:#6B2D10"><div class="sub">Replaced CrPC 1973</div><div class="title">Bharatiya Nagarik Suraksha Sanhita</div><div class="code">BNSS · Act 46 of 2023</div></div><div class="nl-card-body">Defines how crimes are investigated and how bail works.<ul><li>📌 Anticipatory Bail → <strong>§ 482 BNSS</strong></li><li>📌 FIR Quashing → <strong>§ 528 BNSS</strong></li><li>📌 Maintenance → <strong>§ 144 BNSS</strong></li><li>📌 Police Notice → <strong>§ 35 BNSS</strong></li></ul></div></div>
+      <div class="nl-card"><div class="nl-card-hd" style="background:#1A5C38"><div class="sub">Replaced Evidence Act 1872</div><div class="title">Bharatiya Sakshya Adhiniyam</div><div class="code">BSA · Act 47 of 2023</div></div><div class="nl-card-body">Defines what counts as evidence.<ul><li>📌 WhatsApp chats ✅ primary evidence</li><li>📌 Call recordings ✅ primary evidence</li><li>📌 Emails & SMS ✅ primary evidence</li><li>📌 Certificate required § 63(4) BSA</li></ul></div></div>
     </div>
-    <div style="background:var(--warn-bg);border:1.5px solid var(--warn-border);border-radius:var(--rl);padding:1rem 1.1rem;margin-bottom:1.5rem;font-size:13px;color:var(--warn-text)">
-      <strong>Which law applies to your case?</strong><br>
-      ✅ Filed <strong>before July 1, 2024</strong> → IPC + CrPC + Indian Evidence Act apply<br>
-      ✅ Filed <strong>on or after July 1, 2024</strong> → BNS + BNSS + BSA apply
+    <div style="background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:var(--r);padding:.85rem 1rem;margin-bottom:1.25rem;font-size:13px;color:var(--amber-tx)">
+      <strong>Filed before July 1, 2024?</strong> → IPC + CrPC + Evidence Act apply.<br>
+      <strong>Filed on/after July 1, 2024?</strong> → BNS + BNSS + BSA apply.
     </div>
-    <div class="pg-title" style="margin-bottom:.75rem">Section Number Changes</div>
-    <div class="map-wrap"><table class="map-tbl"><thead><tr><th>Old Section</th><th>New Section</th><th>Code</th><th>Topic</th></tr></thead><tbody id="map-tbody"></tbody></table></div>
+    <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:.65rem">Section number changes</div>
+    <div class="map-wrap"><table class="map-tbl"><thead><tr><th>Old</th><th>New</th><th>Code</th><th>Topic</th></tr></thead><tbody id="map-tbody"></tbody></table></div>
   </div>
 </div>
 
-<!-- ══ MODAL — SOS ══ -->
-<div class="overlay" id="modal-sos">
+<!-- ════════ MODAL — SOS ════════ -->
+<div class="overlay" id="modal-sos" onclick="if(event.target===this)closeM('sos')">
   <div class="modal">
-    <div class="modal-hd"><h3>🆘 Emergency Legal Help</h3><button class="modal-close" onclick="closeM('sos')">✕</button></div>
-    <div class="modal-body">
-      <div class="wbox"><span>⚠</span><div><strong>If you are being arrested:</strong> Stay calm. Do NOT argue. Do NOT sign anything. Ask for a lawyer immediately.</div></div>
-      <div style="font-size:13px;font-weight:600;color:var(--primary);margin-bottom:.65rem">What to do right now:</div>
-      <div class="step"><div class="snum">1</div><div class="sbody"><strong>Say nothing without your lawyer</strong><p>Tell police: "I want to speak with my lawyer before answering any questions."</p></div></div>
-      <div class="step"><div class="snum">2</div><div class="sbody"><strong>Call NALSA for free legal aid</strong><p>Dial <strong>15100</strong> — free legal aid is your constitutional right (Article 22).</p></div></div>
-      <div class="step"><div class="snum">3</div><div class="sbody"><strong>Apply for Anticipatory Bail (BNSS § 482)</strong><p>If not yet arrested — file before arrest at Sessions Court. A lawyer can do this today.</p></div></div>
-      <div class="step"><div class="snum">4</div><div class="sbody"><strong>Document everything</strong><p>Write down names, times, events. Screenshot all messages. Every detail matters.</p></div></div>
-      <div style="margin-top:.85rem;font-size:12px;color:var(--muted);line-height:2.1">📞 NALSA: <strong>15100</strong> &nbsp;|&nbsp; 📞 SIF: <strong>1800-599-0019</strong><br>📞 Police: <strong>100</strong> &nbsp;|&nbsp; 📞 MRA: <strong>+91 9372932329</strong></div>
+    <div class="modal-hd"><h3>🆘 If You're Being Arrested</h3><button class="modal-close" onclick="closeM('sos')">✕</button></div>
+    <div class="warn" style="margin-bottom:1rem"><span>⚠</span><div><strong>Stay calm. Do NOT argue, resist, or sign anything.</strong></div></div>
+    <div class="step-item"><div class="step-n">1</div><div class="step-body"><strong>Say nothing without your lawyer</strong><p>"I want to speak with my lawyer before answering any questions."</p></div></div>
+    <div class="step-item"><div class="step-n">2</div><div class="step-body"><strong>Call NALSA for a free lawyer</strong><p>Dial <strong>15100</strong> — free legal aid is your constitutional right under Article 22.</p></div></div>
+    <div class="step-item"><div class="step-n">3</div><div class="step-body"><strong>Apply for Anticipatory Bail (BNSS § 482)</strong><p>If not yet arrested — file before arrest at Sessions Court. Can be done same day.</p></div></div>
+    <div class="step-item"><div class="step-n">4</div><div class="step-body"><strong>Write everything down</strong><p>Names, times, what was said. Every detail matters for your case.</p></div></div>
+    <div style="margin-top:1rem;padding:.85rem;background:#F8F8F6;border-radius:8px;font-size:12px;color:var(--ink2);line-height:2.1">
+      NALSA: <strong>15100</strong> &nbsp;·&nbsp; SIF: <strong>1800-599-0019</strong><br>
+      Police: <strong>100</strong> &nbsp;·&nbsp; MRA: <strong>+91 9372932329</strong>
     </div>
   </div>
 </div>
 
-<!-- ══ FOOTER ══ -->
+<!-- ── COPY TOAST ── -->
+<div class="copy-toast" id="copy-toast">Copied to clipboard ✓</div>
+
+<!-- ════════ FOOTER ════════ -->
 <footer>
   <div class="foot-w">
     <div class="foot-links">
-      <span onclick="go('laws')">All Laws</span>
-      <span onclick="go('cases')">Case Library</span>
-      <span onclick="go('guide')">Guides</span>
-      <span onclick="go('newlaws')">BNS/BNSS 2024</span>
+      <button onclick="go('laws')">All Laws</button>
+      <button onclick="go('cases')">Case Library</button>
+      <button onclick="go('guide')">Action Guides</button>
+      <button onclick="go('newlaws')">BNS / BNSS 2024</button>
     </div>
-    <div class="disc"><strong>⚠ Disclaimer:</strong> NyaySetu provides general legal education only — not legal advice. Laws change; always consult a qualified Indian lawyer before taking legal action. | © 2026 NyaySetu</div>
+    <div class="foot-disc"><strong>Disclaimer:</strong> NyaySetu provides general legal education only — not legal advice. Always consult a qualified Indian lawyer before taking action. © 2026 NyaySetu</div>
   </div>
 </footer>
 
 <script>
-// ════════════════════════════════════════
-// CONFIGURE YOUR CLOUDFLARE WORKER URL HERE
-// Replace with your actual worker URL after deploying worker/worker.js
+// ════════════════════════════════
 const PROXY = 'https://nyaysetu-proxy.jkuku7866.workers.dev';
-// ════════════════════════════════════════
+// ════════════════════════════════
 
 // ── DATA ─────────────────────────────────────────────────────────────────────
 
-const CATS = [
-  {icon:'🔴',label:'498A / BNS § 85',q:'Section 498A BNS 85 cruelty'},
-  {icon:'🏠',label:'Domestic Violence',q:'domestic violence PWDVA'},
-  {icon:'💼',label:'Maintenance',q:'maintenance BNSS 144'},
-  {icon:'👶',label:'Child Custody',q:'child custody father rights'},
-  {icon:'🛡',label:'False FIR & Bail',q:'false FIR anticipatory bail'},
-  {icon:'📝',label:'Divorce',q:'divorce Hindu Marriage Act'},
-  {icon:'💰',label:'Dowry / Sec 406',q:'dowry Section 406 misuse'},
-  {icon:'✈',label:'NRI Husband',q:'NRI husband passport laws'},
-  {icon:'🆕',label:'BNS / BNSS 2024',page:'newlaws'},
+const MAP_ROWS=[['IPC § 498A','BNS § 85','BNS','Cruelty by husband/relatives'],['IPC § 406','BNS § 316','BNS','Criminal breach of trust'],['IPC § 182','BNS § 216','BNS','False info to police'],['IPC § 211','BNS § 250','BNS','Filing false charge'],['IPC § 499/500','BNS § 356/357','BNS','Defamation'],['CrPC § 41A','BNSS § 35','BNSS','Pre-arrest notice'],['CrPC § 438','BNSS § 482','BNSS','Anticipatory Bail'],['CrPC § 482','BNSS § 528','BNSS','FIR Quashing'],['CrPC § 125','BNSS § 144','BNSS','Maintenance'],['CrPC § 167','BNSS § 187','BNSS','Remand'],['IEA § 65B','BSA § 63','BSA','Electronic evidence'],['IEA § 27','BSA § 23','BSA','Confession to police']];
+
+const LAWS=[
+  {id:'498a',icon:'🔴',title:'Section 498A IPC / BNS § 85 — Cruelty',ref:'IPC § 498A · Now BNS § 85 (after July 1, 2024)',
+   tags:[{l:'Often Misused',c:'ltag-o'},{l:'SC Guidelines Apply',c:'ltag-b'},{l:'70%+ Acquittal',c:'ltag-g'}],
+   expl:'Section 498A (now BNS § 85) makes it a crime for a husband or his relatives to be "cruel" to a wife. The Supreme Court has called it a tool of "legal terrorism" in many cases. Over 70% of all 498A trials end in acquittal. Police CANNOT arrest you immediately — they must follow the Arnesh Kumar procedure (BNSS § 35).',
+   warn:'Even with SC guidelines, some police still arrest first. Get a lawyer the moment you receive any notice.',
+   rights:['Police cannot arrest without following BNSS § 35 (Arnesh Kumar Guidelines).','You can file for Anticipatory Bail (BNSS § 482) BEFORE any arrest.','Your parents and siblings cannot be arrested without specific individual evidence.','You can file a counter-complaint under BNS § 216 if the FIR is false.','You can permanently quash a false FIR at the High Court under BNSS § 528.','Over 70% of cases end in acquittal — arrest is not conviction.'],
+   steps:[{n:1,t:'Gather all evidence right now',d:'WhatsApp chats, emails, call recordings, bank statements, gift receipts. Back up to cloud immediately.',tm:'Day 1'},{n:2,t:'Hire a criminal lawyer & file Anticipatory Bail',d:'File under BNSS § 482 at Sessions Court. This prevents arrest while the case is pending.',tm:'Day 1–2'},{n:3,t:'Respond to police notice with your lawyer',d:'Police must issue a BNSS § 35 notice before arrest. Appear with your lawyer — never go alone.',tm:'Within notice period'},{n:4,t:'File counter-complaint if FIR is false',d:'BNS § 216 (false information) and BNS § 250 (false criminal charge) if the FIR is fabricated.',tm:'Week 1–2'},{n:5,t:'Attend every court date',d:'Missing a date = non-bailable warrant. Set calendar reminders. Apply for exemption if needed.',tm:'Ongoing'},{n:6,t:'Apply to quash FIR at High Court',d:'File under BNSS § 528. Courts regularly quash false 498A / BNS § 85 FIRs.',tm:'2–4 weeks after FIR'}],
+   cases:[{name:'Arnesh Kumar v. State of Bihar',cite:'SC · (2014) 8 SCC 273',ruling:'Police cannot arrest in 498A cases without magistrate approval — now in BNSS § 35.',impact:'Drastically reduced arbitrary arrests',copy:'Arnesh Kumar v. State of Bihar (2014) 8 SCC 273 — Police cannot arrest under 498A/BNS § 85 without prior magistrate approval. Now codified in BNSS § 35.',url:'https://indiankanoon.org/doc/36992711/'},{name:'Preeti Gupta v. State of Jharkhand',cite:'SC · (2010) 7 SCC 667',ruling:'Blanket arrest of all family members without specific individual evidence is illegal.',impact:'Protected families from mass arrests',copy:'Preeti Gupta v. State of Jharkhand (2010) 7 SCC 667 — Omnibus allegations against all family members without specific evidence must be quashed.',url:'https://indiankanoon.org/doc/1561075/'},{name:'Social Action Forum v. Union of India',cite:'SC · (2018) 10 SCC 443',ruling:'Mediation must be attempted before investigation in many matrimonial offences.',impact:'Added procedural safeguard before arrests',copy:'Social Action Forum v. Union of India (2018) 10 SCC 443 — Mediation must be attempted before investigation in matrimonial offences.',url:'https://indiankanoon.org/doc/127517806/'}]},
+  {id:'maint',icon:'💼',title:'Maintenance — BNSS § 144 (Old CrPC § 125)',ref:'CrPC § 125 · Now BNSS § 144 (after July 1, 2024)',
+   tags:[{l:'Income-Based',c:'ltag-b'},{l:'Interim Orders Fast',c:'ltag-o'},{l:'Challengeable',c:'ltag-g'}],
+   expl:'Maintenance under BNSS § 144 allows a wife, children, or parents to claim monthly support. Courts sometimes award very high amounts without verifying actual income. The Rajnesh v. Neha (2021) SC ruling requires BOTH parties to disclose all income and assets — you can challenge any unreasonable order.',
+   warn:'Courts can issue an interim maintenance order within 60 days. Attend every hearing with your income documents.',
+   rights:['Maintenance must be based on BOTH parties\' income — not just yours.','If the wife earns independently, maintenance can be reduced or denied.','If she left without sufficient reason, maintenance can be denied (BNSS § 144(4)).','Interim orders can be challenged at the Sessions Court immediately.','Maintenance stops if the wife remarries or lives with another man (BNSS § 144(5)).'],
+   steps:[{n:1,t:'Submit your actual income proof',d:'Salary slips (3 years), ITR, Form 16, bank statements, all EMI/rent/medical expenses.',tm:'Before first hearing'},{n:2,t:'Document wife\'s income',d:'Her ITR, Form 26AS, employment records, business income. Social media showing her lifestyle.',tm:'Within 4–6 weeks'},{n:3,t:'Challenge interim order immediately',d:'File revision petition at Sessions Court within 15–30 days if the amount is excessive.',tm:'Within 30 days'},{n:4,t:'Plead willful desertion if applicable',d:'Under BNSS § 144(4) — if she left without cause, maintenance can be denied entirely.',tm:'At trial stage'}],
+   cases:[{name:'Rajnesh v. Neha',cite:'SC · (2021) 2 SCC 324',ruling:'Both parties must disclose all income and assets. Single proceedings only. Standardised maintenance guidelines.',impact:'Wife\'s income must be considered — courts cannot ignore it',copy:'Rajnesh v. Neha (2021) 2 SCC 324 — Both parties must mandatorily disclose all assets and income. Wife\'s earnings are a key factor in determining maintenance.'},{name:'Bhuvan Mohan Singh v. Meena',cite:'SC · (2014) 4 SCC 657',ruling:'Where the wife earns adequately, maintenance can be denied or substantially reduced.',impact:'Wife\'s income is a key factor courts must consider',copy:'Bhuvan Mohan Singh v. Meena (2014) 4 SCC 657 — Where the wife has adequate independent income, maintenance to her can be denied or substantially reduced.',url:'https://indiankanoon.org/doc/119688/'}]},
+  {id:'custody',icon:'👶',title:'Child Custody — Father\'s Rights',ref:'HMGA 1956 · Guardians and Wards Act 1890',
+   tags:[{l:'Best Interest of Child',c:'ltag-b'},{l:'Equal Father\'s Rights',c:'ltag-g'},{l:'Visitation Enforceable',c:'ltag-o'}],
+   expl:'Indian custody law has one standard: the "best interest of the child" — NOT automatically the mother. Fathers have EQUAL parental rights. Even if the mother gets primary custody, the father has a legal right to regular visitation. Denying court-ordered visitation is contempt of court and can shift custody to the father.',
+   warn:'Courts often give interim custody to the mother during the case. File for visitation immediately — do not delay.',
+   rights:['Fathers have equal parental rights — "best interest of child" is the only standard.','Mother-preference for children under 5 is NOT absolute (Gaurav Nagpal, 2009).','You have a legal right to regular visitation even without primary custody.','Denying court-ordered visitation is contempt of court.','Repeated denial of visitation can shift primary custody to the father.'],
+   steps:[{n:1,t:'File for interim visitation immediately',d:'Courts routinely grant this. Every day of delay makes it harder to establish contact.',tm:'Week 1'},{n:2,t:'Document your relationship with your child',d:'Photos, videos, school records, medical records, teacher contacts, messages with child.',tm:'Ongoing'},{n:3,t:'Get your name in school and medical records',d:'Attend parent-teacher meetings. Courts look at who is actively involved.',tm:'Immediately'},{n:4,t:'File contempt if visitation is denied',d:'Each denied visit is a separate contempt. File a petition — courts take this seriously.',tm:'Every time it happens'}],
+   cases:[{name:'Gaurav Nagpal v. Sumedha Nagpal',cite:'SC · (2009) 1 SCC 42',ruling:'Courts must not robotically apply the under-5 mother-preference. Child welfare must be examined holistically.',impact:'Weakened automatic mother-preference; father can get custody',copy:'Gaurav Nagpal v. Sumedha Nagpal (2009) 1 SCC 42 — The mother-preference for children under 5 is not an absolute rule. The welfare of the child is the paramount consideration.',url:'https://indiankanoon.org/doc/1952398/'},{name:'Vikram Vir Vohra v. Shalini Bhalla',cite:'SC · (2010) 4 SCC 409',ruling:'Denying court-ordered visitation is serious misconduct and can lead to change of custody.',impact:'Protects father\'s visitation rights — denial can shift custody',copy:'Vikram Vir Vohra v. Shalini Bhalla (2010) 4 SCC 409 — Denial of court-ordered visitation by the custodial parent is serious misconduct and a ground for modification of custody.',url:'https://indiankanoon.org/doc/889726/'}]},
+  {id:'fir',icon:'🛡',title:'False FIR & Bail — Quashing & Counter-Attack',ref:'BNSS § 482 (Anticipatory Bail) · BNSS § 528 (Quashing)',
+   tags:[{l:'Quashing Available',c:'ltag-g'},{l:'Anticipatory Bail',c:'ltag-b'},{l:'Counter FIR Possible',c:'ltag-o'}],
+   expl:'If a false FIR is filed against you: (1) Anticipatory Bail under BNSS § 482 prevents arrest before it happens, and (2) a Quashing petition under BNSS § 528 at the High Court permanently ends the case. The Bhajan Lal judgment (1992) defines 7 exact categories where courts MUST quash an FIR — and courts follow it strictly.',
+   warn:'Even if the FIR is completely false, do NOT flee or ignore summons. Absconding makes courts assume guilt.',
+   rights:['Apply for Anticipatory Bail (BNSS § 482) even before any arrest.','High Court can permanently quash a false FIR under BNSS § 528.','File counter-complaint under BNS § 216 and § 250 if the FIR is false.','Default bail is your right if police fail to file chargesheet within 60 days.','After acquittal, you can sue for malicious prosecution.'],
+   steps:[{n:1,t:'Apply for Anticipatory Bail immediately (BNSS § 482)',d:'File at Sessions Court or High Court within 24–48 hours. If granted, you cannot be arrested.',tm:'Within 24–48 hours'},{n:2,t:'Collect evidence of innocence',d:'Alibi, CCTV, call recordings, location history, messages showing complainant\'s motive.',tm:'Immediately'},{n:3,t:'File quashing petition at High Court (BNSS § 528)',d:'Request a stay of arrest along with the petition. Courts quash false, malicious FIRs.',tm:'Within 2–4 weeks'},{n:4,t:'File counter-FIR in parallel',d:'BNS § 216 (false info to police) and BNS § 250 (false criminal charge) against the complainant.',tm:'Alongside quashing'}],
+   cases:[{name:'State of Haryana v. Bhajan Lal',cite:'SC · 1992 Supp (1) SCC 335',ruling:'Defined 7 categories where High Courts MUST quash FIRs — false, malicious, or abuse of process.',impact:'Gold standard for FIR quashing — cited in every quashing petition in India',copy:'State of Haryana v. Bhajan Lal 1992 Supp (1) SCC 335 — Established 7 categories where the High Court must exercise its power under § 482 CrPC (now BNSS § 528) to quash an FIR.',url:'https://indiankanoon.org/doc/767287/'},{name:'Geeta Mehrotra v. State of UP',cite:'SC · (2012) 10 SCC 741',ruling:'FIRs against family members without specific individual allegations must be quashed.',impact:'Protected families from blanket false FIRs in matrimonial disputes',copy:'Geeta Mehrotra v. State of UP (2012) 10 SCC 741 — General and omnibus allegations against relatives of the husband without specific roles attributed to each are not sustainable and must be quashed.',url:'https://indiankanoon.org/doc/67649534/'}]},
 ];
 
-const MAP_ROWS = [
-  ['IPC § 498A','BNS § 85','BNS','Cruelty by husband/relatives'],
-  ['IPC § 406','BNS § 316','BNS','Criminal breach of trust'],
-  ['IPC § 182','BNS § 216','BNS','False information to police'],
-  ['IPC § 211','BNS § 250','BNS','Filing false criminal charge'],
-  ['IPC § 499/500','BNS § 356/357','BNS','Defamation'],
-  ['CrPC § 41A','BNSS § 35','BNSS','Pre-arrest police notice'],
-  ['CrPC § 438','BNSS § 482','BNSS','Anticipatory Bail'],
-  ['CrPC § 482','BNSS § 528','BNSS','FIR Quashing at High Court'],
-  ['CrPC § 125','BNSS § 144','BNSS','Maintenance'],
-  ['CrPC § 167','BNSS § 187','BNSS','Remand / police custody'],
-  ['IEA § 65B','BSA § 63','BSA','Electronic evidence'],
-  ['IEA § 27','BSA § 23','BSA','Confession to police'],
+const ALL_CASES=[
+  {title:'Arnesh Kumar v. State of Bihar',court:'SC',cite:'(2014) 8 SCC 273',s:'No arrest in 498A/BNS § 85 without magistrate approval — codified in BNSS § 35.',area:'498A / BNS § 85',copy:'Arnesh Kumar v. State of Bihar (2014) 8 SCC 273 — Police cannot arrest under 498A/BNS § 85 without prior magistrate approval.',url:'https://indiankanoon.org/doc/36992711/'},
+  {title:'Rajnesh v. Neha',court:'SC',cite:'(2021) 2 SCC 324',s:'Both parties must disclose all income/assets. Single maintenance proceedings only.',area:'Maintenance',copy:'Rajnesh v. Neha (2021) 2 SCC 324 — Mandatory disclosure of assets by both parties. Wife\',url:'https://indiankanoon.org/doc/138743616/'s income is a key factor in maintenance determination.'},
+  {title:'S.R. Batra v. Taruna Batra',court:'SC',cite:'(2007) 3 SCC 169',s:"Wife's right of residence only in the shared household — not every property of the husband's family.",area:'Domestic Violence',copy:"S.R. Batra v. Taruna Batra (2007) 3 SCC 169 — Wife's right to residence under PWDVA is limited to the shared household and does not extend to every property owned by the husband's family.",url:'https://indiankanoon.org/doc/1823824/'},
+  {title:'Gaurav Nagpal v. Sumedha Nagpal',court:'SC',cite:'(2009) 1 SCC 42',s:'Child welfare is paramount. Mother-preference for under-5 is not absolute.',area:'Child Custody',copy:'Gaurav Nagpal v. Sumedha Nagpal (2009) 1 SCC 42 — The welfare of the minor child is the paramount consideration in custody matters. The presumption in favour of the mother for children under 5 is not an absolute rule.',url:'https://indiankanoon.org/doc/1952398/'},
+  {title:'State of Haryana v. Bhajan Lal',court:'SC',cite:'1992 Supp (1) SCC 335',s:'7 categories where FIRs MUST be quashed — false, malicious, or abuse of process.',area:'False FIR',copy:'State of Haryana v. Bhajan Lal 1992 Supp (1) SCC 335 — Established definitive categories for mandatory quashing of FIR under inherent powers of the High Court.',url:'https://indiankanoon.org/doc/767287/'},
+  {title:'Preeti Gupta v. State of Jharkhand',court:'SC',cite:'(2010) 7 SCC 667',s:'Omnibus allegations against all family members without specific evidence must be quashed.',area:'498A / BNS § 85',copy:'Preeti Gupta v. State of Jharkhand (2010) 7 SCC 667 — Tendency to implicate all relations of the husband in 498A cases without specific roles is an abuse of process.',url:'https://indiankanoon.org/doc/1561075/'},
+  {title:'Bhuvan Mohan Singh v. Meena',court:'SC',cite:'(2014) 4 SCC 657',s:"Wife's adequate independent income is grounds to reduce or deny maintenance.",area:'Maintenance',copy:"Bhuvan Mohan Singh v. Meena (2014) 4 SCC 657 — Where the wife has adequate independent income, maintenance can be denied or substantially reduced."},
+  {title:'Vikram Vir Vohra v. Shalini Bhalla',court:'SC',cite:'(2010) 4 SCC 409',s:'Denial of court-ordered visitation is serious misconduct — can lead to custody change.',area:'Child Custody',copy:'Vikram Vir Vohra v. Shalini Bhalla (2010) 4 SCC 409 — Denial of court-ordered visitation rights is contempt and grounds for modification of custody orders.',url:'https://indiankanoon.org/doc/889726/'},
+  {title:'Social Action Forum v. Union of India',court:'SC',cite:'(2018) 10 SCC 443',s:'Mediation must be attempted before investigation in matrimonial offences.',area:'498A / BNS § 85',copy:'Social Action Forum v. Union of India (2018) 10 SCC 443 — Directed mediation before investigation in matrimonial offences to prevent abuse of criminal process.',url:'https://indiankanoon.org/doc/127517806/'},
+  {title:'Hiral P. Harsora v. Kusum Harsora',court:'SC',cite:'(2016) 10 SCC 165',s:'Male respondents are valid under PWDVA — the law applies to persons, not just husbands.',area:'Domestic Violence',copy:'Hiral P. Harsora v. Kusum Harsora (2016) 10 SCC 165 — Persons of any gender can be respondents under the PWDVA. The restriction to male respondents was struck down.',url:'https://indiankanoon.org/doc/151198/'},
 ];
 
-const LAWS = [
-  {
-    id:'498a', icon:'🔴',
-    title:'Section 498A IPC / BNS § 85 — Cruelty',
-    ref:'IPC § 498A | Now BNS § 85 (cases after July 1, 2024)',
-    tags:[{l:'Often Misused',c:'rtag-o'},{l:'SC Guidelines',c:'rtag-b'},{l:'70%+ Acquittal',c:'rtag-g'}],
-    expl:`Section 498A IPC (now BNS § 85 for cases filed after July 1, 2024) makes it a crime for a husband or his relatives to be "cruel" to a wife. Cruelty includes physical harm, mental harassment, or dowry demands. The Supreme Court itself has called it a tool of "legal terrorism" in many cases. Over 70% of all 498A trials end in acquittal. As of 2024, police CANNOT arrest you immediately — they must follow the Arnesh Kumar procedure, now codified in BNSS § 35.`,
-    warn:`Even with SC guidelines, some police still arrest first. Get a lawyer the moment you receive ANY notice or summons.`,
-    rights:[
-      'Police cannot arrest immediately — must follow BNSS § 35 (Arnesh Kumar, 2014).',
-      'You can apply for Anticipatory Bail (BNSS § 482) BEFORE any arrest.',
-      'Your parents and siblings cannot be arrested without specific individual evidence.',
-      'File a counter-complaint under BNS § 216 if the FIR is false.',
-      'You can permanently quash a false FIR at the High Court under BNSS § 528.',
-      'Over 70% of cases end in acquittal — arrest is not conviction.',
-    ],
-    steps:[
-      {n:1,t:'Gather all evidence right now',d:'WhatsApp chats, emails, call recordings, bank statements, gift receipts. Back up to Google Drive immediately.',tm:'Day 1'},
-      {n:2,t:'Hire a criminal lawyer & file Anticipatory Bail',d:'File under BNSS § 482 at Sessions Court. This prevents arrest while the case is pending.',tm:'Day 1–2'},
-      {n:3,t:'Respond to police notice with your lawyer',d:'Under BNSS § 35, police must issue a notice before arrest. Appear with your lawyer. Do NOT go alone.',tm:'Within notice period'},
-      {n:4,t:'File counter-complaint for false FIR',d:'File under BNS § 216 (false information) and BNS § 250 (false criminal charge) if the FIR is fabricated.',tm:'Week 1–2'},
-      {n:5,t:'Attend every court date',d:'Missing a court date results in a non-bailable warrant. Set reminders. Apply for exemption if unavoidable.',tm:'Ongoing'},
-      {n:6,t:'Apply to quash FIR at High Court',d:'File under BNSS § 528. Courts regularly quash false 498A / BNS § 85 FIRs with the right arguments.',tm:'2–4 weeks after FIR'},
-    ],
-    cases:[
-      {name:'Arnesh Kumar v. State of Bihar (2014)',ref:'SC | (2014) 8 SCC 273',ruling:'Police cannot arrest in 498A cases without magistrate approval — now codified in BNSS § 35.',impact:'Drastically reduced arbitrary arrests under 498A / BNS § 85'},
-      {name:'Preeti Gupta v. State of Jharkhand (2010)',ref:'SC | (2010) 7 SCC 667',ruling:'Blanket arrest of all family members without specific evidence is illegal. Courts must scrutinise.',impact:'Protected families from mass arrests'},
-      {name:'Social Action Forum v. Union of India (2018)',ref:'SC | (2018) 10 SCC 443',ruling:'Mediation must be attempted before investigation in many matrimonial offences.',impact:'Added procedural safeguard against immediate arrests'},
-    ]
-  },
-  {
-    id:'maint', icon:'💼',
-    title:'Maintenance — BNSS § 144 (Old CrPC § 125)',
-    ref:'CrPC § 125 | Now BNSS § 144 (cases after July 1, 2024)',
-    tags:[{l:'Income-Based',c:'rtag-b'},{l:'Interim Orders Fast',c:'rtag-o'},{l:'Challengeable',c:'rtag-g'}],
-    expl:`Maintenance under BNSS § 144 allows a wife, children, or parents to claim monthly support from a husband who has "sufficient means." Courts sometimes award very high amounts without verifying actual income. The good news: you can challenge the amount, prove her income, and get it reduced or stopped. The Rajnesh v. Neha (2021) Supreme Court ruling requires BOTH parties to disclose all income and assets.`,
-    warn:`Courts can issue an interim maintenance order within 60 days. If you miss hearings or fail to produce income proof, the order will be based on the wife's claims.`,
-    rights:[
-      'Maintenance is based on BOTH parties\' income — not just yours.',
-      'If the wife earns independent income, maintenance can be reduced or denied.',
-      'If the wife left without sufficient reason, maintenance can be denied (BNSS § 144(4)).',
-      'Interim orders can be challenged immediately at the Sessions Court.',
-      'If the wife remarries or lives with another man, maintenance stops (BNSS § 144(5)).',
-    ],
-    steps:[
-      {n:1,t:'Submit your actual income proof',d:'Salary slips (3 years), ITR, Form 16, bank statements. List all EMI, rent, parents\' support, medical costs.',tm:'Before first hearing'},
-      {n:2,t:'Investigate and document wife\'s income',d:'Her ITR, Form 26AS, employment records, business income, rental income. Social media posts showing lifestyle.',tm:'Within 4–6 weeks'},
-      {n:3,t:'Challenge the interim order immediately',d:'File a revision petition at Sessions Court within 15–30 days if the interim amount is too high.',tm:'Within 30 days of order'},
-      {n:4,t:'Plead willful desertion if applicable',d:'Under BNSS § 144(4), if she left without cause, maintenance can be denied.',tm:'At trial stage'},
-    ],
-    cases:[
-      {name:'Rajnesh v. Neha (2021)',ref:'SC | (2021) 2 SCC 324',ruling:'Both parties must disclose all income and assets. Single proceedings only. Standardised maintenance law.',impact:'Wife\'s income must be considered; courts cannot ignore her earnings'},
-      {name:'Bhuvan Mohan Singh v. Meena (2014)',ref:'SC | (2014) 4 SCC 657',ruling:'Where the wife earns adequately, maintenance can be denied or drastically reduced.',impact:'Wife\'s income is a key factor courts must weigh'},
-    ]
-  },
-  {
-    id:'custody', icon:'👶',
-    title:'Child Custody — Father\'s Rights',
-    ref:'HMGA 1956 | Guardians and Wards Act 1890',
-    tags:[{l:'Best Interest of Child',c:'rtag-b'},{l:'Equal Father\'s Rights',c:'rtag-g'},{l:'Visitation Enforceable',c:'rtag-o'}],
-    expl:`Indian custody law has one standard: the "best interest of the child" — NOT automatically the mother. Fathers have EQUAL parental rights. Even if the mother gets primary custody, the father has a LEGAL RIGHT to regular visitation. Denying court-ordered visitation is contempt of court and can ultimately shift custody to the father.`,
-    warn:`Courts may give interim custody to the mother during the case. Do NOT lose contact with your child. File for visitation immediately — delay hurts your case.`,
-    rights:[
-      'Fathers have equal parental rights — "best interest of child" is the only standard.',
-      'Mother-preference for children under 5 is NOT absolute (Gaurav Nagpal, 2009).',
-      'You have a legal right to regular visitation even without primary custody.',
-      'Denying court-ordered visitation is contempt of court.',
-      'Repeated denial of visitation can shift primary custody to the father.',
-    ],
-    steps:[
-      {n:1,t:'File for interim visitation immediately',d:'Courts routinely grant this. Filing fast shows the court you are an actively involved parent.',tm:'Week 1'},
-      {n:2,t:'Document your relationship with the child',d:'Photos, videos, school records, medical visit records, teacher contacts, WhatsApp messages.',tm:'Ongoing'},
-      {n:3,t:'Get your name in school and medical records',d:'Attend parent-teacher meetings. Courts look at who is actively involved in the child\'s life.',tm:'Immediately'},
-      {n:4,t:'File contempt if visitation is denied',d:'Each denial is a separate contempt. File a petition — courts take this seriously.',tm:'Every time it happens'},
-    ],
-    cases:[
-      {name:'Gaurav Nagpal v. Sumedha Nagpal (2009)',ref:'SC | (2009) 1 SCC 42',ruling:'Courts must not robotically apply the under-5 mother-preference. Child\'s welfare must be holistically examined.',impact:'Weakened automatic mother-preference; strengthened father\'s claim'},
-      {name:'Vikram Vir Vohra v. Shalini Bhalla (2010)',ref:'SC | (2010) 4 SCC 409',ruling:'Denying court-ordered visitation is serious misconduct and can lead to change of custody.',impact:'Protects fathers\' visitation rights'},
-    ]
-  },
-  {
-    id:'fir', icon:'🛡',
-    title:'False FIR & Bail — Quashing & Counter-Attack',
-    ref:'BNSS § 482 (Anticipatory Bail) | BNSS § 528 (Quashing)',
-    tags:[{l:'Quashing Available',c:'rtag-g'},{l:'Anticipatory Bail',c:'rtag-b'},{l:'Counter FIR Possible',c:'rtag-o'}],
-    expl:`If a false FIR is filed against you, two tools protect you: (1) Anticipatory Bail under BNSS § 482 prevents arrest before it happens, and (2) a Quashing petition under BNSS § 528 at the High Court permanently ends the case. The landmark Bhajan Lal case (1992) defines exactly when an FIR must be quashed — and courts follow it strictly.`,
-    warn:`Even if the FIR is completely false, do NOT flee, hide, or ignore summons. Absconding makes courts assume guilt. Appear legally with counsel every single time.`,
-    rights:[
-      'Apply for Anticipatory Bail (BNSS § 482) even before any arrest.',
-      'High Court can permanently quash a false FIR under BNSS § 528.',
-      'File counter-complaint under BNS § 216 and § 250 if the FIR is false.',
-      'Default bail is your right if police fail to file chargesheet within 60 days.',
-      'After acquittal, you can file a civil malicious prosecution suit for damages.',
-    ],
-    steps:[
-      {n:1,t:'Apply for Anticipatory Bail immediately (BNSS § 482)',d:'File at Sessions Court or High Court within 24–48 hours. If granted, you cannot be arrested.',tm:'Within 24–48 hours'},
-      {n:2,t:'Collect evidence of innocence',d:'Alibi, CCTV, call recordings, location history, messages showing complainant has a motive.',tm:'Immediately'},
-      {n:3,t:'File quashing petition at High Court (BNSS § 528)',d:'Attach a request for stay of arrest. Courts quash FIRs that are false, malicious, or abuse of process.',tm:'Within 2–4 weeks'},
-      {n:4,t:'File counter-FIR in parallel',d:'BNS § 216 (false information to police) and BNS § 250 (false criminal charge).',tm:'Alongside quashing'},
-    ],
-    cases:[
-      {name:'State of Haryana v. Bhajan Lal (1992)',ref:'SC | 1992 Supp (1) SCC 335',ruling:'Defined 7 categories where FIRs MUST be quashed — false, malicious, or abuse of process.',impact:'Gold standard for FIR quashing — cited in every quashing petition in India'},
-      {name:'Geeta Mehrotra v. State of UP (2012)',ref:'SC | (2012) 10 SCC 741',ruling:'FIRs against family members without specific individual allegations must be quashed.',impact:'Protected families from blanket false FIRs in matrimonial disputes'},
-    ]
-  },
+const GUIDES=[
+  {emoji:'🚨',title:'Being arrested under 498A / BNS § 85',steps:['Stay calm. Do NOT resist arrest or argue with police.','Say: "I want to speak with my lawyer before answering any questions."','Call family and a criminal lawyer immediately.','You will be produced before a magistrate within 24 hours — apply for bail there.','Do NOT sign any blank papers or confessions.','Remember: 70%+ of 498A cases are acquitted at trial. Arrest ≠ conviction.']},
+  {emoji:'📬',title:'Received a maintenance notice',steps:['Read the notice — note the court name, case number, and date.','Hire a family law lawyer within 48 hours.','Collect 3 years of salary slips, bank statements, and ITR.','Investigate wife\'s income: her ITR, Form 26AS, employment records.','List all your fixed monthly expenses: EMI, rent, parents\' support, medical.','Attend court on the FIRST date — missing it results in an ex-parte order against you.']},
+  {emoji:'👶',title:'Wife took the children',steps:['File for interim custody/visitation at Family Court today — every day of delay hurts.','Document every denied call or visit with date, time, and screenshot.','Collect proof of your involvement: school records, medical records, teacher contacts.','File Habeas Corpus at High Court if the child\'s location is hidden.','File contempt if any existing visitation order is being violated.']},
 ];
 
-const ALL_CASES = [
-  {title:'Arnesh Kumar v. State of Bihar (2014)',court:'SC',$:'(2014) 8 SCC 273',s:'No arrest without magistrate approval in 498A/BNS § 85 cases — codified in BNSS § 35.',area:'498A / BNS § 85'},
-  {title:'Rajnesh v. Neha (2021)',court:'SC',$:'(2021) 2 SCC 324',s:'Both parties must disclose all income and assets. Single maintenance proceedings only. Comprehensive guidelines.',area:'Maintenance'},
-  {title:'S.R. Batra v. Taruna Batra (2007)',court:'SC',$:'(2007) 3 SCC 169',s:"Wife's right of residence only in the shared household — not every property of the husband's family.",area:'Domestic Violence'},
-  {title:'Gaurav Nagpal v. Sumedha Nagpal (2009)',court:'SC',$:'(2009) 1 SCC 42',s:'Child welfare is paramount. Mother-preference for under-5 is not absolute. Father can get custody.',area:'Child Custody'},
-  {title:'State of Haryana v. Bhajan Lal (1992)',court:'SC',$:'1992 Supp (1) SCC 335',s:'7 categories where FIRs MUST be quashed — false, malicious, or abuse of legal process.',area:'False FIR'},
-  {title:'Preeti Gupta v. State of Jharkhand (2010)',court:'SC',$:'(2010) 7 SCC 667',s:'Omnibus allegations against all family members without specific evidence must be quashed.',area:'498A / BNS § 85'},
-  {title:'Bhuvan Mohan Singh v. Meena (2014)',court:'SC',$:'(2014) 4 SCC 657',s:"If the wife earns adequately, maintenance to her can be denied or substantially reduced.",area:'Maintenance'},
-  {title:'Vikram Vir Vohra v. Shalini Bhalla (2010)',court:'SC',$:'(2010) 4 SCC 409',s:'Denying court-ordered visitation is serious misconduct — can lead to change of custody.',area:'Child Custody'},
-  {title:'Social Action Forum v. Union of India (2018)',court:'SC',$:'(2018) 10 SCC 443',s:'Mediation must be attempted before investigation in matrimonial offences. Added procedural safeguards.',area:'498A / BNS § 85'},
-  {title:'Hiral P. Harsora v. Kusum Harsora (2016)',court:'SC',$:'(2016) 10 SCC 165',s:'Male respondents are valid under the PWDVA. The law applies to persons, not just husbands.',area:'Domestic Violence'},
-];
+const LPILLS=[{c:'hi',l:'हिंदी'},{c:'mr',l:'मराठी'},{c:'ta',l:'தமிழ்'},{c:'te',l:'తెలుగు'},{c:'bn',l:'বাংলা'},{c:'gu',l:'ગુજ'},{c:'kn',l:'ಕನ್ನಡ'},{c:'ml',l:'മലയാ'}];
+const LNAMES={en:'English',hi:'Hindi',mr:'Marathi',ta:'Tamil',te:'Telugu',bn:'Bengali',gu:'Gujarati',kn:'Kannada',ml:'Malayalam'};
 
-const GUIDES = [
-  {emoji:'🚨',title:'Arrested under 498A / BNS § 85 — What to do RIGHT NOW',steps:['Stay calm. Do NOT resist arrest or argue with police under any circumstances.','Immediately say: "I want to speak with my lawyer before answering any questions."','Call family and a trusted criminal lawyer the moment you are allowed to make a call.','You will be produced before a magistrate within 24 hours — apply for bail there.','Do NOT sign any blank papers or confessions.','Arrest ≠ conviction. Over 70% of 498A cases end in acquittal at trial.']},
-  {emoji:'📬',title:'Received a maintenance notice — First 7 days',steps:['Read the notice carefully — note the court name, case number, and the hearing date.','Hire a family law lawyer within 48 hours.','Collect 3 years of salary slips, bank statements, and ITR returns.','Investigate wife\'s income: her ITR, Form 26AS, employment records.','List all your fixed monthly expenses: EMI, rent, parents\' support, medical bills.','Attend court on the FIRST date — missing it results in an ex-parte order against you.']},
-  {emoji:'👶',title:'Wife took the children — Immediate action plan',steps:['File for interim custody/visitation at Family Court today — every day of delay hurts.','Document every denied phone call or visit: date, time, screenshot of refusal messages.','Collect proof of your involvement: school records, medical records, teacher contacts.','File Habeas Corpus at the High Court if child\'s location is hidden or access is totally denied.','File contempt of court if any existing visitation order is already being violated.']},
-];
-
-// ── LANGUAGE PILLS ───────────────────────────────────────────────────────────
-const LPILLS = [
-  {c:'hi',l:'हिंदी'},{c:'mr',l:'मराठी'},{c:'ta',l:'தமிழ்'},
-  {c:'te',l:'తెలుగు'},{c:'bn',l:'বাংলা'},{c:'gu',l:'ગુજ'},
-  {c:'kn',l:'ಕನ್ನಡ'},{c:'ml',l:'മലയാ'},
-];
-const LNAMES = {en:'English',hi:'Hindi (हिंदी)',mr:'Marathi (मराठी)',ta:'Tamil (தமிழ்)',te:'Telugu (తెలుగు)',bn:'Bengali (বাংলা)',gu:'Gujarati (ગુજরાતી)',kn:'Kannada (ಕನ್ನಡ)',ml:'Malayalam (മലയാളം)'};
-
-// ── API CALL (Gemini via Cloudflare Worker proxy) ─────────────────────────
-// Worker accepts: { system?, userMessage, max_tokens? }
-// Worker returns: { text }
-async function callAPI({ system, userMessage, max_tokens }) {
-  const res = await fetch(PROXY, {
-    method:  'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body:    JSON.stringify({ system, userMessage, max_tokens })
-  });
-  if (!res.ok) {
-    let detail = '';
-    try { const e = await res.json(); detail = e.error || JSON.stringify(e); } catch {}
-    throw new Error(`${res.status}: ${detail}`);
-  }
-  const data = await res.json();
-  if (!data.text && data.error) throw new Error(data.error);
-  return data.text || '';
+// ── API ───────────────────────────────────────────────────────────────────────
+async function callAPI({system,userMessage,max_tokens}){
+  const res=await fetch(PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system,userMessage,max_tokens})});
+  if(!res.ok){let d='';try{const e=await res.json();d=e.error||JSON.stringify(e);}catch{}throw new Error(`${res.status}: ${d}`);}
+  const data=await res.json();
+  if(!data.text&&data.error)throw new Error(data.error);
+  return data.text||'';
 }
 
+// ── JSON extraction — robust, handles model preamble/fences ──────────────────
+function extractArr(raw){
+  let s=raw.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
+  const a=s.indexOf('[');
+  if(a!==-1){let d=0,z=-1;for(let i=a;i<s.length;i++){if(s[i]==='[')d++;else if(s[i]===']'){d--;if(d===0){z=i;break;}}}if(z!==-1){try{return JSON.parse(s.slice(a,z+1));}catch{}}}
+  const o=s.indexOf('{');
+  if(o!==-1){let d=0,z=-1;for(let i=o;i<s.length;i++){if(s[i]==='{')d++;else if(s[i]==='}'){d--;if(d===0){z=i;break;}}}if(z!==-1){try{const p=JSON.parse(s.slice(o,z+1));return p.t||p.translations||[];}catch{}}}
+  return s.split('\n').reduce((acc,l)=>{const m=l.match(/^\s*"((?:[^"\\]|\\.)*)"\s*,?\s*$/);if(m)acc.push(m[1].replace(/\\n/g,'\n').replace(/\\"/g,'"'));return acc;},[]);
+}
 
-// ── BUILD CARD HTML ──────────────────────────────────────────────────────────
-function buildCard(law, prefix) {
-  const pills = LPILLS.map(p =>
-    `<button class="lpill" data-lang="${p.c}" onclick="handlePill(this,'${prefix}')">${p.l}</button>`
-  ).join('');
+// ── SANITIZE (XSS) ───────────────────────────────────────────────────────────
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;');}
+function fmt(s){return esc(s).replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/\n/g,'<br>');}
 
+// ── BUILD LAW CARD ────────────────────────────────────────────────────────────
+function buildCard(law,pfx){
+  const pills=LPILLS.map(p=>`<button class="lpill" data-lang="${p.c}" onclick="handlePill(this,'${pfx}')">${p.l}</button>`).join('');
   return `
-  <div class="rcard-hd">
-    <span class="rcard-ico">${law.icon}</span>
-    <div class="rcard-meta">
-      <h3>${law.title}</h3>
-      <div class="sub">${law.ref}</div>
-      <div class="rtags">${law.tags.map(t=>`<span class="rtag ${t.c}">${t.l}</span>`).join('')}</div>
+  <div class="law-card-hd">
+    <span class="lc-icon">${law.icon}</span>
+    <div class="lc-meta">
+      <div class="lc-title">${law.title}</div>
+      <div class="lc-ref">${law.ref}</div>
+      <div class="lc-tags">${law.tags.map(t=>`<span class="ltag ${t.c}">${t.l}</span>`).join('')}</div>
     </div>
-    <span class="chev">▼</span>
+    <span class="chev">▾</span>
   </div>
-  <div class="rcard-body">
+  <div class="law-body">
+    <div class="tr-bar" id="${pfx}-trbar">
+      <span class="lb-lbl">🌐 Translate all tabs:</span>
+      ${pills}
+      <button class="lpill reset" id="${pfx}-rst" style="display:none" onclick="resetCard('${pfx}')">EN ↺</button>
+      <div class="tr-st" id="${pfx}-trst"></div>
+    </div>
     <div class="tabs">
-      <button class="tab on" data-tab="ex">📖 Explanation</button>
-      <button class="tab" data-tab="ri">⚖ Rights</button>
-      <button class="tab" data-tab="st">📋 Steps</button>
-      <button class="tab" data-tab="ca">🏛 Cases</button>
+      <button class="tab on" data-tab="ex">Explanation</button>
+      <button class="tab" data-tab="ri">Your Rights</button>
+      <button class="tab" data-tab="st">What To Do</button>
+      <button class="tab" data-tab="ca">Cases to Cite</button>
     </div>
-    <div class="tc on" id="${prefix}-ex">
-      <div class="explbox">
-        <div class="elbl">In Simple Language</div>
-        <p id="${prefix}-simple">${law.expl}</p>
-        <div class="lang-bar">
-          <span class="lang-bar-lbl">🌐 Translate:</span>
-          ${pills}
-          <button class="lpill" id="${prefix}-reset" data-lang="en" onclick="resetCard('${prefix}')" style="display:none;background:#EEF3FB;border-color:#C8D4E8;color:var(--primary)">EN ↺</button>
+    <div class="tp on" id="${pfx}-ex">
+      <div class="expl-box">
+        <div class="expl-lbl">In Plain Language</div>
+        <div class="expl-text" id="${pfx}-etxt">${law.expl}</div>
+      </div>
+      <div class="warn"><span>⚠</span><div><strong>Note:</strong> ${law.warn}</div></div>
+    </div>
+    <div class="tp" id="${pfx}-ri"><ul class="rlist">${law.rights.map(r=>`<li class="ri-item">${r}</li>`).join('')}</ul></div>
+    <div class="tp" id="${pfx}-st">
+      ${law.steps.map(s=>`<div class="step-item"><div class="step-n">${s.n}</div><div class="step-body"><strong class="st-t">${s.t}</strong><p class="st-d">${s.d}</p><span class="step-tm">⏱ ${s.tm}</span></div></div>`).join('')}
+    </div>
+    <div class="tp" id="${pfx}-ca">
+      <div class="case-note">📋 Tap "Copy citation" to copy the full reference for your lawyer to use in court. Tap the case name to read the full judgement on Indian Kanoon.</div>
+      ${law.cases.map((c,i)=>`
+      <div class="case-card">
+        <div class="case-hd">
+          <a class="case-name" href="${c.url||'#'}" target="_blank" rel="noopener noreferrer" onclick="if(!event.currentTarget.href||event.currentTarget.href==='#'){event.preventDefault();qs('${(c.name||'').replace(/'/g,"\'")}');}" >📌 ${c.name} ↗</a>
+          <div class="case-cite">${c.cite}</div>
         </div>
-        <div class="tr-st" id="${prefix}-tr-st"></div>
-      </div>
-      <div class="wbox"><span>⚠</span><div><strong>Note:</strong> ${law.warn}</div></div>
-    </div>
-    <div class="tc" id="${prefix}-ri">
-      <ul class="rlist">${law.rights.map(r=>`<li>${r}</li>`).join('')}</ul>
-    </div>
-    <div class="tc" id="${prefix}-st">
-      <div id="${prefix}-steps">${law.steps.map(s=>`
-        <div class="step">
-          <div class="snum">${s.n}</div>
-          <div class="sbody">
-            <strong class="st-title">${s.t}</strong>
-            <p class="st-desc">${s.d}</p>
-            <span class="stm">⏱ ${s.tm}</span>
-          </div>
-        </div>`).join('')}
-      </div>
-    </div>
-    <div class="tc" id="${prefix}-ca">
-      <p style="font-size:12px;color:var(--muted);margin-bottom:.75rem">Landmark cases where courts ruled in favour of men:</p>
-      ${law.cases.map(c=>`
-        <div class="ccase">
-          <div class="ctit">📌 ${c.name}</div>
-          <div class="cref">${c.ref}</div>
-          <div class="crul">"${c.ruling}"</div>
-          <div class="cimp">✅ ${c.impact}</div>
-        </div>`).join('')}
+        <div class="case-body">
+          <div class="case-ruling cr-item">"${c.ruling}"</div>
+          <div class="case-impact ci-item">✅ ${c.impact}</div>
+          <button class="case-copy" onclick="copyCase('${pfx}-c${i}','${esc(c.copy)}')">📋 Copy citation</button>
+        </div>
+      </div>`).join('')}
     </div>
   </div>`;
 }
 
-function attachCard(el, prefix) {
-  el.querySelector('.rcard-hd').onclick = () => el.classList.toggle('open');
-  el.querySelectorAll('.tab').forEach(b => b.onclick = e => {
+// ── Section number → search link helper ────────────────────────────────────
+// Called after card HTML is inserted into the DOM.
+// Finds patterns like "BNSS § 482", "BNS § 85", "BSA § 63", "CrPC § 125" etc.
+// and wraps them in clickable links that trigger a search.
+const SEC_PATTERN = /((?:BNSS|BNS|BSA|IPC|CrPC|IEA)\s*§\s*\d+(?:\(\d+\))?)/g;
+function linkSections(el){
+  // Only process text nodes inside safe containers — avoids breaking JS/attributes
+  const walk = (node)=>{
+    if(node.nodeType===3){ // text node
+      const txt = node.textContent;
+      if(!SEC_PATTERN.test(txt)) return;
+      SEC_PATTERN.lastIndex=0;
+      const frag = document.createDocumentFragment();
+      let last=0, m;
+      while((m=SEC_PATTERN.exec(txt))!==null){
+        if(m.index>last) frag.appendChild(document.createTextNode(txt.slice(last,m.index)));
+        const a = document.createElement('a');
+        a.className='sec-link';
+        a.href='#';
+        a.textContent=m[1];
+        const q=m[1];
+        a.onclick=(e)=>{e.preventDefault();qs(q);};
+        frag.appendChild(a);
+        last=m.index+m[1].length;
+      }
+      if(last<txt.length) frag.appendChild(document.createTextNode(txt.slice(last)));
+      node.parentNode.replaceChild(frag,node);
+    } else if(node.nodeType===1){
+      // Skip script, style, a (already a link), button
+      const tag=node.tagName.toLowerCase();
+      if(tag==='script'||tag==='style'||tag==='a'||tag==='button') return;
+      Array.from(node.childNodes).forEach(walk);
+    }
+  };
+  // Only linkify inside the law-body panels, not the header
+  const body=el.querySelector('.law-body');
+  if(body) walk(body);
+}
+
+function attachCard(el,pfx){
+  el.querySelector('.law-card-hd').onclick=()=>el.classList.toggle('open');
+  el.querySelectorAll('.tab').forEach(b=>b.onclick=e=>{
     e.stopPropagation();
-    el.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
-    el.querySelectorAll('.tc').forEach(x => x.classList.remove('on'));
-    el.querySelector(`#${prefix}-${b.dataset.tab}`).classList.add('on');
+    el.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+    el.querySelectorAll('.tp').forEach(x=>x.classList.remove('on'));
+    el.querySelector(`#${pfx}-${b.dataset.tab}`).classList.add('on');
     b.classList.add('on');
   });
+  // Link all section numbers after DOM is ready
+  linkSections(el);
 }
 
-// ── TRANSLATION ──────────────────────────────────────────────────────────────
-async function handlePill(btn, prefix) {
-  const lang = btn.dataset.lang;
-  const card = btn.closest('.rcard');
-  card.querySelectorAll('.lpill').forEach(p => p.classList.remove('on'));
+// ── COPY CASE CITATION ────────────────────────────────────────────────────────
+function copyCase(id,text){
+  navigator.clipboard.writeText(text).then(()=>{
+    const t=document.getElementById('copy-toast');
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),2200);
+  }).catch(()=>{
+    // Fallback for browsers without clipboard API
+    const ta=document.createElement('textarea');
+    ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    const t=document.getElementById('copy-toast');
+    t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200);
+  });
+}
+
+// ── TRANSLATION ───────────────────────────────────────────────────────────────
+async function handlePill(btn,pfx){
+  const lang=btn.dataset.lang;
+  const card=btn.closest('.law-card');
+  card.querySelectorAll('.lpill').forEach(p=>p.classList.remove('on'));
   btn.classList.add('on');
-  await translateCard(prefix, lang, card);
+  await translateCard(pfx,lang,card);
 }
 
-// ── JSON extraction — handles markdown fences, extra text, encoding issues ───
-function extractTranslations(raw) {
-  // 1. Strip markdown fences
-  let s = raw.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
+async function translateCard(pfx,lang,card){
+  const stEl=document.getElementById(`${pfx}-trst`);
+  stEl.innerHTML='<div class="mspin"></div> Translating all tabs to '+LNAMES[lang]+'...';
 
-  // 2. Find the first '[' and its matching ']'
-  const arrStart = s.indexOf('[');
-  if (arrStart !== -1) {
-    let depth = 0, arrEnd = -1;
-    for (let i = arrStart; i < s.length; i++) {
-      if (s[i] === '[') depth++;
-      else if (s[i] === ']') { depth--; if (depth === 0) { arrEnd = i; break; } }
-    }
-    if (arrEnd !== -1) {
-      try { return JSON.parse(s.slice(arrStart, arrEnd + 1)); } catch {}
-    }
-  }
+  // Collect ALL translatable elements across all 4 tabs
+  const etxt    = document.getElementById(`${pfx}-etxt`);
+  const stitles = card.querySelectorAll('.st-t');
+  const sdescs  = card.querySelectorAll('.st-d');
+  const riItems = card.querySelectorAll('.ri-item');
+  const crItems = card.querySelectorAll('.cr-item');
+  const ciItems = card.querySelectorAll('.ci-item');
 
-  // 3. Find {"t":[...]} or {"translations":[...]}
-  const objStart = s.indexOf('{');
-  if (objStart !== -1) {
-    let depth = 0, objEnd = -1;
-    for (let i = objStart; i < s.length; i++) {
-      if (s[i] === '{') depth++;
-      else if (s[i] === '}') { depth--; if (depth === 0) { objEnd = i; break; } }
-    }
-    if (objEnd !== -1) {
-      try {
-        const obj = JSON.parse(s.slice(objStart, objEnd + 1));
-        return obj.t || obj.translations || [];
-      } catch {}
-    }
-  }
+  const allEls = [etxt, ...stitles, ...sdescs, ...riItems, ...crItems, ...ciItems];
+  allEls.forEach(el=>{ if(el&&!el.dataset.orig) el.dataset.orig=el.textContent; });
 
-  // 4. Last resort: extract quoted strings line by line
-  const lines = raw.split('\n');
-  const results = [];
-  for (const line of lines) {
-    const m = line.match(/^\s*"((?:[^"\\]|\\.)*)"\s*,?\s*$/);
-    if (m) results.push(m[1].replace(/\\n/g, '\n').replace(/\\"/g, '"'));
-  }
-  return results;
-}
+  const texts = allEls.map(el=>el?el.dataset.orig:'').filter(Boolean);
+  const numbered = texts.map((t,i)=>`${i+1}. ${t}`).join('\n');
 
-async function translateCard(prefix, lang, card) {
-  const statusEl = document.getElementById(`${prefix}-tr-st`);
-  statusEl.innerHTML = `<div class="mspin"></div> Translating to ${LNAMES[lang]}...`;
+  const prompt=`Translate Indian legal rights content to ${LNAMES[lang]}.
+OUTPUT: ONLY a JSON array — ["t1","t2",...] — ${texts.length} items, same order. No markdown, no code fences, nothing else.
+RULES: Simple everyday spoken ${LNAMES[lang]} like talking to a friend, not a court. Keep in English: 498A, BNS, BNSS, BSA, FIR, IPC, CrPC, ITR, NALSA, § numbers. Use local words: vakeel=lawyer, thana=police station, bail=bail.
+INPUT:\n${numbered}`;
 
-  const simpleEl = document.getElementById(`${prefix}-simple`);
-  const titleEls = card.querySelectorAll('.st-title');
-  const descEls  = card.querySelectorAll('.st-desc');
-
-  // Save originals
-  if (!simpleEl.dataset.orig) simpleEl.dataset.orig = simpleEl.textContent;
-  titleEls.forEach(el => { if (!el.dataset.orig) el.dataset.orig = el.textContent; });
-  descEls.forEach(el  => { if (!el.dataset.orig) el.dataset.orig  = el.textContent; });
-
-  const texts = [
-    simpleEl.dataset.orig,
-    ...Array.from(titleEls).map(el => el.dataset.orig),
-    ...Array.from(descEls).map(el  => el.dataset.orig),
-  ];
-
-  // Build a numbered list so the model can't confuse order
-  const numbered = texts.map((t, i) => `${i + 1}. ${t}`).join('\n');
-
-  const prompt = `You are translating Indian legal rights content to ${LNAMES[lang]}.
-
-OUTPUT FORMAT — respond with ONLY a JSON array, nothing else before or after:
-["translation 1", "translation 2", ...]
-${texts.length} items, same order as input. No markdown, no code fences, no explanation.
-
-TRANSLATION RULES:
-- Simple everyday spoken ${LNAMES[lang]} — like explaining to a neighbour, not a court
-- Keep in English (do not translate): 498A, BNS, BNSS, BSA, FIR, IPC, CrPC, ITR, NALSA, § numbers
-- Local words: Hindi/Marathi → vakeel (lawyer), thana (police station), girftari (arrest)
-- Tamil → vaakil (lawyer); Telugu → vakeel; keep bail, FIR, court as-is
-
-INPUT (${texts.length} items):
-${numbered}`;
-
-  try {
-    const raw = await callAPI({ userMessage: prompt, max_tokens: 2000 });
-    const t = extractTranslations(raw);
-
-    if (!t.length) throw new Error('Model returned no translations — try again');
-
-    if (t[0]) simpleEl.textContent = t[0];
-    titleEls.forEach((el, i) => { if (t[1 + i]) el.textContent = t[1 + i]; });
-    descEls.forEach((el, i)  => { if (t[1 + titleEls.length + i]) el.textContent = t[1 + titleEls.length + i]; });
-
-    statusEl.innerHTML = `✅ Translated to ${LNAMES[lang]}`;
-    document.getElementById(`${prefix}-reset`).style.display = 'inline-block';
-  } catch (e) {
-    statusEl.innerHTML = `⚠ Translation failed — tap again to retry`;
-    console.error('Translation error:', e);
-    const card2 = document.getElementById(`${prefix}-simple`)?.closest('.rcard');
-    if (card2) card2.querySelectorAll('.lpill').forEach(p => p.classList.remove('on'));
+  try{
+    const raw=await callAPI({userMessage:prompt,max_tokens:3000});
+    const t=extractArr(raw);
+    if(!t.length) throw new Error('No translations returned');
+    allEls.forEach((el,i)=>{ if(el&&t[i]) el.textContent=t[i]; });
+    stEl.innerHTML=`✅ All tabs translated to ${LNAMES[lang]}`;
+    document.getElementById(`${pfx}-rst`).style.display='inline-block';
+  }catch(e){
+    stEl.innerHTML='⚠ Tap again to retry';
+    console.error('Translation error:',e);
+    card.querySelectorAll('.lpill').forEach(p=>p.classList.remove('on'));
   }
 }
 
-function resetCard(prefix) {
-  const card = document.getElementById(`${prefix}-simple`)?.closest('.rcard');
-  if (!card) return;
-  card.querySelectorAll('[data-orig]').forEach(el => { el.textContent = el.dataset.orig; });
-  card.querySelectorAll('.lpill').forEach(p => p.classList.remove('on'));
-  document.getElementById(`${prefix}-tr-st`).innerHTML = '';
-  document.getElementById(`${prefix}-reset`).style.display = 'none';
+function resetCard(pfx){
+  const card=document.getElementById(`${pfx}-etxt`)?.closest('.law-card');
+  if(!card)return;
+  card.querySelectorAll('[data-orig]').forEach(el=>{el.textContent=el.dataset.orig;});
+  card.querySelectorAll('.lpill').forEach(p=>p.classList.remove('on'));
+  document.getElementById(`${pfx}-trst`).innerHTML='';
+  document.getElementById(`${pfx}-rst`).style.display='none';
+  // Re-linkify sections after text restored
+  linkSections(card);
 }
 
-// ── AI CHAT ──────────────────────────────────────────────────────────────────
-async function sendChat() {
-  const inp = document.getElementById('chat-input');
-  const msg = inp.value.trim();
-  if (!msg) return;
-  addMsg(msg, 'user');
-  inp.value = '';
-  const t = addMsg('', 'bot', true);
-
-  const sys = `You are NyaySetu's legal assistant helping Indian men understand their legal rights.
-
-LANGUAGE: Detect the language of the user's message and reply in THE SAME LANGUAGE using simple everyday words — like a trusted friend explaining, not a lawyer.
-- Hindi: use simple Hindustani — "vakeel" (lawyer), "thana" (police station), "FIR" stays as FIR
-- Tamil/Telugu/Kannada/Malayalam/Marathi/Bengali/Gujarati: use colloquial spoken form
-- English: keep it simple and clear
-
-KEEP IN ENGLISH: 498A, BNS § 85, BNSS § 482, FIR, IPC, BNSS, BSA, NALSA, and all section numbers
-
-LEGAL KNOWLEDGE (current as of July 2024):
-- BNS replaced IPC; BNSS replaced CrPC; BSA replaced Evidence Act — all from July 1, 2024
-- 498A = now BNS § 85 | Anticipatory Bail = BNSS § 482 | FIR Quashing = BNSS § 528 | Maintenance = BNSS § 144
-- Arnesh Kumar (2014): No automatic arrest in 498A/BNS § 85
-- Rajnesh v. Neha (2021): Both parties must disclose all income for maintenance
-- BSA § 63: WhatsApp, emails, call recordings = PRIMARY evidence in court
-- 70%+ of 498A cases end in acquittal at trial
-
-Format: (1) Simple explanation of the situation (2) Key rights (3) What to do next — numbered steps
-End with a one-line reminder to consult a qualified lawyer for their specific case.`;
-
-  try {
-    const text = await callAPI({ system: sys, userMessage: msg, max_tokens: 800 });
-    t.innerHTML = fmt(text || 'Sorry, could not generate a response. Please try again.');
+// ── CHAT ──────────────────────────────────────────────────────────────────────
+async function sendChat(){
+  const inp=document.getElementById('chat-input');
+  const msg=inp.value.trim(); if(!msg)return;
+  addMsg(msg,'user'); inp.value='';
+  const t=addMsg('','bot',true);
+  const sys=`You are NyaySetu's legal assistant helping Indian men understand their rights.
+LANGUAGE: Detect the user's language and reply in THE SAME LANGUAGE using simple everyday words — like a trusted friend, not a lawyer.
+Hindi: use simple Hindustani — vakeel=lawyer, thana=police station.
+Keep in English: 498A, BNS § 85, BNSS § 482, FIR, IPC, BNSS, BSA, NALSA, section numbers.
+CURRENT LAW (July 2024): BNS replaced IPC, BNSS replaced CrPC, BSA replaced Evidence Act.
+Key cases: Arnesh Kumar (2014)=no auto-arrest; Rajnesh v Neha (2021)=both disclose income; BSA § 63=WhatsApp is primary evidence.
+Format: (1) Simple explanation (2) Your rights (3) What to do — numbered steps. End with a one-line reminder to consult a qualified lawyer.`;
+  try{
+    const text=await callAPI({system:sys,userMessage:msg,max_tokens:800});
+    t.innerHTML=fmt(text||'Sorry, could not get a response. Please try again.');
     t.classList.remove('typing');
-  } catch (e) {
-    t.textContent = '';
-    t.insertAdjacentHTML('beforeend', '⚠ ' + escHtml(e.message));
+  }catch(e){
+    t.textContent='';
+    t.insertAdjacentHTML('beforeend','⚠ '+esc(e.message));
     t.classList.remove('typing');
-    console.error('Chat error:', e);
+    console.error('Chat error:',e);
   }
 }
-
-function escHtml(s) {
-  // Escape HTML special characters to prevent XSS
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-          .replace(/"/g,'&quot;').replace(/'/g,'&#x27;');
-}
-function fmt(s) {
-  // Sanitize first, then apply safe markdown-to-HTML
-  return escHtml(s)
-    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g,'<em>$1</em>')
-    .replace(/\n/g,'<br>');
-}
-function addMsg(text, who, typing = false) {
-  const c = document.getElementById('chat-msgs');
-  const d = document.createElement('div');
-  d.className = `cmsg ${who}`;
-  d.innerHTML = typing ? '<span class="dots"><span></span><span></span><span></span></span>' : fmt(text);
-  c.appendChild(d);
-  c.scrollTop = c.scrollHeight;
-  return d;
+function addMsg(text,who,typing=false){
+  const c=document.getElementById('chat-msgs');
+  const d=document.createElement('div'); d.className=`cmsg ${who}`;
+  d.innerHTML=typing?'<span class="dots"><span></span><span></span><span></span></span>':fmt(text);
+  c.appendChild(d); c.scrollTop=c.scrollHeight; return d;
 }
 
-// ── SEARCH ───────────────────────────────────────────────────────────────────
-function doSearch() { const q = document.getElementById('srch').value.trim(); if (q) runSearch(q); }
-function qs(t) { document.getElementById('srch').value = t; runSearch(t); }
+// ── SEARCH ────────────────────────────────────────────────────────────────────
+function doSearch(){const q=document.getElementById('srch').value.trim();if(q)runSearch(q);}
+function qs(t){document.getElementById('srch').value=t;runSearch(t);}
+document.getElementById('srch').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
 
-function runSearch(query) {
+function runSearch(query){
   go('search');
-  document.getElementById('srch-load').style.display = 'block';
-  document.getElementById('srch-res').innerHTML = '';
-  document.getElementById('srch-title').textContent = '';
-  setTimeout(() => {
-    document.getElementById('srch-load').style.display = 'none';
-    const q = query.toLowerCase();
-    const results = LAWS.filter(l =>
-      l.title.toLowerCase().includes(q) || l.id.includes(q) || l.expl.toLowerCase().includes(q) ||
-      query.split(' ').some(w => w.length > 2 && (l.title.toLowerCase().includes(w) || l.expl.toLowerCase().includes(w)))
-    );
-    document.getElementById('srch-title').textContent =
-      results.length ? `${results.length} result(s) for "${query}"` : `No results for "${query}" — try: 498A, maintenance, custody, FIR`;
-    const c = document.getElementById('srch-res');
-    results.forEach((law, i) => {
-      const d = document.createElement('div');
-      d.className = 'rcard';
-      d.innerHTML = buildCard(law, `sr-${i}`);
-      c.appendChild(d);
-      attachCard(d, `sr-${i}`);
-      if (i === 0) setTimeout(() => d.querySelector('.rcard-hd').click(), 60);
+  document.getElementById('res-q').textContent=`"${query}"`;
+  document.getElementById('res-count').textContent='';
+  document.getElementById('res-spin').style.display='block';
+  document.getElementById('res-list').innerHTML='';
+  setTimeout(()=>{
+    document.getElementById('res-spin').style.display='none';
+    const q=query.toLowerCase();
+    const results=LAWS.filter(l=>l.title.toLowerCase().includes(q)||l.id.includes(q)||l.expl.toLowerCase().includes(q)||query.split(' ').some(w=>w.length>2&&(l.title.toLowerCase().includes(w)||l.expl.toLowerCase().includes(w))));
+    document.getElementById('res-count').textContent=results.length?`${results.length} result${results.length>1?'s':''}`:' — no match';
+    const c=document.getElementById('res-list');
+    if(!results.length){c.innerHTML=`<div style="text-align:center;padding:3rem;color:var(--ink3)"><div style="font-size:2rem;margin-bottom:.75rem">🔍</div><div style="font-size:14px;font-weight:500;margin-bottom:.4rem">No results for "${esc(query)}"</div><div style="font-size:13px">Try: 498A, maintenance, custody, false FIR, DV Act, BNS</div></div>`;return;}
+    results.forEach((law,i)=>{
+      const d=document.createElement('div'); d.className='law-card'; d.id=`sr-${i}`;
+      d.innerHTML=buildCard(law,`sr-${i}`); c.appendChild(d); attachCard(d,`sr-${i}`);
+      if(i===0)setTimeout(()=>d.querySelector('.law-card-hd').click(),60);
     });
-  }, 500);
+  },400);
 }
 
-// ── PAGES ────────────────────────────────────────────────────────────────────
-function go(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('on'));
+// ── PAGE RENDERING ────────────────────────────────────────────────────────────
+function renderLaws(){
+  const c=document.getElementById('laws-list'); if(c.children.length)return;
+  LAWS.forEach((law,i)=>{const d=document.createElement('div');d.className='law-card';d.id=`lw-${i}`;d.innerHTML=buildCard(law,`lw-${i}`);c.appendChild(d);attachCard(d,`lw-${i}`);});
+}
+function renderCases(){
+  const c=document.getElementById('cases-list'); if(c.children.length)return;
+  const byArea={};
+  ALL_CASES.forEach(cs=>{if(!byArea[cs.area])byArea[cs.area]=[];byArea[cs.area].push(cs);});
+  Object.entries(byArea).forEach(([area,cases])=>{
+    const h=document.createElement('div'); h.className='case-area-hd'; h.textContent=area; c.appendChild(h);
+    cases.forEach(cs=>{
+      const d=document.createElement('div'); d.className='case-card';
+      const csUrl = cs.url || '';
+      d.innerHTML=`<div class="case-hd"><a class="case-name" ${csUrl ? `href="${csUrl}" target="_blank" rel="noopener noreferrer"` : `href="#" onclick="event.preventDefault();qs('${cs.title.replace(/'/g,"\'")}')" `}>📌 ${cs.title} ↗</a><div class="case-cite">${cs.court} · ${cs.cite}</div></div><div class="case-body"><div class="case-ruling">${cs.s}</div><div class="case-impact">✅ Area: ${cs.area}</div><button class="case-copy" onclick="copyCase('',\`${esc(cs.copy)}\`)">📋 Copy citation</button></div>`;
+      c.appendChild(d);
+    });
+  });
+}
+function renderGuides(){
+  const c=document.getElementById('guide-list'); if(c.children.length)return;
+  GUIDES.forEach(g=>{
+    const d=document.createElement('div'); d.className='guide-card';
+    d.innerHTML=`<div class="guide-title">${g.emoji} ${g.title}</div>${g.steps.map((s,i)=>`<div class="step-item"><div class="step-n">${i+1}</div><div class="step-body"><p>${s}</p></div></div>`).join('')}`;
+    c.appendChild(d);
+  });
+}
+function renderNewLaws(){
+  const tb=document.getElementById('map-tbody'); if(tb.children.length)return;
+  MAP_ROWS.forEach((r,i)=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${r[0]}</td><td>${r[1]}</td><td><span class="mbadge">${r[2]}</span></td><td>${r[3]}</td>`;tb.appendChild(tr);});
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────────────────────
+function go(name){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
   document.getElementById(`pg-${name}`).classList.add('on');
-  window.scrollTo({top: 0, behavior: 'smooth'});
-
-  if (name === 'home')    renderCats();
-  if (name === 'laws')    renderLaws();
-  if (name === 'cases')   renderCases();
-  if (name === 'guide')   renderGuides();
-  if (name === 'newlaws') renderNewLaws();
+  if(name==='laws')renderLaws();
+  if(name==='cases')renderCases();
+  if(name==='guide')renderGuides();
+  if(name==='newlaws')renderNewLaws();
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ── RENDER ───────────────────────────────────────────────────────────────────
-function renderCats() {
-  const g = document.getElementById('cat-row');
-  if (g.children.length) return;
-  CATS.forEach(c => {
-    const b = document.createElement('button');
-    b.className = 'cat-pill';
-    b.textContent = `${c.icon} ${c.label}`;
-    b.onclick = () => c.page ? go(c.page) : qs(c.q);
-    g.appendChild(b);
-  });
-}
-
-function renderLaws() {
-  const c = document.getElementById('laws-list');
-  if (c.children.length) return;
-  LAWS.forEach((law, i) => {
-    const d = document.createElement('div');
-    d.className = 'rcard';
-    d.innerHTML = buildCard(law, `lw-${i}`);
-    c.appendChild(d);
-    attachCard(d, `lw-${i}`);
-  });
-}
-
-function renderCases() {
-  const c = document.getElementById('cases-list');
-  if (c.children.length) return;
-  const byArea = {};
-  ALL_CASES.forEach(cs => { if (!byArea[cs.area]) byArea[cs.area] = []; byArea[cs.area].push(cs); });
-  Object.entries(byArea).forEach(([area, cases]) => {
-    const h = document.createElement('div');
-    h.style.cssText = 'font-size:13px;font-weight:600;color:var(--primary);margin:1.25rem 0 .6rem;padding-bottom:.35rem;border-bottom:2px solid var(--accent)';
-    h.textContent = area;
-    c.appendChild(h);
-    cases.forEach(cs => {
-      const d = document.createElement('div');
-      d.className = 'ccase';
-      d.innerHTML = `<div class="ctit">📌 ${cs.title}</div><div class="cref">${cs.court} · ${cs.$}</div><div class="crul">${cs.s}</div><div class="cimp">✅ Area: ${cs.area}</div>`;
-      c.appendChild(d);
-    });
-  });
-}
-
-function renderGuides() {
-  const c = document.getElementById('guide-list');
-  if (c.children.length) return;
-  GUIDES.forEach(g => {
-    const d = document.createElement('div');
-    d.style.cssText = 'background:var(--white);border:1.5px solid var(--border);border-radius:var(--rl);padding:1.1rem;margin-bottom:10px';
-    d.innerHTML = `<div style="font-size:13px;font-weight:600;color:var(--primary);margin-bottom:.85rem">${g.emoji} ${g.title}</div>
-    ${g.steps.map((s,i) => `<div class="step"><div class="snum">${i+1}</div><div class="sbody"><p>${s}</p></div></div>`).join('')}`;
-    c.appendChild(d);
-  });
-}
-
-function renderNewLaws() {
-  const tb = document.getElementById('map-tbody');
-  if (tb.children.length) return;
-  MAP_ROWS.forEach((r, i) => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${r[0]}</td><td>${r[1]}</td><td><span class="mbadge">${r[2]}</span></td><td style="color:var(--muted);font-weight:300">${r[3]}</td>`;
-    tb.appendChild(tr);
-  });
-}
-
-// ── MODAL & DRAWER ───────────────────────────────────────────────────────────
-function openM(id) { document.getElementById(`modal-${id}`).classList.add('open'); }
-function closeM(id) { document.getElementById(`modal-${id}`).classList.remove('open'); }
-document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); }));
-
-function toggleDraw() {
-  const d = document.getElementById('drawer');
-  const h = document.getElementById('hbg');
-  d.classList.toggle('open');
-  h.classList.toggle('open');
-  document.body.style.overflow = d.classList.contains('open') ? 'hidden' : '';
-}
-
-// ── INIT ─────────────────────────────────────────────────────────────────────
-document.getElementById('srch').addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
-renderCats();
+// ── DRAWER & MODAL ────────────────────────────────────────────────────────────
+function toggleDraw(){const d=document.getElementById('drawer'),h=document.getElementById('hbg');d.classList.toggle('o');h.classList.toggle('o');document.body.style.overflow=d.classList.contains('o')?'hidden':'';}
+function closeDraw(){const d=document.getElementById('drawer'),h=document.getElementById('hbg');d.classList.remove('o');h.classList.remove('o');document.body.style.overflow='';}
+function openM(id){document.getElementById(`modal-${id}`).classList.add('on');}
+function closeM(id){document.getElementById(`modal-${id}`).classList.remove('on');}
 </script>
 </body>
 </html>
