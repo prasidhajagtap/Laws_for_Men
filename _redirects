@@ -1,0 +1,4 @@
+# Redirect HTTP to HTTPS (Cloudflare Pages handles this automatically,
+# but this is here as a backup)
+http://nyaysetu.pages.dev/* https://nyaysetu.pages.dev/:splat 301
+http://*.nyaysetu.pages.dev/* https://:splat.nyaysetu.pages.dev/:splat 301

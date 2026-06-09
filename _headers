@@ -1,0 +1,25 @@
+# Cloudflare Pages — HTTP Security Headers
+# Applied to every page served from your domain
+
+/*
+  # Prevent clickjacking — stops your page being embedded in iframes
+  X-Frame-Options: DENY
+
+  # Prevent MIME-type sniffing attacks
+  X-Content-Type-Options: nosniff
+
+  # Don't send referrer to external sites
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Disable browser features you don't use
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+
+  # XSS protection for older browsers
+  X-XSS-Protection: 1; mode=block
+
+  # Content Security Policy — controls what can load on your page
+  # Allows: your own files, Google Fonts, your Cloudflare Worker
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://nyaysetu-proxy.jkuku7866.workers.dev https://openrouter.ai; img-src 'self' data:; frame-ancestors 'none';
+
+  # Force HTTPS for 1 year
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
