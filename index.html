@@ -823,14 +823,24 @@ End with a one-line reminder to consult a qualified lawyer for their specific ca
     t.innerHTML = fmt(text || 'Sorry, could not generate a response. Please try again.');
     t.classList.remove('typing');
   } catch (e) {
-    t.innerHTML = `⚠ Error: ${e.message}`;
+    t.textContent = '';
+    t.insertAdjacentHTML('beforeend', '⚠ ' + escHtml(e.message));
     t.classList.remove('typing');
     console.error('Chat error:', e);
   }
 }
 
+function escHtml(s) {
+  // Escape HTML special characters to prevent XSS
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+          .replace(/"/g,'&quot;').replace(/'/g,'&#x27;');
+}
 function fmt(s) {
-  return s.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/\n/g,'<br>');
+  // Sanitize first, then apply safe markdown-to-HTML
+  return escHtml(s)
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g,'<em>$1</em>')
+    .replace(/\n/g,'<br>');
 }
 function addMsg(text, who, typing = false) {
   const c = document.getElementById('chat-msgs');
