@@ -20,7 +20,8 @@ const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 // ── Allowed origins (add your domain here if you change hosts) ──────────────
 const ALLOWED_ORIGINS = [
   'https://prasidhajagtap.github.io',
-  'https://nyaysetu.pages.dev',         // Cloudflare Pages default domain
+  'https://nyaysetu.pages.dev',
+  'https://lawsformen.jkuku7866.workers.dev/'// Cloudflare Pages default domain
 ];
 
 // ── In-memory rate limiter (resets when the isolate recycles, ~few minutes) ─
