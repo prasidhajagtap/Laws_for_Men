@@ -489,7 +489,7 @@ const LAWS=[
 
 const ALL_CASES=[
   {title:'Arnesh Kumar v. State of Bihar',court:'SC',cite:'(2014) 8 SCC 273',s:'No arrest in 498A/BNS § 85 without magistrate approval — codified in BNSS § 35.',area:'498A / BNS § 85',copy:'Arnesh Kumar v. State of Bihar (2014) 8 SCC 273 — Police cannot arrest under 498A/BNS § 85 without prior magistrate approval.',url:'https://indiankanoon.org/doc/36992711/'},
-  {title:'Rajnesh v. Neha',court:'SC',cite:'(2021) 2 SCC 324',s:'Both parties must disclose all income/assets. Single maintenance proceedings only.',area:'Maintenance',copy:'Rajnesh v. Neha (2021) 2 SCC 324 — Mandatory disclosure of assets by both parties. Wife\',url:'https://indiankanoon.org/doc/138743616/'s income is a key factor in maintenance determination.'},
+  {title:'Rajnesh v. Neha',court:'SC',cite:'(2021) 2 SCC 324',s:'Both parties must disclose all income/assets. Single maintenance proceedings only.',area:'Maintenance',copy:'Rajnesh v. Neha (2021) 2 SCC 324 — Mandatory disclosure of assets by both parties. Wife\'s income is a key factor in maintenance determination.',url:'https://indiankanoon.org/doc/138743616/'},
   {title:'S.R. Batra v. Taruna Batra',court:'SC',cite:'(2007) 3 SCC 169',s:"Wife's right of residence only in the shared household — not every property of the husband's family.",area:'Domestic Violence',copy:"S.R. Batra v. Taruna Batra (2007) 3 SCC 169 — Wife's right to residence under PWDVA is limited to the shared household and does not extend to every property owned by the husband's family.",url:'https://indiankanoon.org/doc/1823824/'},
   {title:'Gaurav Nagpal v. Sumedha Nagpal',court:'SC',cite:'(2009) 1 SCC 42',s:'Child welfare is paramount. Mother-preference for under-5 is not absolute.',area:'Child Custody',copy:'Gaurav Nagpal v. Sumedha Nagpal (2009) 1 SCC 42 — The welfare of the minor child is the paramount consideration in custody matters. The presumption in favour of the mother for children under 5 is not an absolute rule.',url:'https://indiankanoon.org/doc/1952398/'},
   {title:'State of Haryana v. Bhajan Lal',court:'SC',cite:'1992 Supp (1) SCC 335',s:'7 categories where FIRs MUST be quashed — false, malicious, or abuse of process.',area:'False FIR',copy:'State of Haryana v. Bhajan Lal 1992 Supp (1) SCC 335 — Established definitive categories for mandatory quashing of FIR under inherent powers of the High Court.',url:'https://indiankanoon.org/doc/767287/'},
@@ -530,6 +530,8 @@ function extractArr(raw){
 
 // ── SANITIZE (XSS) ───────────────────────────────────────────────────────────
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;');}
+// Safe for use inside HTML attribute values (double-quoted attributes)
+function escAttr(s){return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function fmt(s){return esc(s).replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/\n/g,'<br>');}
 
 // ── BUILD LAW CARD ────────────────────────────────────────────────────────────
@@ -574,13 +576,13 @@ function buildCard(law,pfx){
       ${law.cases.map((c,i)=>`
       <div class="case-card">
         <div class="case-hd">
-          <a class="case-name" href="${c.url||'#'}" target="_blank" rel="noopener noreferrer" onclick="if(!event.currentTarget.href||event.currentTarget.href==='#'){event.preventDefault();qs('${(c.name||'').replace(/'/g,"\'")}');}" >📌 ${c.name} ↗</a>
+          <a class="case-name" href="${c.url||'#'}" ${c.url ? 'target="_blank" rel="noopener noreferrer"' : 'data-search="'+escAttr(c.name)+'"'}>📌 ${c.name} ↗</a>
           <div class="case-cite">${c.cite}</div>
         </div>
         <div class="case-body">
           <div class="case-ruling cr-item">"${c.ruling}"</div>
           <div class="case-impact ci-item">✅ ${c.impact}</div>
-          <button class="case-copy" onclick="copyCase('${pfx}-c${i}','${esc(c.copy)}')">📋 Copy citation</button>
+          <button class="case-copy" data-copy="${escAttr(c.copy||'')}">📋 Copy citation</button>
         </div>
       </div>`).join('')}
     </div>
@@ -640,21 +642,24 @@ function attachCard(el,pfx){
 }
 
 // ── COPY CASE CITATION ────────────────────────────────────────────────────────
-function copyCase(id,text){
-  navigator.clipboard.writeText(text).then(()=>{
-    const t=document.getElementById('copy-toast');
-    t.classList.add('show');
-    setTimeout(()=>t.classList.remove('show'),2200);
-  }).catch(()=>{
-    // Fallback for browsers without clipboard API
-    const ta=document.createElement('textarea');
-    ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
-    document.body.appendChild(ta); ta.select();
-    document.execCommand('copy'); document.body.removeChild(ta);
-    const t=document.getElementById('copy-toast');
-    t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200);
-  });
+function doCopy(text){
+  const showToast=()=>{const t=document.getElementById('copy-toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);};
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(showToast).catch(()=>fallbackCopy(text,showToast));
+  } else { fallbackCopy(text,showToast); }
 }
+function fallbackCopy(text,cb){
+  const ta=document.createElement('textarea');
+  ta.value=text;ta.style.cssText='position:fixed;opacity:0;top:0;left:0';
+  document.body.appendChild(ta);ta.focus();ta.select();
+  try{document.execCommand('copy');}catch(e){}
+  document.body.removeChild(ta);if(cb)cb();
+}
+// Delegated click for all .case-copy buttons — avoids inline onclick entirely
+document.addEventListener('click',function(e){
+  const btn=e.target.closest('.case-copy');
+  if(btn){ const text=btn.dataset.copy||btn.getAttribute('data-copy')||''; doCopy(text); }
+});
 
 // ── TRANSLATION ───────────────────────────────────────────────────────────────
 async function handlePill(btn,pfx){
@@ -770,6 +775,13 @@ function runSearch(query){
   },400);
 }
 
+// ── DELEGATED CLICK: data-search anchors ─────────────────────────────────────
+// Handles case-name anchors that have no external URL — triggers internal search
+document.addEventListener('click', function(e){
+  const a = e.target.closest('a[data-search]');
+  if(a){ e.preventDefault(); qs(a.dataset.search); }
+});
+
 // ── PAGE RENDERING ────────────────────────────────────────────────────────────
 function renderLaws(){
   const c=document.getElementById('laws-list'); if(c.children.length)return;
@@ -784,7 +796,15 @@ function renderCases(){
     cases.forEach(cs=>{
       const d=document.createElement('div'); d.className='case-card';
       const csUrl = cs.url || '';
-      d.innerHTML=`<div class="case-hd"><a class="case-name" ${csUrl ? `href="${csUrl}" target="_blank" rel="noopener noreferrer"` : `href="#" onclick="event.preventDefault();qs('${cs.title.replace(/'/g,"\'")}')" `}>📌 ${cs.title} ↗</a><div class="case-cite">${cs.court} · ${cs.cite}</div></div><div class="case-body"><div class="case-ruling">${cs.s}</div><div class="case-impact">✅ Area: ${cs.area}</div><button class="case-copy" onclick="copyCase('',\`${esc(cs.copy)}\`)">📋 Copy citation</button></div>`;
+      const csCopy = cs.copy ? cs.copy.replace(/`/g,"'") : '';
+      d.innerHTML='<div class="case-hd">'
+        + (csUrl
+            ? `<a class="case-name" href="${csUrl}" target="_blank" rel="noopener noreferrer">📌 ${cs.title} ↗</a>`
+            : `<a class="case-name" href="#" data-search="${escAttr(cs.title)}">📌 ${cs.title} ↗</a>`)
+        + `<div class="case-cite">${cs.court} · ${cs.cite}</div></div>`
+        + `<div class="case-body"><div class="case-ruling">${cs.s}</div>`
+        + `<div class="case-impact">✅ Area: ${cs.area}</div>`
+        + `<button class="case-copy" data-copy="${escAttr(csCopy)}">📋 Copy citation</button></div>`;
       c.appendChild(d);
     });
   });
